@@ -25,18 +25,34 @@
             <p class="text-muted mb-4 fs-5">
                 <% 
                     String type = request.getParameter("type");
-                    if ("invalid_phone".equals(type)) {
-                        out.print("The phone number you entered is invalid. Please enter exactly 10 digits.");
-                    } else if ("invalid_email".equals(type)) {
-                        out.print("The email address format is incorrect. Please enter a valid email (e.g., name@domain.com).");
-                    } else if ("invalid_name".equals(type)) {
-                        out.print("The name entered is invalid. Names should only contain letters and be between 2 to 50 characters.");
-                    } else if ("weak_password".equals(type)) {
-                        out.print("Your password is too weak. It must be at least 6 characters long.");
-                    } else if ("invalid_payment".equals(type)) {
-                        out.print("Payment details are incorrect. Please check your card number, CVV, and expiry date.");
+                    Integer statusCode = (Integer) request.getAttribute("javax.servlet.error.status_code");
+                    Throwable throwable = (Throwable) request.getAttribute("javax.servlet.error.exception");
+                    String errorMessage = (String) request.getAttribute("javax.servlet.error.message");
+
+                    if (statusCode != null) { // System Error
+                        if (statusCode == 404) {
+                            out.print("The page you're looking for was not found (404). Please check the URL and try again.");
+                        } else if (statusCode == 500) {
+                            out.print("Internal Server Error (500). Something went wrong on our end. Please try again later.");
+                        } else {
+                            out.print("Error " + statusCode + ": " + (errorMessage != null ? errorMessage : "An unexpected error occurred."));
+                        }
+                    } else if (type != null) { // Custom Redirect (Original logic)
+                        if ("invalid_phone".equals(type)) {
+                            out.print("The phone number you entered is invalid. Please enter exactly 10 digits.");
+                        } else if ("invalid_email".equals(type)) {
+                            out.print("The email address format is incorrect. Please enter a valid email (e.g., name@domain.com).");
+                        } else if ("invalid_name".equals(type)) {
+                            out.print("The name entered is invalid. Names should only contain letters and be between 2 to 50 characters.");
+                        } else if ("weak_password".equals(type)) {
+                            out.print("Your password is too weak. It must be at least 6 characters long.");
+                        } else if ("invalid_payment".equals(type)) {
+                            out.print("Payment details are incorrect. Please check your card number, CVV, and expiry date.");
+                        } else {
+                            out.print("Something went wrong with your request. Please check your information and try again.");
+                        }
                     } else {
-                        out.print("Something went wrong with your request. Please check your information and try again.");
+                        out.print("An unknown error occurred. Please return to the homepage.");
                     }
                 %>
             </p>

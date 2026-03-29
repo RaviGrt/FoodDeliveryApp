@@ -42,6 +42,7 @@
     </dependencies>
 
     <build>
+        <finalName>FoodDeliveryApp</finalName>
         <plugins>
             <!-- Maven WAR plugin -->
             <plugin>
@@ -49,31 +50,7 @@
                 <artifactId>maven-war-plugin</artifactId>
                 <version>3.3.2</version>
             </plugin>
-            <!-- Jetty Plugin for running locally easily -->
-            <plugin>
-                <groupId>org.eclipse.jetty</groupId>
-                <artifactId>jetty-maven-plugin</artifactId>
-                <version>9.4.44.v20210927</version>
-                <configuration>
-                    <webApp>
-                        <contextPath>/FoodDeliveryApp</contextPath>
-                    </webApp>
-                    <httpConnector>
-                        <port>8080</port>
-                    </httpConnector>
-                </configuration>
-            </plugin>
-            <!-- Tomcat 7 Plugin for maven -->
-            <plugin>
-                <groupId>org.apache.tomcat.maven</groupId>
-                <artifactId>tomcat7-maven-plugin</artifactId>
-                <version>2.2</version>
-                <configuration>
-                    <path>/FoodDeliveryApp</path>
-                    <port>8081</port>
-                </configuration>
-            </plugin>
-            <!-- Maven Eclipse Plugin: run 'mvn eclipse:eclipse -Dwtpversion=2.0' to regenerate Eclipse files -->
+            <!-- Maven Eclipse Plugin -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-eclipse-plugin</artifactId>
@@ -86,31 +63,6 @@
                 </configuration>
             </plugin>
         </plugins>
-        <!-- Suppress m2e warnings in Eclipse for plugin goals it does not understand -->
-        <pluginManagement>
-            <plugins>
-                <plugin>
-                    <groupId>org.eclipse.m2e</groupId>
-                    <artifactId>lifecycle-mapping</artifactId>
-                    <version>1.0.0</version>
-                    <configuration>
-                        <lifecycleMappingMetadata>
-                            <pluginExecutions>
-                                <pluginExecution>
-                                    <pluginExecutionFilter>
-                                        <groupId>org.apache.tomcat.maven</groupId>
-                                        <artifactId>tomcat7-maven-plugin</artifactId>
-                                        <versionRange>[2.0,)</versionRange>
-                                        <goals><goal>run</goal></goals>
-                                    </pluginExecutionFilter>
-                                    <action><ignore/></action>
-                                </pluginExecution>
-                            </pluginExecutions>
-                        </lifecycleMappingMetadata>
-                    </configuration>
-                </plugin>
-            </plugins>
-        </pluginManagement>
     </build>
 
 </project>
