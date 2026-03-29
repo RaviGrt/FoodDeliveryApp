@@ -35,6 +35,18 @@ public class PaymentServlet extends HttpServlet {
         int restaurantId = Integer.parseInt(request.getParameter("restaurantId"));
         String paymentMethod = request.getParameter("paymentMethod");
         
+        // Server-side validation for Payment
+        if ("CARD".equals(paymentMethod)) {
+            String card = request.getParameter("cardNumber");
+            String expiry = request.getParameter("expiry");
+            String cvv = request.getParameter("cvv");
+            
+            if (card == null || card.length() != 16 || expiry == null || !expiry.matches("^\\d{2}/\\d{2}$") || cvv == null || cvv.length() != 3) {
+                response.sendRedirect("error.jsp?type=invalid_payment");
+                return;
+            }
+        }
+        
         DeliveryPartner partner = partnerDAO.assignAvailablePartner();
         int partnerId = partner != null ? partner.getPartnerId() : 0; // 0 → stored as NULL in DB
         

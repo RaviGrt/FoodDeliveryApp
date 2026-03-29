@@ -11,13 +11,35 @@ import java.util.List;
 public class CartDAO {
     
     public boolean addToCart(Cart cart) {
-        String query = "INSERT INTO Cart (user_id, item_id, quantity) VALUES (?, ?, ?)";
-        try (Connection conn = DBConnection.getConnection();
-             PreparedStatement ps = conn.prepareStatement(query)) {
-            ps.setInt(1, cart.getUserId());
-            ps.setInt(2, cart.getItemId());
-            ps.setInt(3, cart.getQuantity());
-            return ps.executeUpdate() > 0;
+        String checkQuery = "SELECT quantity FROM Cart WHERE user_id = ? AND item_id = ?";
+        String updateQuery = "UPDATE Cart SET quantity = quantity + ? WHERE user_id = ? AND item_id = ?";
+        String insertQuery = "INSERT INTO Cart (user_id, item_id, quantity) VALUES (?, ?, ?)";
+        
+        try (Connection conn = DBConnection.getConnection()) {
+            // 1. Check if item exists
+            try (PreparedStatement psCheck = conn.prepareStatement(checkQuery)) {
+                psCheck.setInt(1, cart.getUserId());
+                psCheck.setInt(2, cart.getItemId());
+                try (ResultSet rs = psCheck.executeQuery()) {
+                    if (rs.next()) {
+                        // 2. Exists -> Update
+                        try (PreparedStatement psUpdate = conn.prepareStatement(updateQuery)) {
+                            psUpdate.setInt(1, cart.getQuantity());
+                            psUpdate.setInt(2, cart.getUserId());
+                            psUpdate.setInt(3, cart.getItemId());
+                            return psUpdate.executeUpdate() > 0;
+                        }
+                    } else {
+                        // 3. Not Exists -> Insert
+                        try (PreparedStatement psInsert = conn.prepareStatement(insertQuery)) {
+                            psInsert.setInt(1, cart.getUserId());
+                            psInsert.setInt(2, cart.getItemId());
+                            psInsert.setInt(3, cart.getQuantity());
+                            return psInsert.executeUpdate() > 0;
+                        }
+                    }
+                }
+            }
         } catch (SQLException e) {
             e.printStackTrace();
             return false;
@@ -58,6 +80,22 @@ public class CartDAO {
             e.printStackTrace();
         }
         return 0;
+    }
+
+    public boolean updateQuantity(int cartId, int newQuantity) {
+        if (newQuantity <= 0) {
+            return removeFromCart(cartId);
+        }
+        String query = "UPDATE Cart SET quantity = ? WHERE cart_id = ?";
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement ps = conn.prepareStatement(query)) {
+            ps.setInt(1, newQuantity);
+            ps.setInt(2, cartId);
+            return ps.executeUpdate() > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 
     public boolean removeFromCart(int cartId) {

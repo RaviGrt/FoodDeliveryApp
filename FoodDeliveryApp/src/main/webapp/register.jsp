@@ -36,19 +36,19 @@
                 <form action="RegisterServlet" method="post">
                     <div class="mb-3">
                         <label class="form-label text-muted small fw-bold">Full Name</label>
-                        <input type="text" name="name" class="form-control bg-light border-0" required>
+                        <input type="text" id="regName" name="name" class="form-control bg-light border-0" required placeholder="Letters only">
                     </div>
                     <div class="mb-3">
                         <label class="form-label text-muted small fw-bold">Email</label>
-                        <input type="email" name="email" class="form-control bg-light border-0" required>
+                        <input type="email" id="regEmail" name="email" class="form-control bg-light border-0" required placeholder="name@domain.com">
                     </div>
                     <div class="mb-3">
                         <label class="form-label text-muted small fw-bold">Password</label>
-                        <input type="password" name="password" class="form-control bg-light border-0" required>
+                        <input type="password" id="regPassword" name="password" class="form-control bg-light border-0" required placeholder="Min 6 characters">
                     </div>
                     <div class="mb-4">
                         <label class="form-label text-muted small fw-bold">Phone Number</label>
-                        <input type="text" name="phone" class="form-control bg-light border-0" required
+                        <input type="text" id="regPhone" name="phone" class="form-control bg-light border-0" required maxlength="10"
                                value="<%= request.getParameter("phone") != null ? request.getParameter("phone") : "" %>">
                     </div>
                     <button type="submit" class="btn btn-purple btn-lg w-100 fw-bold rounded-pill">Register</button>
@@ -72,6 +72,70 @@
         const isDark = body.classList.contains('dark-mode');
         localStorage.setItem('darkMode', isDark ? 'on' : 'off');
         toggleBtn.innerHTML = isDark ? '<i class="bi bi-sun-fill"></i>' : '<i class="bi bi-moon-stars-fill"></i>';
+    });
+
+    // Form Validation for Registration
+    document.querySelector('form').addEventListener('submit', function(e) {
+        const phone = document.getElementById('regPhone').value.trim();
+        const name = document.getElementById('regName').value.trim();
+        const email = document.getElementById('regEmail').value.trim();
+        const password = document.getElementById('regPassword').value;
+        
+        const phoneRegex = /^[0-9]{10}$/;
+        const nameRegex = /^[A-Za-z\s]{2,50}$/;
+        const emailRegex = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,6}$/;
+        
+        if (!phoneRegex.test(phone)) {
+            e.preventDefault();
+            alert('You should enter the correct 10-digit number.');
+            window.location.href = 'error.jsp?type=invalid_phone';
+            return;
+        }
+        if (!nameRegex.test(name)) {
+            e.preventDefault();
+            alert('Please enter a valid name (letters only).');
+            window.location.href = 'error.jsp?type=invalid_name';
+            return;
+        }
+        if (!emailRegex.test(email)) {
+            e.preventDefault();
+            alert('Please enter a valid email address.');
+            window.location.href = 'error.jsp?type=invalid_email';
+            return;
+        }
+        if (password.length < 6) {
+            e.preventDefault();
+            alert('Password must be at least 6 characters long.');
+            window.location.href = 'error.jsp?type=weak_password';
+            return;
+        }
+    });
+
+    document.addEventListener('DOMContentLoaded', function() {
+        const regName = document.getElementById('regName');
+        const regPhone = document.getElementById('regPhone');
+
+        // Prevent non-numeric in phone
+        regPhone.addEventListener('keypress', function(e) {
+            if (!/[0-9]/.test(e.key) && e.key !== 'Backspace' && e.key !== 'Delete' && e.key !== 'ArrowLeft' && e.key !== 'ArrowRight') {
+                e.preventDefault();
+            }
+        });
+
+        // Prevent non-alpha in name
+        regName.addEventListener('keypress', function(e) {
+            if (!/[A-Za-z\s]/.test(e.key) && e.key !== 'Backspace' && e.key !== 'Delete' && e.key !== 'ArrowLeft' && e.key !== 'ArrowRight') {
+                e.preventDefault();
+            }
+        });
+        
+        // Prevent paste of non-numeric data in phone
+        regPhone.addEventListener('paste', function(e) {
+            const pasteData = e.clipboardData.getData('text');
+            if (!/^[0-9]+$/.test(pasteData)) {
+                e.preventDefault();
+            }
+        });
     });
 </script>
 </body>

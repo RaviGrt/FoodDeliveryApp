@@ -28,18 +28,58 @@
         .offer-badge { background: var(--primary-light); color: var(--primary); }
         body.dark-mode .offer-badge { background: #3b2d5e; color: #c4b5fd; }
         .city-select select { color: var(--primary); font-weight: 700; }
+        
+        /* Modern Toggle Switch */
+        .veg-switch { display: flex; align-items: center; cursor: pointer; user-select: none; }
+        .veg-switch input { display: none; }
+        .veg-slider { width: 44px; height: 22px; background: #cbd5e1; border-radius: 100px; position: relative; transition: 0.3s; margin-right: 10px; }
+        .veg-slider::before { content: ""; position: absolute; width: 16px; height: 16px; background: white; border-radius: 50%; top: 3px; left: 3px; transition: 0.3s; }
+        .veg-switch input:checked + .veg-slider { background: #10b981; } /* Emerald Green */
+        .veg-switch input:checked + .veg-slider::before { transform: translateX(22px); }
+        .veg-label { font-weight: 700; font-size: 0.9rem; color: #64748b; }
+        .veg-switch input:checked ~ .veg-label { color: #10b981; }
+        .navbar .bi { font-size: 0.85rem; }
+        .city-group-title { margin-top: 2rem; margin-bottom: 1.5rem; position: relative; padding-bottom: 0.5rem; border-bottom: 2px solid var(--primary-light); }
+        .city-group-title::after { content: ""; position: absolute; bottom: -2px; left: 0; width: 60px; height: 2px; background: var(--primary); }
+        
+        /* Navbar Icon Box Style */
+        .nav-icon-link {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 12px;
+            color: white !important;
+            transition: all 0.2s ease;
+            text-decoration: none;
+            font-size: 1.2rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .nav-icon-link:hover {
+            background: rgba(255, 255, 255, 0.35);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        .nav-icon-link i { font-size: 1.25rem; }
+        .logout-box { background: rgba(255, 255, 255, 0.1); }
+        .dark-toggle { width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; background: rgba(255, 255, 255, 0.1); border-radius: 12px; border: 1px solid rgba(255, 255, 255, 0.1); transition: 0.2s; color: white; }
+        .dark-toggle:hover { background: rgba(255, 255, 255, 0.25); transform: translateY(-2px); }
     </style>
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-dark bg-purple shadow-sm">
-    <div class="container">
+    <div class="container-fluid px-4">
         <a class="navbar-brand fw-bold" href="HomeServlet"><i class="bi bi-basket-fill text-warning"></i> Urban Eats</a>
-        <div class="d-flex align-items-center gap-2">
-            <a href="MoodSuggestServlet" class="btn btn-outline-light btn-sm fw-bold rounded-pill px-3"><i class="bi bi-stars me-1"></i>Mood Suggest</a>
-            <a href="CartServlet" class="btn btn-outline-light btn-sm fw-bold rounded-pill px-3"><i class="bi bi-cart3"></i> Cart</a>
-            <a href="OrderTrackingServlet" class="btn btn-outline-light btn-sm fw-bold rounded-pill px-3"><i class="bi bi-box-seam"></i> Orders</a>
-            <button class="dark-toggle" id="darkToggle" title="Toggle dark mode"><i class="bi bi-moon-stars-fill"></i></button>
-            <a href="login.jsp" class="btn btn-light btn-sm fw-bold text-purple rounded-pill px-3">Logout</a>
+        <div class="ms-auto d-flex align-items-center gap-2">
+            <!-- Hidden Home Icon as we are on Home page -->
+            <a href="MoodSuggestServlet" class="nav-icon-link" title="Mood Suggest"><i class="bi bi-stars"></i></a>
+            <a href="CartServlet" class="nav-icon-link" title="My Cart"><i class="bi bi-cart3"></i></a>
+            <a href="OrderTrackingServlet" class="nav-icon-link" title="My Orders"><i class="bi bi-box-seam"></i></a>
+            <a href="ProfileServlet" class="nav-icon-link" title="My Profile"><i class="bi bi-person-circle"></i></a>
+            <button class="dark-toggle mx-1" id="darkToggle" title="Toggle dark mode"><i class="bi bi-moon-stars-fill"></i></button>
+            <a href="login.jsp" class="nav-icon-link logout-box shadow-sm ms-2" title="Logout"><i class="bi bi-box-arrow-right"></i></a>
         </div>
     </div>
 </nav>
@@ -48,7 +88,7 @@
     <c:if test="${not empty aiSuggestion}">
         <div class="alert border-0 shadow-sm rounded-3 d-flex align-items-center mb-4" style="background:var(--primary-light); color:var(--primary);">
             <i class="bi bi-stars fs-4 me-3"></i>
-            <div><strong>AI Suggestion:</strong> ${aiSuggestion}</div>
+            <div><strong>AI Suggestion:</strong> <c:out value="${aiSuggestion}"/></div>
         </div>
     </c:if>
 
@@ -65,11 +105,28 @@
                         </select>
                     </form>
                 </div>
-                <div class="col-md-9">
-                    <form action="SearchServlet" method="get" class="d-flex">
-                        <input type="text" name="query" class="form-control form-control-lg bg-light border-0 me-2 shadow-sm" placeholder="Search for restaurants or cuisines..." value="${searchQuery}">
+                <div class="col-md-9 d-flex gap-3 align-items-center">
+                    <form action="SearchServlet" method="get" class="d-flex flex-grow-1">
+                        <input type="text" name="query" class="form-control form-control-lg bg-light border-0 me-2 shadow-sm" placeholder="Search for restaurants or cuisines..." value="<c:out value='${searchQuery}'/>">
                         <button type="submit" class="btn btn-purple btn-lg px-4 fw-bold shadow-sm rounded-pill">Search</button>
                     </form>
+                    
+                    <!-- Veg Only Switch -->
+                    <div class="ms-md-4 ps-md-4 border-start d-none d-md-block">
+                        <label class="veg-switch">
+                            <input type="checkbox" id="vegToggle">
+                            <span class="veg-slider"></span>
+                            <span class="veg-label">Veg Only</span>
+                        </label>
+                    </div>
+                </div>
+                <!-- Mobile Veg Toggle -->
+                <div class="col-12 d-md-none mt-2 px-2">
+                    <label class="veg-switch">
+                        <input type="checkbox" id="vegToggleMobile" onchange="document.getElementById('vegToggle').click()">
+                        <span class="veg-slider"></span>
+                        <span class="veg-label">Veg Only</span>
+                    </label>
                 </div>
             </div>
         </div>
@@ -82,8 +139,17 @@
         </a>
     </div>
     <div class="row">
+        <c:set var="lastCity" value="" />
         <c:forEach var="r" items="${restaurants}">
-            <div class="col-md-4 mb-4">
+            <c:if test="${r.city != lastCity}">
+                <div class="col-12 city-group-title mb-4 restaurant-card-group-header" data-city="${r.city}">
+                    <h3 class="fw-extrabold mb-0 text-dark">
+                        <i class="bi bi-geo-alt-fill text-purple me-2"></i>Restaurants in <c:out value="${r.city}"/>
+                    </h3>
+                </div>
+                <c:set var="lastCity" value="${r.city}" />
+            </c:if>
+            <div class="col-md-4 mb-4 restaurant-card" data-veg-only="${r.isVegOnly()}" data-city="${r.city}">
                 <a href="RestaurantServlet?id=${r.restaurantId}" class="text-decoration-none text-dark">
                 <div class="card shadow-sm h-100 border-0 rounded-4 card-hover">
                     <div class="card-body p-4">
@@ -157,6 +223,50 @@
             var myModal = new bootstrap.Modal(document.getElementById('cityModal'), { keyboard: false });
             myModal.show();
         }
+
+        // Veg Filtering Logic
+        const vegToggle = document.getElementById('vegToggle');
+        const restaurantCards = document.querySelectorAll('.restaurant-card');
+        const noResultsMsg = document.getElementById('noVegMsg');
+
+        function filterVeg() {
+            const isVegOnly = vegToggle.checked;
+            let visibleCount = 0;
+            const citiesWithVisibleRestaurants = new Set();
+
+            restaurantCards.forEach(card => {
+                const isCardVeg = card.getAttribute('data-veg-only') === 'true';
+                const city = card.getAttribute('data-city');
+                
+                if (isVegOnly && !isCardVeg) {
+                    card.style.display = 'none';
+                } else {
+                    card.style.display = 'block';
+                    visibleCount++;
+                    citiesWithVisibleRestaurants.add(city);
+                }
+            });
+
+            // Handle Header Visibility
+            document.querySelectorAll('.restaurant-card-group-header').forEach(header => {
+                const headerCity = header.getAttribute('data-city');
+                header.style.display = citiesWithVisibleRestaurants.has(headerCity) ? 'block' : 'none';
+            });
+
+            if (visibleCount === 0 && restaurantCards.length > 0) {
+                if (!noResultsMsg) {
+                    const msg = document.createElement('div');
+                    msg.id = 'noVegMsg';
+                    msg.className = 'col-12 text-center text-muted my-5 py-5';
+                    msg.innerHTML = '<i class="bi bi-patch-exclamation fs-1 mb-3 d-block"></i><h5>No pure veg restaurants found in this view!</h5>';
+                    document.querySelector('.row').appendChild(msg);
+                }
+            } else if (noResultsMsg) {
+                noResultsMsg.remove();
+            }
+        }
+
+        vegToggle.addEventListener('change', filterVeg);
     });
 </script>
 </body>

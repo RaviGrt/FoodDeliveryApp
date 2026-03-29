@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -30,6 +31,32 @@
         .step.active .icon { color: #198754; background: #e8f5e9; }
         .step.inactive .icon { color: #adb5bd; background: #f8f9fa; }
         .order-header { background: linear-gradient(135deg, #8b5cf6 0%, #a78bfa 100%); }
+        .navbar .bi { font-size: 0.85rem; }
+        
+        /* Navbar Icon Box Style */
+        .nav-icon-link {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 12px;
+            color: white !important;
+            transition: all 0.2s ease;
+            text-decoration: none;
+            font-size: 1.2rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .nav-icon-link:hover {
+            background: rgba(255, 255, 255, 0.35);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        .nav-icon-link i { font-size: 1.25rem; }
+        .logout-box { background: rgba(255, 255, 255, 0.1); }
+        .dark-toggle { width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; background: rgba(255, 255, 255, 0.1); border-radius: 12px; border: 1px solid rgba(255, 255, 255, 0.1); transition: 0.2s; color: white; }
+        .dark-toggle:hover { background: rgba(255, 255, 255, 0.25); transform: translateY(-2px); }
     </style>
     <c:if test="${not empty order and order.status != 'Delivered'}">
         <meta http-equiv="refresh" content="5">
@@ -37,11 +64,16 @@
 </head>
 <body class="pb-5">
 <nav class="navbar navbar-expand-lg navbar-dark bg-purple shadow-sm mb-4">
-    <div class="container">
+    <div class="container-fluid px-4">
         <a class="navbar-brand fw-bold" href="HomeServlet"><i class="bi bi-basket-fill text-warning"></i> Urban Eats</a>
-        <div class="d-flex align-items-center gap-2">
-            <a href="HomeServlet" class="btn btn-outline-light btn-sm fw-bold rounded-pill px-3">Back to Home</a>
-            <button class="dark-toggle" id="darkToggle" title="Toggle dark mode"><i class="bi bi-moon-stars-fill"></i></button>
+        <div class="ms-auto d-flex align-items-center gap-2">
+            <a href="HomeServlet" class="nav-icon-link" title="Home"><i class="bi bi-house-door-fill"></i></a>
+            <a href="MoodSuggestServlet" class="nav-icon-link" title="Mood Suggest"><i class="bi bi-stars"></i></a>
+            <a href="CartServlet" class="nav-icon-link" title="My Cart"><i class="bi bi-cart3"></i></a>
+            <!-- Hidden Orders Icon -->
+            <a href="ProfileServlet" class="nav-icon-link" title="My Profile"><i class="bi bi-person-circle"></i></a>
+            <button class="dark-toggle mx-1" id="darkToggle" title="Toggle dark mode"><i class="bi bi-moon-stars-fill"></i></button>
+            <a href="login.jsp" class="nav-icon-link logout-box shadow-sm ms-2" title="Logout"><i class="bi bi-box-arrow-right"></i></a>
         </div>
     </div>
 </nav>
@@ -54,7 +86,7 @@
                     <div class="card border-0 shadow-sm rounded-4 overflow-hidden mb-4">
                         <div class="order-header p-4 text-white text-center">
                             <h4 class="fw-bold mb-1">Order #${order.orderId}</h4>
-                            <p class="mb-0 opacity-75 small"><i class="bi bi-clock"></i> Placed on ${order.createdAt}</p>
+                            <p class="mb-0 opacity-75 small"><i class="bi bi-clock"></i> Placed on <fmt:formatDate value="${order.createdAt}" pattern="dd MMM yyyy, hh:mm a" /></p>
                         </div>
                         <div class="card-body p-5">
                             <h5 class="fw-bold mb-5 d-flex align-items-center"><i class="bi bi-activity text-purple me-2 fs-4"></i> Live Tracking</h5>
@@ -102,7 +134,7 @@
                                 <div class="d-flex justify-content-between mb-3 border-bottom pb-3">
                                     <div>
                                         <h5 class="fw-bold mb-1">Order #${o.orderId}</h5>
-                                        <p class="text-muted small mb-0"><i class="bi bi-calendar3"></i> ${o.createdAt}</p>
+                                        <p class="text-muted small mb-0"><i class="bi bi-calendar3"></i> <fmt:formatDate value="${o.createdAt}" pattern="dd MMM yyyy, hh:mm a" /></p>
                                     </div>
                                     <div class="text-end">
                                         <span class="badge ${o.status == 'Delivered' ? 'bg-success' : 'bg-warning text-dark'} px-3 py-2 rounded-pill shadow-sm">${o.status}</span>

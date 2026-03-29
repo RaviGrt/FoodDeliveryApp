@@ -36,18 +36,46 @@
         .dark-toggle { background: none; border: none; color: white; font-size: 1.3rem; cursor: pointer; }
         .emoji-bg { font-size: 2.5rem; }
         .hero-section { background: linear-gradient(135deg, #8b5cf6 0%, #a78bfa 100%); border-radius: 24px; }
+        .navbar .bi { font-size: 0.85rem; }
+        
+        /* Navbar Icon Box Style */
+        .nav-icon-link {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 12px;
+            color: white !important;
+            transition: all 0.2s ease;
+            text-decoration: none;
+            font-size: 1.2rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .nav-icon-link:hover {
+            background: rgba(255, 255, 255, 0.35);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        .nav-icon-link i { font-size: 1.25rem; }
+        .logout-box { background: rgba(255, 255, 255, 0.1); }
+        .dark-toggle { width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; background: rgba(255, 255, 255, 0.1); border-radius: 12px; border: 1px solid rgba(255, 255, 255, 0.1); transition: 0.2s; color: white; }
+        .dark-toggle:hover { background: rgba(255, 255, 255, 0.25); transform: translateY(-2px); }
     </style>
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-dark bg-purple shadow-sm">
-    <div class="container">
+    <div class="container-fluid px-4">
         <a class="navbar-brand fw-bold" href="HomeServlet"><i class="bi bi-basket-fill text-warning"></i> Urban Eats</a>
-        <div class="d-flex align-items-center gap-2">
-            <a href="HomeServlet" class="btn btn-outline-light btn-sm fw-bold rounded-pill px-3"><i class="bi bi-house"></i> Home</a>
-            <a href="CartServlet" class="btn btn-outline-light btn-sm fw-bold rounded-pill px-3"><i class="bi bi-cart3"></i> Cart</a>
-            <a href="OrderTrackingServlet" class="btn btn-outline-light btn-sm fw-bold rounded-pill px-3"><i class="bi bi-box-seam"></i> Orders</a>
-            <button class="dark-toggle" id="darkToggle" title="Toggle dark mode"><i class="bi bi-moon-stars-fill"></i></button>
-            <a href="login.jsp" class="btn btn-light btn-sm fw-bold text-purple rounded-pill px-3">Logout</a>
+        <div class="ms-auto d-flex align-items-center gap-2">
+            <a href="HomeServlet" class="nav-icon-link" title="Home"><i class="bi bi-house-door-fill"></i></a>
+            <!-- Hidden Mood Suggest Icon -->
+            <a href="CartServlet" class="nav-icon-link" title="My Cart"><i class="bi bi-cart3"></i></a>
+            <a href="OrderTrackingServlet" class="nav-icon-link" title="My Orders"><i class="bi bi-box-seam"></i></a>
+            <a href="ProfileServlet" class="nav-icon-link" title="My Profile"><i class="bi bi-person-circle"></i></a>
+            <button class="dark-toggle mx-1" id="darkToggle" title="Toggle dark mode"><i class="bi bi-moon-stars-fill"></i></button>
+            <a href="login.jsp" class="nav-icon-link logout-box shadow-sm ms-2" title="Logout"><i class="bi bi-box-arrow-right"></i></a>
         </div>
     </div>
 </nav>

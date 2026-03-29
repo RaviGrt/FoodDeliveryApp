@@ -20,8 +20,10 @@ public class CheckPhoneServlet extends HttpServlet {
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
 
-        if (phone == null || phone.trim().isEmpty()) {
-            response.getWriter().write("{\"exists\": false}");
+        // Indian phone number validation (exactly 10 digits)
+        if (phone == null || !phone.trim().matches("^[0-9]{10}$")) {
+            response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+            response.getWriter().write("{\"exists\": false, \"error\": \"invalid_format\"}");
             return;
         }
 

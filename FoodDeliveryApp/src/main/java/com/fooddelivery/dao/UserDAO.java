@@ -65,6 +65,42 @@ public class UserDAO {
         return user;
     }
 
+    public User getUserById(int userId) {
+        User user = null;
+        String query = "SELECT * FROM Users WHERE user_id = ?";
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement ps = conn.prepareStatement(query)) {
+            ps.setInt(1, userId);
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    user = new User(
+                        rs.getInt("user_id"), rs.getString("name"), rs.getString("email"), 
+                        rs.getString("password"), rs.getString("phone"), rs.getString("city")
+                    );
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return user;
+    }
+
+    public boolean updateUser(User user) {
+        String query = "UPDATE Users SET name = ?, email = ?, phone = ?, city = ? WHERE user_id = ?";
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement ps = conn.prepareStatement(query)) {
+            ps.setString(1, user.getName());
+            ps.setString(2, user.getEmail());
+            ps.setString(3, user.getPhone());
+            ps.setString(4, user.getCity());
+            ps.setInt(5, user.getUserId());
+            return ps.executeUpdate() > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
     public boolean updateUserCity(int userId, String city) {
         String query = "UPDATE Users SET city = ? WHERE user_id = ?";
         try (Connection conn = DBConnection.getConnection();

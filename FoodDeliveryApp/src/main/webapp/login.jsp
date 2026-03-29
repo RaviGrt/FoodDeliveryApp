@@ -41,7 +41,7 @@
                 <div id="step-phone">
                     <div class="mb-3">
                         <label class="form-label text-muted small fw-bold">Phone Number</label>
-                        <input type="text" id="phoneInput" class="form-control form-control-lg bg-light border-0" placeholder="e.g. 9876543210" maxlength="15">
+                        <input type="text" id="phoneInput" class="form-control form-control-lg bg-light border-0" maxlength="10">
                         <div id="phoneError" class="text-danger small mt-1" style="display:none;">Please enter a valid phone number.</div>
                     </div>
                     <button onclick="checkPhone()" class="btn btn-purple btn-lg w-100 fw-bold rounded-pill" id="continueBtn">Continue</button>
@@ -88,22 +88,47 @@
         toggleBtn.innerHTML = isDark ? '<i class="bi bi-sun-fill"></i>' : '<i class="bi bi-moon-stars-fill"></i>';
     });
     function checkPhone() {
-        const phone = document.getElementById('phoneInput').value.trim();
+        const phoneInput = document.getElementById('phoneInput');
+        const phone = phoneInput.value.trim();
         const errEl = document.getElementById('phoneError');
-        if (!phone) { errEl.style.display = 'inline'; errEl.textContent = 'Please enter a phone number.'; return; }
+        
+        // Regex for exactly 10 digits
+        const phoneRegex = /^[0-9]{10}$/;
+        
+        if (!phone) { 
+            errEl.style.display = 'inline'; 
+            errEl.textContent = 'Please enter a phone number.'; 
+            return; 
+        }
+        
+        if (!phoneRegex.test(phone)) {
+            // Popup alert as requested
+            alert('You should enter the correct 10-digit number.');
+            // Fallback redirect to error page
+            window.location.href = 'error.jsp?type=invalid_phone';
+            return;
+        }
+
         errEl.style.display = 'none';
         const btn = document.getElementById('continueBtn');
         btn.disabled = true; btn.textContent = 'Checking...';
+        
         fetch('CheckPhoneServlet?phone=' + encodeURIComponent(phone))
-            .then(res => res.json())
+            .then(res => {
+                if (!res.ok && res.status === 400) {
+                     window.location.href = 'error.jsp?type=invalid_phone';
+                     return;
+                }
+                return res.json();
+            })
             .then(data => {
-                if (data.exists) {
+                if (data && data.exists) {
                     document.getElementById('phoneDisplay').textContent = phone;
                     document.getElementById('hiddenPhone').value = phone;
                     document.getElementById('step-phone').style.display = 'none';
                     document.getElementById('step-password').style.display = 'block';
                     document.getElementById('passwordInput').focus();
-                } else {
+                } else if (data) {
                     window.location.href = 'register.jsp?phone=' + encodeURIComponent(phone);
                 }
             })
@@ -116,8 +141,22 @@
         document.getElementById('phoneInput').focus();
     }
     document.addEventListener('DOMContentLoaded', function() {
-        document.getElementById('phoneInput').addEventListener('keypress', function(e) {
+        const phoneInput = document.getElementById('phoneInput');
+        phoneInput.addEventListener('keypress', function(e) {
             if (e.key === 'Enter') checkPhone();
+            
+            // Real-time numeric only filter
+            if (!/[0-9]/.test(e.key) && e.key !== 'Backspace' && e.key !== 'Delete' && e.key !== 'ArrowLeft' && e.key !== 'ArrowRight') {
+                e.preventDefault();
+            }
+        });
+        
+        // Prevent paste of non-numeric data
+        phoneInput.addEventListener('paste', function(e) {
+            const pasteData = e.clipboardData.getData('text');
+            if (!/^[0-9]+$/.test(pasteData)) {
+                e.preventDefault();
+            }
         });
     });
 </script>

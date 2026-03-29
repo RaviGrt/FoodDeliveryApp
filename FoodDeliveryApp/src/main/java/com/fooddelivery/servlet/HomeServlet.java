@@ -34,16 +34,51 @@ public class HomeServlet extends HttpServlet {
             return;
         }
 
+        List<Restaurant> restaurants;
         if (selectedCity == null || selectedCity.isEmpty() || "All".equals(selectedCity)) {
-            selectedCity = user.getCity(); // default to user's registered city
+            restaurants = restaurantDAO.getRestaurantsByCity("All");
+            final String userCity = (user != null && user.getCity() != null) ? user.getCity().trim().toLowerCase() : "";
+            
+            // Normalize city names for grouping/display
+            for (Restaurant r : restaurants) {
+                if (r.getCity() != null) {
+                    String c = r.getCity().trim();
+                    if (c.length() > 0) {
+                        r.setCity(c.substring(0, 1).toUpperCase() + c.substring(1).toLowerCase());
+                    }
+                }
+            }
+            
+            // Sort: User's city first, then alphabetically
+            java.util.Collections.sort(restaurants, (r1, r2) -> {
+                String c1 = r1.getCity().trim();
+                String c2 = r2.getCity().trim();
+                boolean isR1UserCity = c1.toLowerCase().equals(userCity);
+                boolean isR2UserCity = c2.toLowerCase().equals(userCity);
+                
+                if (isR1UserCity && !isR2UserCity) return -1;
+                if (!isR1UserCity && isR2UserCity) return 1;
+                return c1.compareToIgnoreCase(c2);
+            });
+            selectedCity = "All";
+        } else {
+            restaurants = restaurantDAO.getRestaurantsByCity(selectedCity);
+            // Also normalize for single city view
+            for (Restaurant r : restaurants) {
+                if (r.getCity() != null) {
+                    String c = r.getCity().trim();
+                    if (c.length() > 0) {
+                        r.setCity(c.substring(0, 1).toUpperCase() + c.substring(1).toLowerCase());
+                    }
+                }
+            }
         }
         
         boolean showCityModal = false;
-        if (selectedCity == null || selectedCity.trim().isEmpty()) {
+        if ((selectedCity == null || selectedCity.trim().isEmpty() || "All".equals(selectedCity)) && (user == null || user.getCity() == null || user.getCity().isEmpty())) {
             showCityModal = true;
         }
         
-        List<Restaurant> restaurants = restaurantDAO.getRestaurantsByCity(selectedCity);
         List<String> allCities = restaurantDAO.getAllCities();
         String aiSuggestion = aiService.getSuggestion();
         

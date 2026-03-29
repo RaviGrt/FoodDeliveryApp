@@ -15,18 +15,61 @@ public class AppContextListener implements ServletContextListener {
 
     @Override
     public void contextInitialized(ServletContextEvent sce) {
-        System.out.println("Initializing Database Tables on Startup...");
-        try (Connection conn = DBConnection.getConnection();
-             Statement stmt = conn.createStatement()) {
-            
-            // Notice: The sql folder was moved to src/main/resources/sql
-            executeSqlScript(AppContextListener.class.getResourceAsStream("/sql/schema.sql"), stmt);
-            executeSqlScript(AppContextListener.class.getResourceAsStream("/sql/data.sql"), stmt);
-            
-            System.out.println("Database auto-initialization complete. Missing tables were created.");
+        System.out.println("Checking Database Status on Startup...");
+        try (Connection conn = DBConnection.getConnection()) {
+            if (conn == null) {
+                System.err.println("Failed to obtain database connection. Skipping initialization.");
+                return;
+            }
+
+            try (Statement stmt = conn.createStatement()) {
+                // 1. Only create tables if the USERS table is missing
+                if (!tableExists(conn, "USERS")) {
+                    System.out.println("==> Users table MISSING. Initializing Database Schema (schema.sql)...");
+                    executeSqlScript(AppContextListener.class.getResourceAsStream("/sql/schema.sql"), stmt);
+                    System.out.println("==> Database Schema initialized SUCCESS.");
+                } else {
+                    System.out.println("==> Database schema already exists. Skipping schema.sql.");
+                }
+
+                // 2. Only insert data if the RESTAURANTS table is empty
+                if (isTableEmpty(conn, "RESTAURANTS")) {
+                    System.out.println("==> Restaurants table EMPTY. Seeding Sample Data (data.sql)...");
+                    executeSqlScript(AppContextListener.class.getResourceAsStream("/sql/data.sql"), stmt);
+                    System.out.println("==> Database Seeded SUCCESS.");
+                } else {
+                    System.out.println("==> Restaurants already present. Skipping data.sql to prevent duplication.");
+                }
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    private boolean tableExists(Connection conn, String tableName) {
+        try {
+            java.sql.DatabaseMetaData metaData = conn.getMetaData();
+            try (java.sql.ResultSet rs = metaData.getTables(null, null, tableName.toUpperCase(), new String[]{"TABLE"})) {
+                return rs.next();
+            }
+        } catch (Exception e) {
+            System.err.println("Error checking if table " + tableName + " exists: " + e.getMessage());
+            return false;
+        }
+    }
+
+    private boolean isTableEmpty(Connection conn, String tableName) {
+        String query = "SELECT COUNT(*) FROM " + tableName;
+        try (Statement stmt = conn.createStatement();
+             java.sql.ResultSet rs = stmt.executeQuery(query)) {
+            if (rs.next()) {
+                return rs.getInt(1) == 0;
+            }
+        } catch (Exception e) {
+            // Table might not exist yet, which is handled by schema check
+            return true;
+        }
+        return true;
     }
 
     private void executeSqlScript(InputStream is, Statement stmt) throws Exception {

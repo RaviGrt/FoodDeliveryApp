@@ -70,7 +70,7 @@
                 <version>2.2</version>
                 <configuration>
                     <path>/FoodDeliveryApp</path>
-                    <port>8080</port>
+                    <port>8081</port>
                 </configuration>
             </plugin>
             <!-- Maven Eclipse Plugin: run 'mvn eclipse:eclipse -Dwtpversion=2.0' to regenerate Eclipse files -->

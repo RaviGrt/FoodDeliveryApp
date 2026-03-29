@@ -23,17 +23,46 @@
         .btn-outline-purple:hover { background: var(--primary); color: white; }
         .text-purple { color: var(--primary) !important; }
         .dark-toggle { background: none; border: none; color: white; font-size: 1.3rem; cursor: pointer; }
+        .navbar .bi { font-size: 0.85rem; }
+        
+        /* Navbar Icon Box Style */
+        .nav-icon-link {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 12px;
+            color: white !important;
+            transition: all 0.2s ease;
+            text-decoration: none;
+            font-size: 1.2rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .nav-icon-link:hover {
+            background: rgba(255, 255, 255, 0.35);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        .nav-icon-link i { font-size: 1.25rem; }
+        .logout-box { background: rgba(255, 255, 255, 0.1); }
+        .dark-toggle { width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; background: rgba(255, 255, 255, 0.1); border-radius: 12px; border: 1px solid rgba(255, 255, 255, 0.1); transition: 0.2s; color: white; }
+        .dark-toggle:hover { background: rgba(255, 255, 255, 0.25); transform: translateY(-2px); }
     </style>
 </head>
 <body class="pb-5">
 <nav class="navbar navbar-expand-lg navbar-dark bg-purple shadow-sm mb-4">
-    <div class="container">
+    <div class="container-fluid px-4">
         <a class="navbar-brand fw-bold" href="HomeServlet"><i class="bi bi-basket-fill text-warning"></i> Urban Eats</a>
-        <div class="d-flex align-items-center gap-2">
-            <a href="MoodSuggestServlet" class="btn btn-outline-light btn-sm fw-bold rounded-pill px-3"><i class="bi bi-stars"></i> Mood</a>
-            <a href="OrderTrackingServlet" class="btn btn-outline-light btn-sm fw-bold rounded-pill px-3"><i class="bi bi-box-seam"></i> Orders</a>
-            <button class="dark-toggle" id="darkToggle" title="Toggle dark mode"><i class="bi bi-moon-stars-fill"></i></button>
-            <a href="login.jsp" class="btn btn-light btn-sm fw-bold text-purple rounded-pill px-3">Logout</a>
+        <div class="ms-auto d-flex align-items-center gap-2">
+            <a href="HomeServlet" class="nav-icon-link" title="Home"><i class="bi bi-house-door-fill"></i></a>
+            <a href="MoodSuggestServlet" class="nav-icon-link" title="Mood Suggest"><i class="bi bi-stars"></i></a>
+            <!-- Hidden Cart Icon -->
+            <a href="OrderTrackingServlet" class="nav-icon-link" title="My Orders"><i class="bi bi-box-seam"></i></a>
+            <a href="ProfileServlet" class="nav-icon-link" title="My Profile"><i class="bi bi-person-circle"></i></a>
+            <button class="dark-toggle mx-1" id="darkToggle" title="Toggle dark mode"><i class="bi bi-moon-stars-fill"></i></button>
+            <a href="login.jsp" class="nav-icon-link logout-box shadow-sm ms-2" title="Logout"><i class="bi bi-box-arrow-right"></i></a>
         </div>
     </div>
 </nav>
@@ -53,14 +82,21 @@
                     <div class="list-group-item p-4 d-flex justify-content-between align-items-center border-0 border-bottom">
                         <div>
                             <h5 class="mb-1 fw-bold"><i class="bi bi-egg-fried text-warning me-2"></i>${mItem.name}</h5>
-                            <p class="text-muted mb-0 small">Quantity: <strong>${item.quantity}</strong></p>
-                            <p class="mb-0 fw-bold fs-5 mt-2 text-purple">₹${itemTotal}</p>
+                            <div class="d-flex align-items-center mt-2 gap-3">
+                                <div class="d-flex align-items-center border rounded-pill px-2 py-1 bg-light">
+                                    <button onclick="updateQty(${item.cartId}, ${item.quantity - 1}, this)" class="btn btn-sm text-purple fw-bold p-0 px-2" style="border:none; background:none;">-</button>
+                                    <span class="mx-2 fw-bold quantity-val" id="qty-${item.cartId}">${item.quantity}</span>
+                                    <button onclick="updateQty(${item.cartId}, ${item.quantity + 1}, this)" class="btn btn-sm text-purple fw-bold p-0 px-2" style="border:none; background:none;">+</button>
+                                </div>
+                                <span class="fw-bold text-muted small item-price" data-price="${mItem.price}">@ ₹${mItem.price}</span>
+                            </div>
+                            <p class="mb-0 fw-bold fs-5 mt-2 text-purple item-total" id="total-${item.cartId}">₹${itemTotal}</p>
                         </div>
-                        <form action="CartServlet" method="post">
-                            <input type="hidden" name="action" value="remove">
-                            <input type="hidden" name="cartId" value="${item.cartId}">
-                            <button type="submit" class="btn btn-outline-purple btn-sm rounded-circle shadow-sm" style="width: 40px; height: 40px;"><i class="bi bi-trash3"></i></button>
-                        </form>
+                        <div class="d-flex flex-column align-items-end">
+                            <button onclick="updateQty(${item.cartId}, 0, this)" class="btn btn-outline-danger btn-sm rounded-circle shadow-sm" style="width: 35px; height: 35px;" title="Remove item">
+                                <i class="bi bi-trash3"></i>
+                            </button>
+                        </div>
                     </div>
                 </c:forEach>
                 <c:if test="${empty cartItems}">
@@ -123,6 +159,68 @@
         localStorage.setItem('darkMode', isDark ? 'on' : 'off');
         toggleBtn.innerHTML = isDark ? '<i class="bi bi-sun-fill"></i>' : '<i class="bi bi-moon-stars-fill"></i>';
     });
+
+    function updateQty(cartId, newQty, btn) {
+        if (newQty < 0) return;
+        
+        // Visual feedback: disable while loading
+        const btnGroup = btn.closest('.rounded-pill') || btn.parentElement;
+        btnGroup.style.opacity = '0.5';
+        btnGroup.style.pointerEvents = 'none';
+
+        fetch('${pageContext.request.contextPath}/CartServlet', {
+            method: 'POST',
+            headers: { 
+                'Content-Type': 'application/x-www-form-urlencoded',
+                'X-Requested-With': 'XMLHttpRequest'
+            },
+            body: 'action=update&cartId=' + cartId + '&newQuantity=' + newQty
+        })
+        .then(res => res.json())
+        .then(data => {
+            if (data.status === 'success') {
+                if (newQty === 0) {
+                    const row = btn.closest('.list-group-item');
+                    row.style.opacity = '0';
+                    setTimeout(() => {
+                        row.remove();
+                        if (document.querySelectorAll('.list-group-item').length === 0) {
+                            location.reload();
+                        }
+                    }, 300);
+                } else {
+                    const qtySpan = document.getElementById('qty-' + cartId);
+                    const totalSpan = document.getElementById('total-' + cartId);
+                    const priceSpan = btn.closest('.list-group-item').querySelector('.item-price');
+                    const price = parseFloat(priceSpan.getAttribute('data-price'));
+                    
+                    qtySpan.innerText = newQty;
+                    totalSpan.innerText = '₹' + (price * newQty).toFixed(2);
+                    
+                    // Update buttons' new onclick values
+                    const btns = btnGroup.querySelectorAll('button');
+                    btns[0].setAttribute('onclick', 'updateQty(' + cartId + ', ' + (newQty - 1) + ', this)');
+                    btns[1].setAttribute('onclick', 'updateQty(' + cartId + ', ' + (newQty + 1) + ', this)');
+                }
+
+                // Update Bill Details
+                document.querySelector('.col-md-4 .text-muted .fw-bold').innerText = '₹' + data.subtotal.toFixed(2);
+                const discountRow = document.querySelector('.col-md-4 .text-success .fw-bold');
+                if (discountRow) {
+                    discountRow.innerText = '- ₹' + data.discount.toFixed(2);
+                }
+                document.querySelector('.col-md-4 .text-purple.fs-4').innerText = '₹' + data.total.toFixed(2);
+            }
+        })
+        .catch(err => {
+            console.error('Error updating cart:', err);
+            alert('Failed to update cart. Please try again.');
+        })
+        .finally(() => {
+            btnGroup.style.opacity = '1';
+            btnGroup.style.pointerEvents = 'auto';
+        });
+    }
 </script>
 </body>
 </html>

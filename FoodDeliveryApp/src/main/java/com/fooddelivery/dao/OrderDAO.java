@@ -92,4 +92,20 @@ public class OrderDAO {
         }
         return order;
     }
+
+    public int getOrdersCountByUserId(int userId) {
+        String query = "SELECT COUNT(*) FROM Orders WHERE user_id = ?";
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement ps = conn.prepareStatement(query)) {
+            ps.setInt(1, userId);
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    return rs.getInt(1);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
 }

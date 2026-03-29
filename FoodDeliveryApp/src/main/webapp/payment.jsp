@@ -50,13 +50,38 @@
                         <input type="hidden" name="totalAmount" value="${totalAmount}">
                         <input type="hidden" name="restaurantId" value="${restaurantId}">
                         <div class="form-check border rounded-4 p-3 mb-3 d-flex align-items-center payment-option">
-                            <input class="form-check-input ms-2 me-3 fs-5" type="radio" name="paymentMethod" id="upi" value="UPI" checked>
+                            <input class="form-check-input ms-2 me-3 fs-5" type="radio" name="paymentMethod" id="upi" value="UPI" checked onclick="toggleCard(false)">
                             <label class="form-check-label flex-grow-1 fw-bold fs-5" for="upi">
                                 <i class="bi bi-phone me-2 text-primary fs-4"></i> UPI Pay
                             </label>
                         </div>
+                        <div class="form-check border rounded-4 p-3 mb-3 d-flex align-items-center payment-option">
+                            <input class="form-check-input ms-2 me-3 fs-5" type="radio" name="paymentMethod" id="card" value="CARD" onclick="toggleCard(true)">
+                            <label class="form-check-label flex-grow-1 fw-bold fs-5" for="card">
+                                <i class="bi bi-credit-card me-2 text-dark fs-4"></i> Credit/Debit Card
+                            </label>
+                        </div>
+                        
+                        <!-- Card Details Form (Hidden) -->
+                        <div id="cardDetails" class="mb-4 p-3 border rounded-4 bg-light" style="display:none;">
+                            <div class="mb-3">
+                                <label class="small fw-bold text-muted">Card Number</label>
+                                <input type="text" name="cardNumber" id="cardNumber" class="form-control border-0" placeholder="0000 0000 0000 0000" maxlength="16">
+                            </div>
+                            <div class="row">
+                                <div class="col-6 mb-3">
+                                    <label class="small fw-bold text-muted">Expiry (MM/YY)</label>
+                                    <input type="text" name="expiry" id="expiry" class="form-control border-0" placeholder="MM/YY" maxlength="5">
+                                </div>
+                                <div class="col-6 mb-3">
+                                    <label class="small fw-bold text-muted">CVV</label>
+                                    <input type="password" name="cvv" id="cvv" class="form-control border-0" placeholder="***" maxlength="3">
+                                </div>
+                            </div>
+                        </div>
+
                         <div class="form-check border rounded-4 p-3 mb-5 d-flex align-items-center payment-option">
-                            <input class="form-check-input ms-2 me-3 fs-5" type="radio" name="paymentMethod" id="cod" value="COD">
+                            <input class="form-check-input ms-2 me-3 fs-5" type="radio" name="paymentMethod" id="cod" value="COD" onclick="toggleCard(false)">
                             <label class="form-check-label flex-grow-1 fw-bold fs-5" for="cod">
                                 <i class="bi bi-cash-coin me-2 text-success fs-4"></i> Cash on Delivery
                             </label>
@@ -69,6 +94,65 @@
     </div>
 </div>
 <script>
+    function toggleCard(show) {
+        const details = document.getElementById('cardDetails');
+        details.style.display = show ? 'block' : 'none';
+        // Toggle required attributes
+        document.getElementById('cardNumber').required = show;
+        document.getElementById('expiry').required = show;
+        document.getElementById('cvv').required = show;
+    }
+
+    document.querySelector('form').addEventListener('submit', function(e) {
+        const method = document.querySelector('input[name="paymentMethod"]:checked').value;
+        if (method === 'CARD') {
+            const card = document.getElementById('cardNumber').value.replace(/\s/g, '');
+            const expiry = document.getElementById('expiry').value;
+            const cvv = document.getElementById('cvv').value;
+            
+            if (card.length !== 16 || isNaN(card)) {
+                e.preventDefault();
+                alert('Please enter a valid 16-digit card number.');
+                return;
+            }
+            if (!/^\d{2}\/\d{2}$/.test(expiry)) {
+                e.preventDefault();
+                alert('Please enter expiry in MM/YY format.');
+                return;
+            }
+            if (cvv.length !== 3 || isNaN(cvv)) {
+                e.preventDefault();
+                alert('Please enter a valid 3-digit CVV.');
+                return;
+            }
+        }
+    });
+
+    document.addEventListener('DOMContentLoaded', function() {
+        // Numeric only for Card and CVV
+        const cardInput = document.getElementById('cardNumber');
+        const cvvInput = document.getElementById('cvv');
+        const expiryInput = document.getElementById('expiry');
+
+        [cardInput, cvvInput].forEach(el => {
+            el.addEventListener('keypress', function(e) {
+                if (!/[0-9]/.test(e.key) && e.key !== 'Backspace') e.preventDefault();
+            });
+        });
+
+        expiryInput.addEventListener('keypress', function(e) {
+            if (!/[0-9/]/.test(e.key) && e.key !== 'Backspace') e.preventDefault();
+        });
+        
+        // Auto-slash for expiry
+        expiryInput.addEventListener('input', function(e) {
+            let val = this.value.replace(/\D/g, '');
+            if (val.length > 2) {
+                this.value = val.substring(0, 2) + '/' + val.substring(2, 4);
+            }
+        });
+    });
+
     const body = document.body;
     const toggleBtn = document.getElementById('darkToggle');
     if (localStorage.getItem('darkMode') === 'on') {

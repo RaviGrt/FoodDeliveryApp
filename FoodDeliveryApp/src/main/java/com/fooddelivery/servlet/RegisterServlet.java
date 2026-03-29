@@ -20,9 +20,30 @@ public class RegisterServlet extends HttpServlet {
         String email = request.getParameter("email");
         String password = request.getParameter("password");
         String phone = request.getParameter("phone");
-        String city = "Pending"; // City is now dynamically asked on the Home page
+        String city = "Pending";
 
-        User user = new User(0, name, email, password, phone, city);
+        // Server-side validation for phone (10 digits)
+        if (phone == null || !phone.trim().matches("^[0-9]{10}$")) {
+            response.sendRedirect("error.jsp?type=invalid_phone");
+            return;
+        }
+        // Validation for Email
+        if (email == null || !email.trim().matches("^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,6}$")) {
+            response.sendRedirect("error.jsp?type=invalid_email");
+            return;
+        }
+        // Validation for Name (Alpha-only, 2-50 chars)
+        if (name == null || !name.trim().matches("^[A-Za-z\\s]{2,50}$")) {
+            response.sendRedirect("error.jsp?type=invalid_name");
+            return;
+        }
+        // Validation for Password (Min 6 chars)
+        if (password == null || password.length() < 6) {
+            response.sendRedirect("error.jsp?type=weak_password");
+            return;
+        }
+
+        User user = new User(0, name.trim(), email.trim(), password, phone.trim(), city);
         boolean registered = userDAO.register(user);
 
         if (registered) {
