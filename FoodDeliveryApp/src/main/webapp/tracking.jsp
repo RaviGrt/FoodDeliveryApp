@@ -4,11 +4,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Track Order - Urban Eats</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
+<<<<<<< Updated upstream
         :root { --primary: #8b5cf6; --primary-dark: #7c3aed; --primary-light: #ede9fe; }
         body { font-family: 'Inter', sans-serif; background: #f5f3ff; }
         body.dark-mode { background: #1a1625 !important; color: #e9d5ff !important; }
@@ -43,173 +46,340 @@
             align-items: center; 
             justify-content: center; 
             font-size: 1.3rem;
+=======
+        :root {
+            --primary: #8b5cf6;
+            --primary-dark: #7c3aed;
+            --primary-light: #ede9fe;
+            --primary-hover: #6d28d9;
+            --surface: #ffffff;
+            --surface-light: #f8fafc;
+            --text-primary: #1e293b;
+            --text-secondary: #64748b;
+            --border-color: #e2e8f0;
+            --success: #10b981;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #f8fafc 0%, #ede9fe 100%);
+            min-height: 100vh;
+            color: var(--text-primary);
+>>>>>>> Stashed changes
             transition: all 0.3s ease;
         }
-        .step.active { border-left-color: #10b981; }
-        .step.active .icon { 
-            color: white; 
-            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
-            box-shadow: 0 0 0 5px white, 0 4px 12px rgba(16, 185, 129, 0.3);
-            transform: scale(1.1);
+
+        body.dark-mode {
+            background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%);
+            color: #e2e8f0;
         }
-        .step.inactive .icon { 
-            color: #cbd5e1; 
-            background: #f1f5f9;
+
+        /* Premium Navbar */
+        .navbar {
+            background: rgba(139, 92, 246, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 0.75rem 0;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            z-index: 1000;
         }
-        .order-header { background: linear-gradient(135deg, #8b5cf6 0%, #a78bfa 100%); }
-        
-        /* Navbar Icon Box Style */
+        body.dark-mode .navbar {
+            background: rgba(15, 23, 42, 0.9);
+            border-bottom: 1px solid rgba(139, 92, 246, 0.2);
+        }
+
         .nav-icon-link {
-            width: 40px;
-            height: 40px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: rgba(255, 255, 255, 0.2);
-            border-radius: 12px;
-            color: white !important;
-            transition: all 0.2s ease;
-            text-decoration: none;
-            font-size: 1.2rem;
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            width: 42px; height: 42px; display: flex; align-items: center; justify-content: center;
+            background: rgba(255, 255, 255, 0.15); border-radius: 14px; color: white !important;
+            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+            text-decoration: none; border: 1px solid rgba(255, 255, 255, 0.1);
         }
+
         .nav-icon-link:hover {
-            background: rgba(255, 255, 255, 0.35);
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
         }
-        .nav-icon-link i { font-size: 1.25rem; }
-        .logout-box { background: rgba(255, 255, 255, 0.1); }
-        .dark-toggle { width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; background: rgba(255, 255, 255, 0.1); border-radius: 12px; border: 1px solid rgba(255, 255, 255, 0.1); transition: 0.2s; color: white; }
-        .dark-toggle:hover { background: rgba(255, 255, 255, 0.25); transform: translateY(-2px); }
-        
-        @keyframes slideInFromLeft {
-            from { opacity: 0; transform: translateX(-20px); }
-            to { opacity: 1; transform: translateX(0); }
+
+        .dark-toggle {
+            width: 42px; height: 42px; display: flex; align-items: center; justify-content: center;
+            background: rgba(255, 255, 255, 0.15); border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 14px; color: white; cursor: pointer; transition: all 0.3s ease;
         }
-        .step { animation: slideInFromLeft 0.5s ease-out; }
-        .step:nth-child(2) { animation-delay: 0.1s; }
-        .step:nth-child(3) { animation-delay: 0.2s; }
-        .step:nth-child(4) { animation-delay: 0.3s; }
+
+        .dark-toggle:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-3px);
+        }
+
+        .container { margin-top: 3rem; }
+
+        h3 {
+            font-size: 2.2rem;
+            font-weight: 800;
+            letter-spacing: -1px;
+            margin-bottom: 2rem;
+            color: var(--text-primary);
+        }
+        body.dark-mode h3 { color: #f8fafc; }
+
+        /* Order Header Card */
+        .order-header-card {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            border-radius: 28px;
+            padding: 3rem;
+            color: white;
+            box-shadow: 0 15px 40px rgba(139, 92, 246, 0.25);
+            margin-bottom: -40px;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Timeline Card */
+        .timeline-card {
+            border-radius: 28px;
+            border: none;
+            background: var(--surface);
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.05);
+            padding: 5rem 3rem 3rem;
+        }
+        body.dark-mode .timeline-card {
+            background: rgba(30, 41, 59, 0.7);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(139, 92, 246, 0.1);
+        }
+
+        /* Timeline Steps (Apple Style) */
+        .timeline {
+            position: relative;
+            padding-left: 3rem;
+        }
+        .timeline::before {
+            content: ""; position: absolute; left: 14px; top: 10px; bottom: 10px;
+            width: 4px; background: var(--border-color);
+            border-radius: 4px;
+        }
+        body.dark-mode .timeline::before { background: rgba(255,255,255,0.1); }
+
+        .timeline-step {
+            position: relative;
+            padding-bottom: 3rem;
+            transition: all 0.5s ease;
+        }
+        .timeline-step:last-child { padding-bottom: 0; }
+
+        .step-indicator {
+            position: absolute; left: -3rem; top: 0;
+            width: 32px; height: 32px;
+            background: var(--surface);
+            border: 4px solid var(--border-color);
+            border-radius: 50%;
+            z-index: 2;
+            transition: all 0.3s ease;
+            display: flex; align-items: center; justify-content: center;
+        }
+        body.dark-mode .step-indicator { background: #1e293b; border-color: rgba(255,255,255,0.1); }
+
+        .timeline-step.active .step-indicator {
+            background: var(--success);
+            border-color: var(--success);
+            box-shadow: 0 0 0 8px rgba(16, 185, 129, 0.15);
+            color: white;
+        }
+        .timeline-step.active .step-indicator i { visibility: visible; }
+        .step-indicator i { font-size: 0.8rem; visibility: hidden; }
+
+        .step-content {
+            opacity: 0.5;
+            transition: all 0.3s ease;
+        }
+        .timeline-step.active .step-content { opacity: 1; transform: translateX(10px); }
+
+        .step-title { font-weight: 800; font-size: 1.25rem; margin-bottom: 4px; }
+        .step-desc { font-weight: 500; font-size: 0.95rem; color: var(--text-secondary); }
+
+        /* Order List UI */
+        .order-row-card {
+            background: var(--surface);
+            border-radius: 20px;
+            padding: 1.5rem;
+            border: 1px solid var(--border-color);
+            margin-bottom: 1rem;
+            transition: all 0.3s ease;
+        }
+        body.dark-mode .order-row-card {
+            background: rgba(30, 41, 59, 0.5);
+            border-color: rgba(139, 92, 246, 0.1);
+        }
+        .order-row-card:hover { transform: translateY(-5px); box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
+
+        .status-badge {
+            padding: 8px 16px;
+            border-radius: 12px;
+            font-weight: 800;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        @keyframes pulse-success {
+            0% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.4); }
+            70% { box-shadow: 0 0 0 15px rgba(16, 185, 129, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+        }
+        .timeline-step.active .step-indicator { animation: pulse-success 2s infinite; }
+
     </style>
     <c:if test="${not empty order and order.status != 'Delivered'}">
-        <meta http-equiv="refresh" content="5">
+        <meta http-equiv="refresh" content="7">
     </c:if>
 </head>
 <body class="pb-5">
-<nav class="navbar navbar-expand-lg navbar-dark bg-purple shadow-sm mb-4">
+
+<nav class="navbar navbar-expand-lg navbar-dark sticky-top">
     <div class="container-fluid px-4">
-        <a class="navbar-brand fw-bold" href="HomeServlet"><i class="bi bi-basket-fill text-warning me-2"></i>Urban Eats</a>
-        <div class="ms-auto d-flex align-items-center gap-2">
+        <a class="navbar-brand fw-800 fs-3" href="HomeServlet">
+            <i class="bi bi-basket-fill text-warning me-2"></i>Urban Eats
+        </a>
+        <div class="ms-auto d-flex align-items-center gap-3">
             <a href="HomeServlet" class="nav-icon-link" title="Home"><i class="bi bi-house-door-fill"></i></a>
-            <a href="MoodSuggestServlet" class="nav-icon-link" title="Mood Suggest"><i class="bi bi-stars"></i></a>
+            <a href="MoodSuggestServlet" class="nav-icon-link" title="AI Suggest"><i class="bi bi-stars"></i></a>
             <a href="CartServlet" class="nav-icon-link" title="My Cart"><i class="bi bi-cart3"></i></a>
             <a href="ProfileServlet" class="nav-icon-link" title="My Profile"><i class="bi bi-person-circle"></i></a>
-            <button class="dark-toggle mx-1" id="darkToggle" title="Toggle dark mode"><i class="bi bi-moon-stars-fill"></i></button>
-            <a href="login.jsp" class="nav-icon-link logout-box shadow-sm ms-2" title="Logout"><i class="bi bi-box-arrow-right"></i></a>
+            <button class="dark-toggle" id="darkToggle" title="Toggle Theme"><i class="bi bi-moon-stars-fill"></i></button>
+            <a href="login.jsp" class="nav-icon-link bg-danger bg-opacity-25 border-danger border-opacity-25" title="Logout"><i class="bi bi-box-arrow-right"></i></a>
         </div>
     </div>
 </nav>
 
-<div class="container">
+<div class="container pb-5">
+    
     <c:choose>
         <c:when test="${not empty order}">
             <div class="row justify-content-center">
-                <div class="col-md-7 col-lg-6">
-                    <div class="card border-0 shadow-sm rounded-4 overflow-hidden mb-4">
-                        <div class="order-header p-4 text-white text-center">
-                            <h4 class="fw-bold mb-1"><i class="bi bi-bag-check me-2"></i>Order #${order.orderId}</h4>
-                            <p class="mb-0 opacity-75 small"><i class="bi bi-calendar3"></i> Placed on <fmt:formatDate value="${order.createdAt}" pattern="dd MMM yyyy, hh:mm a" /></p>
+                <div class="col-lg-8">
+                    <!-- Order Header -->
+                    <div class="order-header-card text-center">
+                        <div class="mb-3">
+                            <span class="badge bg-white text-primary rounded-pill fw-800 px-3 py-2">LIVE TRACKING</span>
                         </div>
-                        <div class="card-body p-5">
-                            <h5 class="fw-bold mb-5"><i class="bi bi-geo-alt-fill text-purple me-2"></i>Live Tracking</h5>
+                        <h1 class="fw-800 mb-2" style="font-size: 3rem; letter-spacing: -2px;">Order #${order.orderId}</h1>
+                        <p class="fs-5 opacity-90 fw-500 mb-0">
+                            <i class="bi bi-clock-history me-2"></i>Placed <fmt:formatDate value="${order.createdAt}" pattern="hh:mm a" />
+                        </p>
+                    </div>
+
+                    <!-- Timeline Content -->
+                    <div class="timeline-card">
+                        <div class="timeline">
                             <c:set var="st" value="${order.status}" />
-                            <div class="step ${st == 'Preparing' || st == 'Food Ready' || st == 'Out for Delivery' || st == 'Delivered' ? 'active' : 'inactive'}">
-                                <div class="icon"><i class="bi bi-check-lg"></i></div>
-                                <h6 class="fw-bold mb-1">Order Confirmed</h6>
-                                <p class="text-muted small mb-0"><i class="bi bi-hourglass-split me-1"></i>Your food is being prepared.</p>
+                            
+                            <div class="timeline-step ${st == 'Preparing' || st == 'Food Ready' || st == 'Out for Delivery' || st == 'Delivered' ? 'active' : ''}">
+                                <div class="step-indicator"><i class="bi bi-check-lg"></i></div>
+                                <div class="step-content">
+                                    <div class="step-title">Order Confirmed</div>
+                                    <div class="step-desc">Your order has been received and is being prepared with care.</div>
+                                </div>
                             </div>
-                            <div class="step ${st == 'Food Ready' || st == 'Out for Delivery' || st == 'Delivered' ? 'active' : 'inactive'}">
-                                <div class="icon"><i class="bi bi-box-seam"></i></div>
-                                <h6 class="fw-bold mb-1">Food Ready</h6>
-                                <p class="text-muted small mb-0"><i class="bi bi-check-circle me-1"></i>Food is packed and ready for pickup.</p>
+
+                            <div class="timeline-step ${st == 'Food Ready' || st == 'Out for Delivery' || st == 'Delivered' ? 'active' : ''}">
+                                <div class="step-indicator"><i class="bi bi-check-lg"></i></div>
+                                <div class="step-content">
+                                    <div class="step-title">Preparing Your Meal</div>
+                                    <div class="step-desc">The chef is working their magic. Almost ready for pickup!</div>
+                                </div>
                             </div>
-                            <div class="step ${st == 'Out for Delivery' || st == 'Delivered' ? 'active' : 'inactive'}">
-                                <div class="icon"><i class="bi bi-bicycle"></i></div>
-                                <h6 class="fw-bold mb-1">Out for Delivery</h6>
-                                <p class="text-muted small mb-0"><i class="bi bi-pin-map me-1"></i>Delivery partner is on the way.</p>
+
+                            <div class="timeline-step ${st == 'Out for Delivery' || st == 'Delivered' ? 'active' : ''}">
+                                <div class="step-indicator"><i class="bi bi-check-lg"></i></div>
+                                <div class="step-content">
+                                    <div class="step-title">Out for Delivery</div>
+                                    <div class="step-desc">A delivery hero is on their way to your doorstep.</div>
+                                </div>
                             </div>
-                            <div class="step ${st == 'Delivered' ? 'active' : 'inactive'}" style="border: none;">
-                                <div class="icon"><i class="bi bi-house-check"></i></div>
-                                <h6 class="fw-bold mb-1">Delivered</h6>
-                                <p class="text-muted small mb-0"><i class="bi bi-hand-thumbs-up me-1"></i>Enjoy your meal!</p>
+
+                            <div class="timeline-step ${st == 'Delivered' ? 'active' : ''}">
+                                <div class="step-indicator"><i class="bi bi-check-lg"></i></div>
+                                <div class="step-content">
+                                    <div class="step-title">Delivered</div>
+                                    <div class="step-desc">Enjoy your meal! Thank you for choosing Urban Eats.</div>
+                                </div>
                             </div>
                         </div>
-                        <div class="bg-light p-4 border-top">
-                            <div class="d-flex justify-content-between align-items-center">
-                                <span class="text-muted small fw-bold"><i class="bi bi-credit-card me-1"></i>Paid via ${order.paymentMethod}</span>
-                                <span class="fw-bold fs-4 text-purple">₹${order.totalAmount}</span>
+
+                        <div class="mt-5 p-4 rounded-4 bg-light bg-opacity-50 d-flex justify-content-between align-items-center">
+                            <div>
+                                <span class="text-secondary small fw-800 text-uppercase">Payment Amount</span>
+                                <div class="fs-3 fw-800 text-primary">₹${order.totalAmount}</div>
+                            </div>
+                            <div class="text-end">
+                                <span class="text-secondary small fw-800 text-uppercase">Method</span>
+                                <div class="fw-700 text-dark"><i class="bi bi-credit-card me-2"></i>${order.paymentMethod}</div>
                             </div>
                         </div>
+
+                        <a href="OrderTrackingServlet" class="btn btn-outline-primary w-100 rounded-pill py-3 fw-800 mt-4">
+                            Back to My Orders
+                        </a>
                     </div>
                 </div>
             </div>
         </c:when>
+        
         <c:otherwise>
-            <div class="d-flex justify-content-between align-items-end mb-4">
-                <h3 class="fw-bold mb-0"><i class="bi bi-clock-history me-2 text-purple"></i>My Orders</h3>
+            <div class="d-flex justify-content-between align-items-center mb-5">
+                <h3 class="fw-800 mb-0">My Orders</h3>
+                <a href="HomeServlet" class="btn btn-purple rounded-pill px-4 fw-800">New Order <i class="bi bi-plus-lg ms-2"></i></a>
             </div>
-            <div class="row">
+
+            <div class="row g-4">
                 <c:forEach var="o" items="${orders}">
-                    <div class="col-md-6 mb-4">
-                        <div class="card border-0 shadow-sm rounded-4 h-100 transition-all">
-                            <div class="card-body p-4">
-                                <div class="d-flex justify-content-between mb-3 border-bottom pb-3">
-                                    <div>
-                                        <h5 class="fw-bold mb-1"><i class="bi bi-receipt me-2 text-primary"></i>Order #${o.orderId}</h5>
-                                        <p class="text-muted small mb-0"><i class="bi bi-calendar3 me-1"></i><fmt:formatDate value="${o.createdAt}" pattern="dd MMM yyyy, hh:mm a" /></p>
-                                    </div>
-                                    <div class="text-end">
-                                        <span class="badge ${o.status == 'Delivered' ? 'bg-success' : o.status == 'Out for Delivery' ? 'bg-warning text-dark' : 'bg-info text-white'} px-3 py-2 rounded-pill shadow-sm">
-                                            <i class="bi bi-circle-fill me-1" style="font-size: 0.5rem;"></i>${o.status}
-                                        </span>
-                                    </div>
+                    <div class="col-lg-6">
+                        <div class="order-row-card">
+                            <div class="d-flex justify-content-between align-items-center mb-3">
+                                <div>
+                                    <h5 class="fw-800 mb-1 text-dark">Order #${o.orderId}</h5>
+                                    <p class="text-secondary small fw-600 mb-0"><i class="bi bi-calendar3 me-2"></i><fmt:formatDate value="${o.createdAt}" pattern="dd MMM yyyy, hh:mm a" /></p>
                                 </div>
-                                <div class="d-flex justify-content-between align-items-center mt-3">
-                                    <div>
-                                        <p class="text-muted small mb-0"><i class="bi bi-cash me-1"></i>Total Amount</p>
-                                        <p class="fw-bold fs-5 mb-0 text-purple">₹${o.totalAmount}</p>
-                                    </div>
-                                    <a href="OrderTrackingServlet?id=${o.orderId}" class="btn btn-outline-purple btn-sm rounded-pill fw-bold px-4 py-2">
-                                        <i class="bi bi-arrow-right me-1"></i>Details
-                                    </a>
-                                </div>
+                                <span class="status-badge ${o.status == 'Delivered' ? 'bg-success bg-opacity-10 text-success' : 'bg-primary bg-opacity-10 text-primary'}">
+                                    ${o.status}
+                                </span>
+                            </div>
+                            <div class="d-flex justify-content-between align-items-center mt-4">
+                                <h4 class="fw-800 text-primary mb-0">₹${o.totalAmount}</h4>
+                                <a href="OrderTrackingServlet?id=${o.orderId}" class="btn btn-sm btn-outline-primary px-4 rounded-pill fw-800 border-2">
+                                    Track Status
+                                </a>
                             </div>
                         </div>
                     </div>
                 </c:forEach>
+
                 <c:if test="${empty orders}">
-                    <div class="col-12 text-center my-5 py-5 bg-white rounded-4 shadow-sm border-0">
-                        <i class="bi bi-inbox text-muted fs-1 d-block mb-3"></i>
-                        <h4 class="fw-bold text-muted">No past orders found.</h4>
-                        <p class="text-muted">Looks like you haven't placed an order yet.</p>
-                        <a href="HomeServlet" class="btn btn-purple btn-lg rounded-pill px-5 mt-3 fw-bold">
-                            <i class="bi bi-shop me-2"></i>Start Ordering
-                        </a>
+                    <div class="col-12 text-center py-5">
+                        <i class="bi bi-receipt fs-1 text-muted opacity-25 mb-3 d-block"></i>
+                        <h4 class="fw-800">Your order history is empty</h4>
+                        <p class="text-secondary">Start your food journey today!</p>
+                        <a href="HomeServlet" class="btn btn-purple rounded-pill px-5 py-3 mt-3 fw-800">Browse Menu</a>
                     </div>
                 </c:if>
             </div>
         </c:otherwise>
     </c:choose>
 </div>
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <script>
     const body = document.body;
     const toggleBtn = document.getElementById('darkToggle');
+
     if (localStorage.getItem('darkMode') === 'on') {
         body.classList.add('dark-mode');
         toggleBtn.innerHTML = '<i class="bi bi-sun-fill"></i>';
     }
+
     toggleBtn.addEventListener('click', () => {
         body.classList.toggle('dark-mode');
         const isDark = body.classList.contains('dark-mode');

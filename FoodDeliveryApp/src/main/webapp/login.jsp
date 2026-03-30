@@ -1,4 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page import="java.util.*, com.fooddelivery.entity.*, com.fooddelivery.dao.*, javax.servlet.http.*" %>
+<%-- Urban Eats v2.1 - Force Recompile --%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -42,6 +44,7 @@
         body.dark-mode .card {
             background: rgba(45, 32, 72, 0.8);
             border: 1px solid rgba(139, 92, 246, 0.2);
+            backdrop-filter: blur(12px);
         }
 
         body.dark-mode .form-control {
@@ -51,7 +54,7 @@
         }
 
         body.dark-mode .form-control::placeholder {
-            color: rgba(194, 181, 253, 0.5);
+            color: rgba(194, 181, 253, 0.4);
         }
 
         body.dark-mode .text-muted {
@@ -86,14 +89,10 @@
             color: white;
         }
 
-        .btn-purple:active {
-            transform: translateY(-1px);
-        }
-
         .dark-toggle-fixed {
             position: fixed;
-            top: 1.5rem;
-            right: 1.5rem;
+            top: 2rem;
+            right: 2rem;
             background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
             color: white;
             border: none;
@@ -111,14 +110,14 @@
         }
 
         .dark-toggle-fixed:hover {
-            transform: translateY(-4px);
+            transform: translateY(-4px) rotate(15deg);
             box-shadow: 0 12px 32px rgba(139, 92, 246, 0.45);
         }
 
         .form-control {
             border-radius: 12px;
             border: 2px solid var(--border-color);
-            padding: 12px 16px;
+            padding: 14px 18px;
             font-size: 1rem;
             background: var(--surface-light);
             transition: all 0.3s ease;
@@ -127,122 +126,58 @@
 
         .form-control:focus {
             border-color: var(--primary);
-            box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.1);
+            box-shadow: 0 0 0 4px rgba(139, 92, 246, 0.1);
             background: var(--surface);
         }
 
-        .form-control::placeholder {
-            color: var(--text-secondary);
-            opacity: 0.7;
-        }
-
         .form-label {
-            font-weight: 600;
+            font-weight: 700;
             color: var(--text-secondary);
             text-transform: uppercase;
-            font-size: 0.8rem;
-            letter-spacing: 0.5px;
-            margin-bottom: 8px;
+            font-size: 0.75rem;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+            display: block;
         }
 
         .card {
-            border-radius: 24px;
+            border-radius: 28px;
             border: none;
             background: var(--surface);
             box-shadow: 0 20px 60px rgba(0, 0, 0, 0.08);
             transition: all 0.3s ease;
         }
 
-        .card:hover {
-            box-shadow: 0 30px 80px rgba(139, 92, 246, 0.1);
-        }
-
         .alert {
-            border-radius: 14px;
+            border-radius: 16px;
             border: none;
-            animation: slideInDown 0.4s ease-out;
-        }
-
-        @keyframes slideInDown {
-            from { opacity: 0; transform: translateY(-20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .logo-section {
-            text-align: center;
-            margin-bottom: 2rem;
+            font-weight: 600;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
         }
 
         .logo-icon {
-            font-size: 3.5rem;
+            font-size: 4rem;
             background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            margin-bottom: 0.5rem;
-            animation: bounceIn 0.6s ease-out;
-        }
-
-        @keyframes bounceIn {
-            0% { transform: scale(0.3); opacity: 0; }
-            50% { opacity: 1; }
-            70% { transform: scale(1.05); }
-            100% { transform: scale(1); }
-        }
-
-        .card-title {
-            font-size: 1.75rem;
-            font-weight: 800;
-            color: var(--text-primary);
-            letter-spacing: -0.5px;
-        }
-
-        .card-subtitle {
-            font-size: 1rem;
-            color: var(--text-secondary);
-            font-weight: 500;
-            margin-bottom: 2rem;
-        }
-
-        .error-message {
-            color: var(--danger);
-            font-size: 0.85rem;
-            font-weight: 600;
-            margin-top: 6px;
-            animation: shake 0.3s ease-in-out;
-        }
-
-        @keyframes shake {
-            0%, 100% { transform: translateX(0); }
-            25% { transform: translateX(-5px); }
-            75% { transform: translateX(5px); }
-        }
-
-        .input-group-icon {
-            position: relative;
-        }
-
-        .input-group-icon i {
-            position: absolute;
-            right: 14px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: var(--primary);
-            pointer-events: none;
+            margin-bottom: 0.75rem;
+            display: inline-block;
         }
 
         .step-indicator {
             display: flex;
             justify-content: space-between;
-            gap: 0.5rem;
+            gap: 0.75rem;
             margin-bottom: 2rem;
         }
 
         .step {
             flex: 1;
-            height: 4px;
+            height: 6px;
             background: #e2e8f0;
-            border-radius: 2px;
+            border-radius: 10px;
+            transition: background 0.4s ease;
         }
 
         .step.active {
@@ -253,196 +188,217 @@
             color: var(--primary);
             text-decoration: none;
             font-weight: 700;
-            transition: all 0.3s ease;
+            transition: all 0.2s ease;
         }
 
         .link-custom:hover {
             color: var(--primary-dark);
-            transform: translateX(2px);
+            text-decoration: underline;
+        }
+
+        .error-message {
+            color: var(--danger);
+            font-size: 0.8rem;
+            font-weight: 700;
+            margin-top: 8px;
+            display: flex;
+            align-items: center;
+        }
+        .error-message::before {
+            content: "\F33A";
+            font-family: "bootstrap-icons";
+            margin-right: 6px;
         }
     </style>
 </head>
-<body class="d-flex align-items-center min-vh-100">
-<button class="dark-toggle-fixed" id="darkToggle" title="Toggle dark mode"><i class="bi bi-moon-stars-fill"></i></button>
+<body>
+    <button class="dark-toggle-fixed" id="darkToggle" title="Toggle dark mode"><i class="bi bi-moon-stars-fill"></i></button>
 
-<div class="container">
-    <div class="row justify-content-center align-items-center min-vh-100">
-        <div class="col-12 col-sm-10 col-md-8 col-lg-5 col-xl-4">
-            <!-- Logo Section -->
-            <div class="logo-section mb-5">
-                <div class="logo-icon mb-3"><i class="bi bi-basket-fill"></i></div>
-                <h1 class="fw-bold mb-2" style="font-size: 2.2rem; letter-spacing: -1px;">Urban Eats</h1>
-                <p class="text-secondary fw-500">Premium Food Delivery</p>
-            </div>
-
-            <!-- Messages -->
-            <% String msg = request.getParameter("msg"); if (msg != null) { %>
-                <div class="alert alert-success border-0 d-flex align-items-center mb-3" style="background: #f0fdf4; color: #15803d;">
-                    <div><%= msg %></div>
+    <div class="container">
+        <div class="row justify-content-center align-items-center min-vh-100 py-5">
+            <div class="col-12 col-sm-10 col-md-8 col-lg-5 col-xl-4">
+                
+                <!-- Brand Section -->
+                <div class="text-center mb-5">
+                    <div class="logo-icon"><i class="bi bi-basket-fill"></i></div>
+                    <h1 class="fw-800 mb-1" style="font-size: 2.5rem; letter-spacing: -1.5px;">Urban <span class="text-purple">Eats</span></h1>
+                    <p class="text-secondary fw-600 mb-0">Premium Food Delivery</p>
                 </div>
-            <% } %>
-            <% String err = request.getParameter("error"); if (err != null) { %>
-                <div class="alert alert-danger border-0 d-flex align-items-center mb-3" style="background: #fef2f2; color: #b91c1c;">
-                    <div><%= err %></div>
-                </div>
-            <% } %>
 
-            <!-- Auth Card -->
-            <div class="card p-5 mb-4">
-                <!-- Step 1: Phone -->
-                <div id="step-phone">
-                    <h2 class="card-title mb-2">Welcome back</h2>
-                    <p class="card-subtitle">Enter your phone number</p>
-
-                    <div class="step-indicator">
-                        <div class="step active"></div>
-                        <div class="step"></div>
+                <!-- Session Messages -->
+                <% 
+                    String msg = request.getParameter("msg"); 
+                    String err = request.getParameter("error");
+                    if (msg != null) { 
+                %>
+                    <div class="alert alert-success border-0 d-flex align-items-center mb-4" style="background: #f0fdf4; color: #15803d;">
+                        <i class="bi bi-check-circle-fill me-3 fs-4"></i>
+                        <div><%= msg %></div>
                     </div>
+                <% } %>
+                <% if (err != null) { %>
+                    <div class="alert alert-danger border-0 d-flex align-items-center mb-4" style="background: #fef2f2; color: #b91c1c;">
+                        <i class="bi bi-exclamation-triangle-fill me-3 fs-4"></i>
+                        <div><%= err %></div>
+                    </div>
+                <% } %>
 
-                    <div class="mb-4">
-                        <label class="form-label">Phone Number</label>
-                        <div class="input-group-icon">
-                            <input type="text" id="phoneInput" class="form-control form-control-lg" 
-                                   maxlength="10" inputmode="numeric" placeholder=""
-                                   value="<%= request.getParameter(\"phone\") != null ? request.getParameter(\"phone\") : \"\" %>">
+                <!-- Authentication Card -->
+                <div class="card p-4 p-md-5 mb-4">
+                    <!-- Step 1: Phone Verification -->
+                    <div id="step-phone">
+                        <h2 class="fw-800 mb-2" style="font-size: 1.8rem;">Welcome back</h2>
+                        <p class="text-secondary fw-500 mb-4">Enter your mobile number to continue</p>
+
+                        <div class="step-indicator">
+                            <div class="step active"></div>
+                            <div class="step"></div>
                         </div>
-                        <div id="phoneError" class="error-message" style="display:none;"></div>
-                    </div>
 
-                    <button onclick="checkPhone()" class="btn btn-purple btn-lg w-100 mb-4">
-                        Continue
-                    </button>
-
-                    <div class="text-center">
-                        <p class="text-secondary mb-0">New to Urban Eats? 
-                            <a href="register.jsp" class="link-custom">Create account</a>
-                        </p>
-                    </div>
-                </div>
-
-                <!-- Step 2: Password -->
-                <div id="step-password" style="display:none;">
-                    <button type="button" onclick="resetPhone()" class="btn btn-sm" 
-                            style="background:none; border:none; color:var(--primary); padding:0;">
-                        Back
-                    </button>
-
-                    <h2 class="card-title mb-2 mt-3">Enter Password</h2>
-                    <p class="card-subtitle">Secure login</p>
-
-                    <div class="step-indicator">
-                        <div class="step active"></div>
-                        <div class="step active"></div>
-                    </div>
-
-                    <div class="mb-3">
-                        <label class="form-label">Phone</label>
-                        <div style="background:#f8fafc; border:2px solid #e2e8f0; border-radius:12px; padding:12px 16px; display:flex; align-items:center; justify-content:space-between;">
-                            <span class="fw-600 text-primary" id="phoneDisplay"></span>
-                            <a href="#" onclick="resetPhone(event)" class="link-custom" style="font-size:0.9rem;">Change</a>
-                        </div>
-                    </div>
-
-                    <form action="LoginServlet" method="post" id="loginForm">
-                        <input type="hidden" name="phone" id="hiddenPhone">
                         <div class="mb-4">
-                            <label class="form-label">Password</label>
-                            <div class="input-group-icon">
-                                <input type="password" name="password" id="passwordInput" class="form-control form-control-lg" 
-                                       required autofocus placeholder="">
+                            <label class="form-label">Phone Number</label>
+                            <div class="position-relative">
+                                <input type="text" id="phoneInput" class="form-control form-control-lg" 
+                                       maxlength="10" inputmode="numeric" placeholder="9876543210"
+                                       value="<%= request.getParameter("phone") != null ? request.getParameter("phone") : "" %>">
+                            </div>
+                            <div id="phoneError" class="error-message" style="display:none;"></div>
+                        </div>
 
+                        <button onclick="checkPhone()" class="btn btn-purple btn-lg w-100 mb-4 py-3 rounded-pill shadow-sm">
+                            Continue <i class="bi bi-arrow-right ms-2"></i>
+                        </button>
+
+                        <div class="text-center">
+                            <p class="text-secondary fw-500 mb-0">New to Urban Eats? 
+                                <a href="register.jsp" class="link-custom ms-1">Create account</a>
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Step 2: Password Entry -->
+                    <div id="step-password" style="display:none;">
+                        <button type="button" onclick="resetPhone()" class="btn btn-link text-decoration-none p-0 mb-3 fw-700" style="color:var(--primary);">
+                            <i class="bi bi-chevron-left me-1"></i> Back
+                        </button>
+
+                        <h2 class="fw-800 mb-2" style="font-size: 1.8rem;">Security</h2>
+                        <p class="text-secondary fw-500 mb-4">Verification required for access</p>
+
+                        <div class="step-indicator">
+                            <div class="step active"></div>
+                            <div class="step active"></div>
+                        </div>
+
+                        <div class="mb-4">
+                            <label class="form-label">Active Account</label>
+                            <div class="d-flex align-items-center justify-content-between bg-light p-3 rounded-4 border">
+                                <span class="fw-700 text-primary" id="phoneDisplay"></span>
+                                <a href="#" onclick="resetPhone(event)" class="link-custom small">Change</a>
                             </div>
                         </div>
-                        <button type="submit" class="btn btn-purple btn-lg w-100">
-                            Login
-                        </button>
-                    </form>
-                </div>
-            </div>
 
-            <p class="text-center text-secondary small">
-                By continuing, you agree to our <a href="#" class="link-custom">Terms</a> and <a href="#" class="link-custom">Privacy</a>
-            </p>
+                        <form action="LoginServlet" method="post" id="loginForm">
+                            <input type="hidden" name="phone" id="hiddenPhone">
+                            <div class="mb-4">
+                                <label class="form-label">Enter Password</label>
+                                <input type="password" name="password" id="passwordInput" class="form-control form-control-lg" 
+                                       required placeholder="••••••••">
+                            </div>
+                            <button type="submit" class="btn btn-purple btn-lg w-100 py-3 rounded-pill shadow-sm">
+                                Login Access <i class="bi bi-shield-lock ms-2"></i>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+
+                <p class="text-center text-secondary small px-3">
+                    Secure login powered by Urban Eats Encryption. <br>
+                    <a href="#" class="link-custom mx-1">Terms</a> · <a href="#" class="link-custom mx-1">Privacy Policy</a>
+                </p>
+            </div>
         </div>
     </div>
-</div>
 
-<script>
-    const body = document.body;
-    const toggleBtn = document.getElementById('darkToggle');
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        const body = document.body;
+        const toggleBtn = document.getElementById('darkToggle');
 
-    if (localStorage.getItem('darkMode') === 'on') {
-        body.classList.add('dark-mode');
-        toggleBtn.innerHTML = '<i class="bi bi-sun-fill"></i>';
-    }
-
-    toggleBtn.addEventListener('click', () => {
-        body.classList.toggle('dark-mode');
-        const isDark = body.classList.contains('dark-mode');
-        localStorage.setItem('darkMode', isDark ? 'on' : 'off');
-        toggleBtn.innerHTML = isDark ? '<i class="bi bi-sun-fill"></i>' : '<i class="bi bi-moon-stars-fill"></i>';
-    });
-
-    const phoneInput = document.getElementById('phoneInput');
-    phoneInput.addEventListener('input', function() {
-        this.value = this.value.replace(/\D/g, '').slice(0, 10);
-        document.getElementById('phoneError').style.display = 'none';
-    });
-
-    phoneInput.addEventListener('keypress', function(e) {
-        if (e.key === 'Enter') checkPhone();
-    });
-
-    function checkPhone() {
-        const phone = phoneInput.value.trim();
-        const errEl = document.getElementById('phoneError');
-        const phoneRegex = /^[0-9]{10}$/;
-        
-        if (!phoneRegex.test(phone)) {
-            errEl.style.display = 'block';
-            errEl.textContent = phone ? 'Please enter 10 digits.' : 'Please enter a phone number.';
-            return;
+        // Theme Persistence
+        if (localStorage.getItem('darkMode') === 'on') {
+            body.classList.add('dark-mode');
+            toggleBtn.innerHTML = '<i class="bi bi-sun-fill"></i>';
         }
 
-        // Check if user exists on the backend
-        fetch('LoginServlet', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/x-www-form-urlencoded', 'X-Requested-With': 'XMLHttpRequest' },
-            body: 'phone=' + encodeURIComponent(phone) + '&checkOnly=true'
-        })
-        .then(res => res.text())
-        .then(data => {
-            if (data === 'exists') {
-                // User exists, proceed to password step
-                document.getElementById('step-phone').style.display = 'none';
-                document.getElementById('step-password').style.display = 'block';
-                document.getElementById('phoneDisplay').textContent = phone;
-                document.getElementById('hiddenPhone').value = phone;
-                document.getElementById('passwordInput').focus();
-            } else if (data === 'notfound') {
-                // User doesn't exist, redirect to register page
-                window.location.href = 'register.jsp?phone=' + encodeURIComponent(phone) + '&msg=Please+Register+First';
-            } else {
-                // Error checking user
-                errEl.style.display = 'block';
-                errEl.textContent = 'Error connecting to server. Please try again.';
-            }
-        })
-        .catch(err => {
-            console.error('Error:', err);
-            errEl.style.display = 'block';
-            errEl.textContent = 'Network error. Please try again.';
+        toggleBtn.addEventListener('click', () => {
+            body.classList.toggle('dark-mode');
+            const isDark = body.classList.contains('dark-mode');
+            localStorage.setItem('darkMode', isDark ? 'on' : 'off');
+            toggleBtn.innerHTML = isDark ? '<i class="bi bi-sun-fill"></i>' : '<i class="bi bi-moon-stars-fill"></i>';
         });
-    }
 
-    function resetPhone(e) {
-        if (e) e.preventDefault();
-        document.getElementById('step-password').style.display = 'none';
-        document.getElementById('step-phone').style.display = 'block';
-        phoneInput.focus();
-    }
-</script>
+        // Phone Input Formatting
+        const phoneInput = document.getElementById('phoneInput');
+        phoneInput.addEventListener('input', function() {
+            this.value = this.value.replace(/\D/g, '').slice(0, 10);
+            document.getElementById('phoneError').style.display = 'none';
+        });
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+        phoneInput.addEventListener('keypress', (e) => { if (e.key === 'Enter') checkPhone(); });
+
+        // AJAX Flow
+        function checkPhone() {
+            const phone = phoneInput.value.trim();
+            const errEl = document.getElementById('phoneError');
+            const phoneRegex = /^[0-9]{10}$/;
+            
+            if (!phoneRegex.test(phone)) {
+                errEl.style.display = 'flex';
+                errEl.textContent = phone ? 'Mobile number must be 10 digits.' : 'Phone number is required.';
+                return;
+            }
+
+            // AJAX call to verify user state
+            fetch('LoginServlet', {
+                method: 'POST',
+                headers: { 
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                    'X-Requested-With': 'XMLHttpRequest' 
+                },
+                body: 'phone=' + encodeURIComponent(phone) + '&checkOnly=true'
+            })
+            .then(res => res.text())
+            .then(data => {
+                if (data === 'exists') {
+                    // Switch to password step
+                    document.getElementById('step-phone').style.display = 'none';
+                    document.getElementById('step-password').style.display = 'block';
+                    document.getElementById('phoneDisplay').textContent = phone;
+                    document.getElementById('hiddenPhone').value = phone;
+                    document.getElementById('passwordInput').focus();
+                } else if (data === 'notfound') {
+                    // Redirect for registration
+                    window.location.href = 'register.jsp?phone=' + encodeURIComponent(phone) + '&msg=Urban+Eats+welcomes+you!+Please+complete+registration.';
+                } else {
+                    errEl.style.display = 'flex';
+                    errEl.textContent = 'Service unavailable. Try again later.';
+                }
+            })
+            .catch(err => {
+                console.error('Auth Error:', err);
+                errEl.style.display = 'flex';
+                errEl.textContent = 'Connection failed. Check your network.';
+            });
+        }
+
+        function resetPhone(e) {
+            if (e) e.preventDefault();
+            document.getElementById('step-password').style.display = 'none';
+            document.getElementById('step-phone').style.display = 'block';
+            phoneInput.focus();
+        }
+    </script>
 </body>
 </html>

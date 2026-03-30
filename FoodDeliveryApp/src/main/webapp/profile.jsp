@@ -9,8 +9,9 @@
     <title>User Profile - Urban Eats</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
+<<<<<<< Updated upstream
         :root { --primary: #8b5cf6; --primary-dark: #7c3aed; --primary-light: #ede9fe; --accent: #f59e0b; }
         body { font-family: 'Inter', sans-serif; background: #f8fafc; color: #1e293b; }
         .bg-purple-gradient { background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%); }
@@ -41,149 +42,267 @@
         .navbar .bi { font-size: 0.85rem; }
         
         /* Navbar Icon Box Style */
+=======
+        :root {
+            --primary: #8b5cf6;
+            --primary-dark: #7c3aed;
+            --primary-light: #ede9fe;
+            --primary-hover: #6d28d9;
+            --surface: #ffffff;
+            --surface-light: #f8fafc;
+            --text-primary: #1e293b;
+            --text-secondary: #64748b;
+            --border-color: #e2e8f0;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #f8fafc 0%, #ede9fe 100%);
+            min-height: 100vh;
+            color: var(--text-primary);
+            transition: all 0.3s ease;
+        }
+
+        body.dark-mode {
+            background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%);
+            color: #e2e8f0;
+        }
+
+        /* Premium Navbar */
+        .navbar {
+            background: rgba(139, 92, 246, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 0.75rem 0;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            z-index: 1000;
+        }
+        body.dark-mode .navbar {
+            background: rgba(15, 23, 42, 0.9);
+            border-bottom: 1px solid rgba(139, 92, 246, 0.2);
+        }
+
+>>>>>>> Stashed changes
         .nav-icon-link {
-            width: 40px;
-            height: 40px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: rgba(255, 255, 255, 0.2);
-            border-radius: 12px;
-            color: white !important;
-            transition: all 0.2s ease;
-            text-decoration: none;
-            font-size: 1.2rem;
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            width: 42px; height: 42px; display: flex; align-items: center; justify-content: center;
+            background: rgba(255, 255, 255, 0.15); border-radius: 14px; color: white !important;
+            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+            text-decoration: none; border: 1px solid rgba(255, 255, 255, 0.1);
         }
+
         .nav-icon-link:hover {
-            background: rgba(255, 255, 255, 0.35);
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
         }
-        .nav-icon-link i { font-size: 1.25rem; }
-        .logout-box { background: rgba(255, 255, 255, 0.1); }
-        .dark-toggle { width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; background: rgba(255, 255, 255, 0.1); border-radius: 12px; border: 1px solid rgba(255, 255, 255, 0.1); transition: 0.2s; color: white; cursor: pointer; }
-        .dark-toggle:hover { background: rgba(255, 255, 255, 0.25); transform: translateY(-2px); }
+
+        .dark-toggle {
+            width: 42px; height: 42px; display: flex; align-items: center; justify-content: center;
+            background: rgba(255, 255, 255, 0.15); border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 14px; color: white; cursor: pointer; transition: all 0.3s ease;
+        }
+
+        .dark-toggle:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-3px);
+        }
+
+        /* Profile Card */
+        .profile-header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            height: 160px;
+            border-radius: 28px 28px 0 0;
+        }
+
+        .profile-card {
+            border-radius: 28px;
+            border: none;
+            background: var(--surface);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.05);
+            margin-top: -60px;
+            overflow: visible;
+        }
+        body.dark-mode .profile-card {
+            background: rgba(30, 41, 59, 0.7);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(139, 92, 246, 0.1);
+        }
+
+        .avatar-box {
+            width: 120px; height: 120px;
+            background: white;
+            border-radius: 32px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 3.5rem;
+            color: var(--primary);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            border: 4px solid var(--surface);
+            margin-top: -60px;
+            margin-bottom: 20px;
+        }
+        body.dark-mode .avatar-box { background: #1e293b; border-color: #334155; }
+
+        .stat-card {
+            background: var(--surface-light);
+            padding: 1.5rem;
+            border-radius: 20px;
+            text-align: center;
+            border: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+        }
+        body.dark-mode .stat-card {
+            background: rgba(15, 23, 42, 0.3);
+            border-color: rgba(139, 92, 246, 0.1);
+        }
+        .stat-card:hover { transform: translateY(-5px); border-color: var(--primary); }
+
+        /* Order Items */
+        .order-card {
+            background: var(--surface);
+            border-radius: 20px;
+            padding: 1.5rem;
+            border-left: 6px solid var(--primary);
+            margin-bottom: 1rem;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.02);
+            transition: all 0.3s ease;
+        }
+        body.dark-mode .order-card {
+            background: rgba(30, 41, 59, 0.5);
+            border-color: var(--primary);
+        }
+        .order-card:hover { transform: scale(1.01); box-shadow: 0 10px 25px rgba(139,92,246,0.1); }
+
+        .btn-purple {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white; border: none; font-weight: 700;
+            transition: all 0.3s ease;
+        }
+        .btn-purple:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(139, 92, 246, 0.3); color: white; }
+
+        .form-control-lg {
+            border-radius: 14px;
+            background: var(--surface-light); border: 2px solid var(--border-color);
+            font-weight: 600;
+        }
+        body.dark-mode .form-control-lg {
+            background: rgba(15, 23, 42, 0.4); border-color: rgba(139, 92, 246, 0.2); color: white;
+        }
+        .form-control-lg:focus { border-color: var(--primary); box-shadow: 0 0 0 4px rgba(139, 92, 246, 0.1); }
     </style>
 </head>
 <body class="pb-5">
 
-<!-- Navbar -->
-<nav class="navbar navbar-expand-lg navbar-dark bg-purple-gradient shadow-sm sticky-top">
+<nav class="navbar navbar-expand-lg navbar-dark sticky-top">
     <div class="container-fluid px-4">
-        <a class="navbar-brand fw-bold" href="HomeServlet"><i class="bi bi-basket-fill text-warning me-2"></i>Urban Eats</a>
-        <div class="ms-auto d-flex align-items-center gap-2">
+        <a class="navbar-brand fw-800 fs-3" href="HomeServlet">
+            <i class="bi bi-basket-fill text-warning me-2"></i>Urban Eats
+        </a>
+        <div class="ms-auto d-flex align-items-center gap-3">
             <a href="HomeServlet" class="nav-icon-link" title="Home"><i class="bi bi-house-door-fill"></i></a>
-            <a href="MoodSuggestServlet" class="nav-icon-link" title="Mood Suggest"><i class="bi bi-stars"></i></a>
+            <a href="MoodSuggestServlet" class="nav-icon-link" title="AI Suggest"><i class="bi bi-stars"></i></a>
             <a href="CartServlet" class="nav-icon-link" title="My Cart"><i class="bi bi-cart3"></i></a>
             <a href="OrderTrackingServlet" class="nav-icon-link" title="My Orders"><i class="bi bi-box-seam"></i></a>
-            <button class="dark-toggle mx-1" id="darkToggle" title="Toggle dark mode"><i class="bi bi-moon-stars-fill"></i></button>
-            <a href="login.jsp" class="nav-icon-link logout-box shadow-sm ms-2" title="Logout"><i class="bi bi-box-arrow-right"></i></a>
+            <button class="dark-toggle" id="darkToggle" title="Toggle Theme"><i class="bi bi-moon-stars-fill"></i></button>
+            <a href="login.jsp" class="nav-icon-link bg-danger bg-opacity-25 border-danger border-opacity-25" title="Logout"><i class="bi bi-box-arrow-right"></i></a>
         </div>
     </div>
 </nav>
 
 <div class="container mt-5">
     <div class="row justify-content-center">
-        <!-- Profile Header/Card -->
-        <div class="col-lg-8">
+        <div class="col-lg-9">
+            
             <c:if test="${not empty success}">
-                <div class="alert alert-success alert-dismissible fade show rounded-4 shadow-sm border-0 mb-4" role="alert">
-                    <i class="bi bi-check-circle-fill me-2"></i> ${success}
-                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-                </div>
-            </c:if>
-            <c:if test="${not empty error}">
-                <div class="alert alert-danger alert-dismissible fade show rounded-4 shadow-sm border-0 mb-4" role="alert">
-                    <i class="bi bi-exclamation-triangle-fill me-2"></i> ${error}
-                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                <div class="alert alert-success border-0 rounded-4 shadow-sm mb-4 p-3 d-flex align-items-center">
+                    <i class="bi bi-check-circle-fill fs-4 me-3"></i> <strong>Success!</strong> ${success}
                 </div>
             </c:if>
 
-            <div class="card overflow-hidden">
-                <div class="bg-purple-gradient" style="height: 120px;"></div>
-                <div class="card-body px-4 px-md-5">
-                    <div class="d-flex flex-column flex-md-row justify-content-between align-items-center align-items-md-end mb-4 gap-3">
-                        <div class="d-flex align-items-end gap-3">
-                            <div class="profile-avatar">
-                                <i class="bi bi-person-fill"></i>
-                            </div>
-                            <div>
-                                <h2 class="fw-bold mb-1">${user.name}</h2>
-                                <p class="text-muted mb-0"><i class="bi bi-geo-alt-fill text-purple me-1"></i> ${user.city}</p>
-                            </div>
+            <div class="profile-header"></div>
+            <div class="card profile-card p-4 p-md-5">
+                <div class="d-flex flex-column flex-md-row justify-content-between align-items-center align-items-md-start">
+                    <div class="text-center text-md-start">
+                        <div class="avatar-box mx-auto mx-md-0">
+                            <i class="bi bi-person-bounding-box"></i>
                         </div>
-                        <button class="btn btn-purple rounded-pill px-4 py-2 fw-bold" data-bs-toggle="modal" data-bs-target="#editProfileModal">
-                            <i class="bi bi-pencil-square me-2"></i>Edit Profile
-                        </button>
+                        <h1 class="fw-800 mb-1" style="font-size: 2.5rem; letter-spacing: -1.5px;">${user.name}</h1>
+                        <p class="text-secondary fw-600 mb-4"><i class="bi bi-geo-alt-fill text-primary me-2"></i>Resident of ${user.city}</p>
                     </div>
+                    <button class="btn btn-purple btn-lg rounded-pill px-4" data-bs-toggle="modal" data-bs-target="#editProfileModal">
+                        <i class="bi bi-pencil-square me-2"></i>Edit Profile
+                    </button>
+                </div>
 
-                    <div class="row g-3 mb-5">
-                        <div class="col-md-4">
-                            <div class="stat-card shadow-sm">
-                                <div class="text-purple fs-3 fw-bold"><i class="bi bi-bag-check me-2"></i>${totalOrders}</div>
-                                <div class="text-muted small fw-bold text-uppercase">Total Orders</div>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="stat-card shadow-sm">
-                                <div class="text-primary fs-3 fw-bold"><i class="bi bi-star-fill me-2"></i>Gold</div>
-                                <div class="text-muted small fw-bold text-uppercase">Member Level</div>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="stat-card shadow-sm">
-                                <div class="text-success fs-3 fw-bold"><i class="bi bi-heart-fill me-2"></i>45</div>
-                                <div class="text-muted small fw-bold text-uppercase">Favorites</div>
-                            </div>
+                <div class="row g-4 mt-2 mb-5">
+                    <div class="col-md-4">
+                        <div class="stat-card">
+                            <h2 class="fw-800 text-primary mb-1">${totalOrders}</h2>
+                            <span class="text-secondary small fw-700 text-uppercase letter-wide">Total Orders</span>
                         </div>
                     </div>
+                    <div class="col-md-4">
+                        <div class="stat-card">
+                            <h2 class="fw-800 text-warning mb-1">Elite</h2>
+                            <span class="text-secondary small fw-700 text-uppercase letter-wide">Account Rank</span>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="stat-card">
+                            <h2 class="fw-800 text-success mb-1">Active</h2>
+                            <span class="text-secondary small fw-700 text-uppercase letter-wide">Member Since 2024</span>
+                        </div>
+                    </div>
+                </div>
 
-                    <div class="row g-4">
-                        <div class="col-md-6">
-                            <label class="form-label text-muted small fw-bold text-uppercase mb-2"><i class="bi bi-envelope-fill me-2 text-primary"></i>Email Address</label>
-                            <div class="fs-6 fw-bold">${user.email}</div>
-                        </div>
-                        <div class="col-md-6">
-                            <label class="form-label text-muted small fw-bold text-uppercase mb-2"><i class="bi bi-telephone-fill me-2 text-success"></i>Phone Number</label>
-                            <div class="fs-6 fw-bold">${user.phone}</div>
-                        </div>
+                <div class="row g-5">
+                    <div class="col-md-6">
+                        <label class="text-secondary small fw-800 text-uppercase mb-2">Registered Email</label>
+                        <div class="fs-5 fw-600"><i class="bi bi-envelope-at me-2 text-primary"></i>${user.email}</div>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="text-secondary small fw-800 text-uppercase mb-2">Mobile Number</label>
+                        <div class="fs-5 fw-600"><i class="bi bi-phone-vibrate me-2 text-success"></i>${user.phone}</div>
                     </div>
                 </div>
             </div>
 
-            <!-- Recent Orders Section -->
+            <!-- Recent Orders -->
             <div class="mt-5">
                 <div class="d-flex justify-content-between align-items-center mb-4 px-2">
-                    <h4 class="fw-bold mb-0"><i class="bi bi-clock-history me-2 text-purple"></i>Recent Orders</h4>
-                    <a href="OrderTrackingServlet" class="text-purple fw-bold text-decoration-none small">View All <i class="bi bi-arrow-right"></i></a>
+                    <h3 class="fw-800 mb-0">Order History</h3>
+                    <a href="OrderTrackingServlet" class="btn btn-link text-primary fw-700 text-decoration-none p-0">View tracking dashboard <i class="bi bi-chevron-right"></i></a>
                 </div>
+                
                 <div class="row g-3">
                     <c:forEach var="ord" items="${lastOrders}">
                         <div class="col-12">
-                            <div class="order-item p-4 shadow-sm d-flex justify-content-between align-items-center">
+                            <div class="order-card d-flex flex-wrap justify-content-between align-items-center">
                                 <div>
-                                    <div class="fw-bold fs-6"><i class="bi bi-receipt me-2 text-primary"></i>Order #${ord.orderId}</div>
-                                    <div class="text-muted small"><i class="bi bi-calendar3 me-1"></i><fmt:formatDate value="${ord.createdAt}" pattern="dd MMM yyyy, hh:mm a" /></div>
+                                    <div class="fw-800 fs-5 mb-1 text-dark">Order ID #${ord.orderId}</div>
+                                    <div class="text-secondary small fw-600"><i class="bi bi-calendar3 me-2"></i><fmt:formatDate value="${ord.createdAt}" pattern="dd MMM yyyy" /></div>
                                 </div>
-                                <div class="text-end">
-                                    <div class="fw-bold text-purple mb-2" style="font-size: 1.1rem;">₹${ord.totalAmount}</div>
-                                    <span class="badge ${ord.status == 'Delivered' ? 'bg-success' : ord.status == 'Out for Delivery' ? 'bg-warning text-dark' : 'bg-info text-white'} rounded-pill px-3 py-2">
-                                        <i class="bi bi-circle-fill me-1" style="font-size: 0.5rem;"></i>${ord.status}
+                                <div class="text-md-end mt-3 mt-md-0">
+                                    <div class="fw-800 text-primary fs-4 mb-2">₹${ord.totalAmount}</div>
+                                    <span class="badge rounded-pill px-3 py-2 fw-700 ${ord.status == 'Delivered' ? 'bg-success bg-opacity-10 text-success' : 'bg-primary bg-opacity-10 text-primary'}">
+                                        <i class="bi bi-circle-fill me-2" style="font-size: 0.5rem;"></i>${ord.status}
                                     </span>
                                 </div>
                             </div>
                         </div>
                     </c:forEach>
                     <c:if test="${empty lastOrders}">
-                        <div class="col-12 text-center py-5">
-                            <i class="bi bi-inbox fs-1 text-muted mb-3 d-block"></i>
-                            <p class="text-muted fw-bold">No orders found yet!</p>
-                            <a href="HomeServlet" class="btn btn-purple rounded-pill px-4 mt-3 fw-bold">Browse Restaurants</a>
+                        <div class="card text-center p-5 border-0 bg-light">
+                            <i class="bi bi-clock-history fs-1 text-muted opacity-25 mb-3"></i>
+                            <h5 class="fw-700">No recent orders found</h5>
+                            <p class="text-secondary">Ready to try something delicious?</p>
+                            <a href="HomeServlet" class="btn btn-purple rounded-pill px-4 mt-2 fw-700">See Restaurants</a>
                         </div>
                     </c:if>
                 </div>
             </div>
+
         </div>
     </div>
 </div>
@@ -191,48 +310,33 @@
 <!-- Edit Profile Modal -->
 <div class="modal fade" id="editProfileModal" tabindex="-1">
     <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content border-0 rounded-4 shadow">
-            <div class="modal-header border-0 pb-0 pt-4">
-                <h5 class="modal-title fw-bold"><i class="bi bi-pencil-square text-purple me-2"></i>Update Profile</h5>
+        <div class="modal-content border-0 rounded-4 shadow-lg">
+            <div class="modal-header border-0 pb-0 pt-4 px-4">
+                <h4 class="modal-title fw-800">Update Profile Details</h4>
                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
             <form action="ProfileServlet" method="POST" id="profileForm">
                 <div class="modal-body p-4">
-                    <div class="mb-3">
-                        <label class="form-label small fw-bold text-muted"><i class="bi bi-person-fill text-primary me-2"></i>FULL NAME</label>
-                        <div class="input-group mb-2">
-                            <span class="input-group-text border-0 bg-light"><i class="bi bi-person"></i></span>
-                            <input type="text" name="name" class="form-control border-0 bg-light" value="${user.name}" required>
-                        </div>
+                    <div class="mb-4">
+                        <label class="form-label small fw-800 text-muted text-uppercase mb-2">Display Name</label>
+                        <input type="text" name="name" class="form-control form-control-lg" value="${user.name}" required>
                     </div>
-                    <div class="mb-3">
-                        <label class="form-label small fw-bold text-muted"><i class="bi bi-envelope-fill text-success me-2"></i>EMAIL ADDRESS</label>
-                        <div class="input-group mb-2">
-                            <span class="input-group-text border-0 bg-light"><i class="bi bi-envelope"></i></span>
-                            <input type="email" name="email" class="form-control border-0 bg-light" value="${user.email}" required>
-                        </div>
+                    <div class="mb-4">
+                        <label class="form-label small fw-800 text-muted text-uppercase mb-2">Account Email</label>
+                        <input type="email" name="email" class="form-control form-control-lg" value="${user.email}" required>
                     </div>
-                    <div class="mb-3">
-                        <label class="form-label small fw-bold text-muted"><i class="bi bi-telephone-fill text-info me-2"></i>PHONE NUMBER</label>
-                        <div class="input-group mb-2">
-                            <span class="input-group-text border-0 bg-light"><i class="bi bi-telephone"></i></span>
-                            <input type="tel" name="phone" class="form-control border-0 bg-light" value="${user.phone}" pattern="[0-9]{10}" maxlength="10" required>
-                        </div>
-                        <div class="form-text small text-muted">Must be exactly 10 digits.</div>
+                    <div class="mb-4">
+                        <label class="form-label small fw-800 text-muted text-uppercase mb-2">Phone Identifier</label>
+                        <input type="tel" name="phone" class="form-control form-control-lg" value="${user.phone}" pattern="[0-9]{10}" maxlength="10" required>
                     </div>
                     <div class="mb-0">
-                        <label class="form-label small fw-bold text-muted"><i class="bi bi-geo-alt-fill text-warning me-2"></i>CITY</label>
-                        <div class="input-group mb-2">
-                            <span class="input-group-text border-0 bg-light"><i class="bi bi-geo-alt"></i></span>
-                            <input type="text" name="city" class="form-control border-0 bg-light" value="${user.city}" required>
-                        </div>
+                        <label class="form-label small fw-800 text-muted text-uppercase mb-2">Delivery City</label>
+                        <input type="text" name="city" class="form-control form-control-lg" value="${user.city}" required>
                     </div>
                 </div>
-                <div class="modal-footer border-0 pt-0 p-4 gap-2">
-                    <button type="button" class="btn btn-light rounded-pill px-4 py-2 fw-bold" data-bs-dismiss="modal">Cancel</button>
-                    <button type="submit" class="btn btn-purple rounded-pill px-5 py-2 fw-bold">
-                        <i class="bi bi-check-circle me-2"></i>Save Changes
-                    </button>
+                <div class="modal-footer border-0 p-4 pt-0 gap-3">
+                    <button type="button" class="btn btn-light rounded-pill px-4 fw-700 flex-grow-1" data-bs-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-purple rounded-pill px-4 fw-700 flex-grow-1">Apply Changes</button>
                 </div>
             </form>
         </div>
@@ -241,63 +345,19 @@
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <script>
-    // Profile Form Validation
-    document.getElementById('profileForm').addEventListener('submit', function(e) {
-        const phone = this.phone.value.trim();
-        const name = this.name.value.trim();
-        const email = this.email.value.trim();
-        
-        const phoneRegex = /^[0-9]{10}$/;
-        const nameRegex = /^[A-Za-z\s]{2,50}$/;
-        const emailRegex = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,6}$/;
-        
-        if (!nameRegex.test(name)) {
-            e.preventDefault();
-            alert('Please enter a valid name (letters only).');
-            return;
-        }
-        if (!emailRegex.test(email)) {
-            e.preventDefault();
-            alert('Please enter a valid email address.');
-            return;
-        }
-        if (!phoneRegex.test(phone)) {
-            e.preventDefault();
-            alert('Please enter a correct 10-digit number.');
-            return;
-        }
-    });
-
     const body = document.body;
     const toggleBtn = document.getElementById('darkToggle');
+
     if (localStorage.getItem('darkMode') === 'on') {
         body.classList.add('dark-mode');
         toggleBtn.innerHTML = '<i class="bi bi-sun-fill"></i>';
     }
+
     toggleBtn.addEventListener('click', () => {
         body.classList.toggle('dark-mode');
         const isDark = body.classList.contains('dark-mode');
         localStorage.setItem('darkMode', isDark ? 'on' : 'off');
         toggleBtn.innerHTML = isDark ? '<i class="bi bi-sun-fill"></i>' : '<i class="bi bi-moon-stars-fill"></i>';
-    });
-
-    document.addEventListener('DOMContentLoaded', function() {
-        const phoneInput = document.querySelector('input[name="phone"]');
-        const nameInput = document.querySelector('input[name="name"]');
-
-        // Numeric only for phone
-        phoneInput.addEventListener('keypress', function(e) {
-            if (!/[0-9]/.test(e.key) && e.key !== 'Backspace' && e.key !== 'Delete' && e.key !== 'ArrowLeft' && e.key !== 'ArrowRight') {
-                e.preventDefault();
-            }
-        });
-
-        // Alpha only for name
-        nameInput.addEventListener('keypress', function(e) {
-            if (!/[A-Za-z\s]/.test(e.key) && e.key !== 'Backspace' && e.key !== 'Delete' && e.key !== 'ArrowLeft' && e.key !== 'ArrowRight') {
-                e.preventDefault();
-            }
-        });
     });
 </script>
 </body>
