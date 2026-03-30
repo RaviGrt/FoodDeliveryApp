@@ -94,11 +94,20 @@ public class RestaurantDAO {
 
     public List<Restaurant> searchRestaurants(String keyword) {
         List<Restaurant> list = new ArrayList<>();
-        String query = "SELECT * FROM Restaurants WHERE LOWER(name) LIKE ? OR LOWER(city) LIKE ?";
+        String query = "SELECT DISTINCT r.restaurant_id, r.name, r.city, r.rating, r.delivery_time, r.is_veg_only, r.offers " +
+                       "FROM Restaurants r " +
+                       "LEFT JOIN Menu m ON r.restaurant_id = m.restaurant_id " +
+                       "WHERE LOWER(r.name) LIKE ? OR LOWER(r.city) LIKE ? " +
+                       "   OR LOWER(m.name) LIKE ? OR LOWER(m.description) LIKE ?";
         try (Connection conn = DBConnection.getConnection();
              PreparedStatement ps = conn.prepareStatement(query)) {
-            ps.setString(1, "%" + keyword.toLowerCase() + "%");
-            ps.setString(2, "%" + keyword.toLowerCase() + "%");
+             
+            String term = "%" + (keyword == null ? "" : keyword.trim().toLowerCase()) + "%";
+            ps.setString(1, term);
+            ps.setString(2, term);
+            ps.setString(3, term);
+            ps.setString(4, term);
+            
             try (ResultSet rs = ps.executeQuery()) {
                 while (rs.next()) {
                     list.add(new Restaurant(

@@ -34,6 +34,7 @@
             align-items: center;
             color: var(--text-primary);
             transition: all 0.3s ease;
+            font-size: 1.05rem;
         }
 
         body.dark-mode {
@@ -42,9 +43,9 @@
         }
 
         body.dark-mode .card {
-            background: rgba(45, 32, 72, 0.8);
+            background: rgba(45, 32, 72, 0.82);
             border: 1px solid rgba(139, 92, 246, 0.2);
-            backdrop-filter: blur(12px);
+            backdrop-filter: blur(15px);
         }
 
         body.dark-mode .form-control {
@@ -53,115 +54,66 @@
             border: 1px solid rgba(139, 92, 246, 0.3);
         }
 
-        body.dark-mode .form-control::placeholder {
-            color: rgba(194, 181, 253, 0.4);
-        }
-
-        body.dark-mode .text-muted {
-            color: #c4b5fd !important;
-        }
-
-        body.dark-mode .alert {
-            background: rgba(59, 45, 94, 0.5);
-            border: 1px solid rgba(139, 92, 246, 0.2);
-            color: #e9d5ff;
-        }
-
-        body.dark-mode .text-dark { color: #e9d5ff !important; }
-        body.dark-mode .text-purple { color: #c4b5fd !important; }
-        body.dark-mode h1, body.dark-mode h2, body.dark-mode .card-title { color: #e9d5ff !important; }
-        body.dark-mode .card-subtitle { color: #c4b5fd !important; }
-        body.dark-mode .logo-icon { background: linear-gradient(135deg, #a78bfa 0%, #8b5cf6 100%); -webkit-background-clip: text; }
-        body.dark-mode #step-password div[style*="background:#f8fafc"] { background: #3b2d5e !important; border-color: #5b3f8c !important; }
-
         .btn-purple {
             background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
-            color: white;
-            border: none;
-            font-weight: 700;
+            color: white; border: none; font-weight: 800;
+            padding: 16px 32px; border-radius: 20px;
             transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+            font-size: 1.15rem;
+            box-shadow: 0 8px 25px rgba(139, 92, 246, 0.35);
         }
 
         .btn-purple:hover {
-            background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary-hover) 100%);
-            transform: translateY(-3px);
-            box-shadow: 0 12px 24px rgba(139, 92, 246, 0.4);
+            transform: translateY(-4px);
+            box-shadow: 0 15px 40px rgba(139, 92, 246, 0.5);
             color: white;
         }
 
         .dark-toggle-fixed {
-            position: fixed;
-            top: 2rem;
-            right: 2rem;
+            position: fixed; top: 2.5rem; right: 2.5rem;
             background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
-            color: white;
-            border: none;
-            border-radius: 50%;
-            width: 48px;
-            height: 48px;
-            font-size: 1.25rem;
-            cursor: pointer;
-            z-index: 999;
-            box-shadow: 0 8px 24px rgba(139, 92, 246, 0.35);
+            color: white; border: none; border-radius: 22px; width: 60px; height: 60px;
+            font-size: 1.5rem; cursor: pointer; z-index: 999;
+            box-shadow: 0 10px 30px rgba(139,92,246,0.4);
+            display: flex; align-items: center; justify-content: center;
             transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            justify-content: center;
         }
-
-        .dark-toggle-fixed:hover {
-            transform: translateY(-4px) rotate(15deg);
-            box-shadow: 0 12px 32px rgba(139, 92, 246, 0.45);
-        }
+        .dark-toggle-fixed:hover { transform: translateY(-4px) rotate(15deg); }
 
         .form-control {
-            border-radius: 12px;
+            border-radius: 16px;
             border: 2px solid var(--border-color);
-            padding: 14px 18px;
-            font-size: 1rem;
+            padding: 16px 22px;
+            font-size: 1.1rem;
             background: var(--surface-light);
             transition: all 0.3s ease;
             font-weight: 500;
         }
 
-        .form-control:focus {
-            border-color: var(--primary);
-            box-shadow: 0 0 0 4px rgba(139, 92, 246, 0.1);
-            background: var(--surface);
-        }
-
         .form-label {
-            font-weight: 700;
+            font-weight: 800;
             color: var(--text-secondary);
             text-transform: uppercase;
-            font-size: 0.75rem;
-            letter-spacing: 1px;
-            margin-bottom: 10px;
+            font-size: 0.8rem;
+            letter-spacing: 1.5px;
+            margin-bottom: 12px;
             display: block;
         }
 
         .card {
-            border-radius: 28px;
+            border-radius: 40px;
             border: none;
             background: var(--surface);
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.08);
-            transition: all 0.3s ease;
-        }
-
-        .alert {
-            border-radius: 16px;
-            border: none;
-            font-weight: 600;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.1);
         }
 
         .logo-icon {
-            font-size: 4rem;
+            font-size: 5rem;
             background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            margin-bottom: 0.75rem;
+            margin-bottom: 1rem;
             display: inline-block;
         }
 
@@ -259,8 +211,7 @@
                             <label class="form-label">Phone Number</label>
                             <div class="position-relative">
                                 <input type="text" id="phoneInput" class="form-control form-control-lg" 
-                                       maxlength="10" inputmode="numeric" placeholder="9876543210"
-                                       value="<%= request.getParameter("phone") != null ? request.getParameter("phone") : "" %>">
+                                       maxlength="10" inputmode="numeric" autocomplete="off" value="">
                             </div>
                             <div id="phoneError" class="error-message" style="display:none;"></div>
                         </div>
@@ -302,8 +253,7 @@
                             <input type="hidden" name="phone" id="hiddenPhone">
                             <div class="mb-4">
                                 <label class="form-label">Enter Password</label>
-                                <input type="password" name="password" id="passwordInput" class="form-control form-control-lg" 
-                                       required placeholder="••••••••">
+                                <input type="password" name="password" id="passwordInput" class="form-control form-control-lg" required>
                             </div>
                             <button type="submit" class="btn btn-purple btn-lg w-100 py-3 rounded-pill shadow-sm">
                                 Login Access <i class="bi bi-shield-lock ms-2"></i>

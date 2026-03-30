@@ -10,23 +10,6 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
-<<<<<<< Updated upstream
-        :root { --primary: #8b5cf6; --primary-dark: #7c3aed; --primary-light: #ede9fe; }
-        body { font-family: 'Inter', sans-serif; background: #f5f3ff; }
-        body.dark-mode { background: #1a1625 !important; color: #e9d5ff !important; }
-        body.dark-mode .card { background: #2d2048 !important; color: #e9d5ff; border: none; }
-        body.dark-mode .bg-light, body.dark-mode .form-control { background: #3b2d5e !important; color: #e9d5ff !important; border: none; }
-        body.dark-mode .text-muted { color: #c4b5fd !important; }
-        body.dark-mode .text-dark { color: #e9d5ff !important; }
-        body.dark-mode .text-purple { color: #c4b5fd !important; }
-        body.dark-mode h1, body.dark-mode h2, body.dark-mode h4 { color: #e9d5ff !important; }
-        body.dark-mode .form-label { color: #c4b5fd !important; }
-        body.dark-mode .alert { background: rgba(59, 45, 94, 0.5) !important; color: #e9d5ff !important; border: 1px solid rgba(139, 92, 246, 0.2) !important; }
-        .btn-purple { background: var(--primary); color: white; border: none; }
-        .btn-purple:hover { background: var(--primary-dark); color: white; }
-        .text-purple { color: var(--primary) !important; }
-        .dark-toggle-fixed { position: fixed; top: 1rem; right: 1rem; background: var(--primary); color: white; border: none; border-radius: 50%; width: 44px; height: 44px; font-size: 1.2rem; cursor: pointer; z-index: 999; box-shadow: 0 4px 12px rgba(139,92,246,0.4); }
-=======
         :root {
             --primary: #8b5cf6;
             --primary-dark: #7c3aed;
@@ -50,6 +33,7 @@
             align-items: center;
             color: var(--text-primary);
             transition: all 0.3s ease;
+            font-size: 1.05rem;
         }
 
         body.dark-mode {
@@ -58,9 +42,9 @@
         }
 
         body.dark-mode .card {
-            background: rgba(45, 32, 72, 0.8);
+            background: rgba(45, 32, 72, 0.82);
             border: 1px solid rgba(139, 92, 246, 0.2);
-            backdrop-filter: blur(12px);
+            backdrop-filter: blur(15px);
         }
 
         body.dark-mode .form-control {
@@ -69,110 +53,69 @@
             border: 1px solid rgba(139, 92, 246, 0.3);
         }
 
-        body.dark-mode .form-control::placeholder {
-            color: rgba(194, 181, 253, 0.4);
-        }
-
         .btn-purple {
             background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
-            color: white;
-            border: none;
-            font-weight: 700;
+            color: white; border: none; font-weight: 800;
+            padding: 16px 32px; border-radius: 20px;
             transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+            font-size: 1.15rem;
+            box-shadow: 0 8px 25px rgba(139, 92, 246, 0.35);
         }
 
         .btn-purple:hover {
-            background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary-hover) 100%);
-            transform: translateY(-3px);
-            box-shadow: 0 12px 24px rgba(139, 92, 246, 0.4);
+            transform: translateY(-4px);
+            box-shadow: 0 15px 40px rgba(139, 92, 246, 0.5);
             color: white;
         }
 
         .dark-toggle-fixed {
-            position: fixed;
-            top: 2rem;
-            right: 2rem;
+            position: fixed; top: 2.5rem; right: 2.5rem;
             background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
-            color: white;
-            border: none;
-            border-radius: 50%;
-            width: 48px;
-            height: 48px;
-            font-size: 1.25rem;
-            cursor: pointer;
-            z-index: 999;
-            box-shadow: 0 8px 24px rgba(139, 92, 246, 0.35);
+            color: white; border: none; border-radius: 22px; width: 60px; height: 60px;
+            font-size: 1.5rem; cursor: pointer; z-index: 999;
+            box-shadow: 0 10px 30px rgba(139,92,246,0.4);
+            display: flex; align-items: center; justify-content: center;
             transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            justify-content: center;
         }
-
-        .dark-toggle-fixed:hover {
-            transform: translateY(-4px) rotate(15deg);
-        }
+        .dark-toggle-fixed:hover { transform: translateY(-4px) rotate(15deg); }
 
         .form-control {
-            border-radius: 12px;
+            border-radius: 16px;
             border: 2px solid var(--border-color);
-            padding: 12px 16px;
-            font-size: 1rem;
+            padding: 16px 22px;
+            font-size: 1.1rem;
             background: var(--surface-light);
             transition: all 0.3s ease;
             font-weight: 500;
         }
 
-        .form-control:focus {
-            border-color: var(--primary);
-            box-shadow: 0 0 0 4px rgba(139, 92, 246, 0.1);
-            background: var(--surface);
-        }
-
         .form-label {
-            font-weight: 700;
+            font-weight: 800;
             color: var(--text-secondary);
             text-transform: uppercase;
-            font-size: 0.7rem;
-            letter-spacing: 1px;
-            margin-bottom: 8px;
+            font-size: 0.8rem;
+            letter-spacing: 1.5px;
+            margin-bottom: 12px;
             display: block;
         }
 
         .card {
-            border-radius: 28px;
+            border-radius: 40px;
             border: none;
             background: var(--surface);
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.08);
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.1);
         }
 
         .logo-icon {
-            font-size: 3rem;
+            font-size: 5rem;
             background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            margin-bottom: 0.5rem;
+            margin-bottom: 1rem;
             display: inline-block;
         }
 
-        .alert {
-            border-radius: 16px;
-            border: none;
-            font-weight: 600;
-        }
-
-        .link-custom {
-            color: var(--primary);
-            text-decoration: none;
-            font-weight: 700;
-            transition: all 0.2s ease;
-        }
-
-        .link-custom:hover {
-            color: var(--primary-dark);
-            text-decoration: underline;
-        }
->>>>>>> Stashed changes
     </style>
 </head>
 <body>
@@ -213,21 +156,19 @@
                         <div class="row">
                             <div class="col-md-12 mb-3">
                                 <label class="form-label">Full Name</label>
-                                <input type="text" id="regName" name="name" class="form-control" required placeholder="John Doe">
+                                <input type="text" id="regName" name="name" class="form-control" required autocomplete="off" value="">
                             </div>
                             <div class="col-md-12 mb-3">
                                 <label class="form-label">Email Address</label>
-                                <input type="email" id="regEmail" name="email" class="form-control" required placeholder="john@example.com">
+                                <input type="email" id="regEmail" name="email" class="form-control" required autocomplete="off" value="">
                             </div>
                             <div class="col-md-12 mb-3">
                                 <label class="form-label">Create Password</label>
-                                <input type="password" id="regPassword" name="password" class="form-control" required placeholder="••••••••">
+                                <input type="password" id="regPassword" name="password" class="form-control" required autocomplete="new-password" value="">
                             </div>
                             <div class="col-md-12 mb-4">
                                 <label class="form-label">Phone Number</label>
-                                <input type="text" id="regPhone" name="phone" class="form-control" required maxlength="10" inputmode="numeric"
-                                       value="<%= request.getParameter("phone") != null ? request.getParameter("phone") : "" %>"
-                                       placeholder="9876543210">
+                                <input type="text" id="regPhone" name="phone" class="form-control" required maxlength="10" inputmode="numeric" autocomplete="off" value="">
                             </div>
                         </div>
                         <button type="submit" class="btn btn-purple btn-lg w-100 py-3 rounded-pill shadow-sm mb-4">

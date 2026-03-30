@@ -80,7 +80,7 @@ public class HomeServlet extends HttpServlet {
         }
         
         List<String> allCities = restaurantDAO.getAllCities();
-        String aiSuggestion = aiService.getSuggestion();
+        String aiSuggestion = aiService.getSuggestion(user);
         
         request.setAttribute("restaurants", restaurants);
         request.setAttribute("allCities", allCities);

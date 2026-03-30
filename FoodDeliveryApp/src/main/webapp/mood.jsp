@@ -21,37 +21,6 @@
             --text-secondary: #64748b;
             --border-color: #e2e8f0;
         }
-<<<<<<< Updated upstream
-        body { font-family: 'Inter', sans-serif; background: #f5f3ff; transition: background 0.3s, color 0.3s; }
-        body.dark-mode { background: #1a1625 !important; color: #e9d5ff !important; }
-        body.dark-mode .card { background: #2d2048 !important; color: #e9d5ff !important; border: none; }
-        body.dark-mode .navbar { background: #13011f !important; }
-        body.dark-mode .form-select, body.dark-mode .form-control { background: #3b2d5e !important; color: #e9d5ff !important; border: 1px solid #5b3f8c; }
-        body.dark-mode .text-muted { color: #c4b5fd !important; }
-        body.dark-mode .text-dark { color: #e9d5ff !important; }
-        body.dark-mode .text-purple { color: #c4b5fd !important; }
-        body.dark-mode h2, body.dark-mode h4, body.dark-mode h5 { color: #e9d5ff !important; }
-        body.dark-mode .form-label { color: #c4b5fd !important; }
-        .bg-purple { background: var(--primary) !important; }
-        .btn-purple { background: var(--primary); color: white; border: none; }
-        .btn-purple:hover { background: var(--primary-hover); color: white; }
-        .btn-outline-purple { color: var(--primary); border: 2px solid var(--primary); background: transparent; }
-        .btn-outline-purple:hover { background: var(--primary); color: white; }
-        .text-purple { color: var(--primary) !important; }
-        .mood-card { cursor: pointer; border: 2px solid transparent; transition: all 0.2s; }
-        .mood-card:hover { border-color: var(--primary); transform: translateY(-3px); box-shadow: 0 8px 25px rgba(139,92,246,0.2); }
-        .mood-card.selected { border-color: var(--primary); background: var(--primary-light); }
-        body.dark-mode .mood-card.selected { background: #3b2d5e; }
-        .suggestion-card { transition: all 0.2s; }
-        .suggestion-card:hover { transform: translateY(-3px); box-shadow: 0 10px 30px rgba(139,92,246,0.15); }
-        .navbar-brand span { color: var(--primary); }
-        .dark-toggle { background: none; border: none; color: white; font-size: 1.3rem; cursor: pointer; }
-        .emoji-bg { font-size: 2.5rem; }
-        .hero-section { background: linear-gradient(135deg, #8b5cf6 0%, #a78bfa 100%); border-radius: 24px; }
-        .navbar .bi { font-size: 0.85rem; }
-        
-        /* Navbar Icon Box Style */
-=======
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -61,6 +30,7 @@
             min-height: 100vh;
             color: var(--text-primary);
             transition: all 0.3s ease;
+            font-size: 1.05rem;
         }
 
         body.dark-mode {
@@ -68,12 +38,12 @@
             color: #e2e8f0;
         }
 
-        /* Premium Navbar */
+        /* Premium Navbar - Cinematic Scale (Standardized) */
         .navbar {
             background: rgba(139, 92, 246, 0.95);
-            backdrop-filter: blur(10px);
-            padding: 0.75rem 0;
-            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05);
+            backdrop-filter: blur(12px);
+            padding: 1rem 0;
+            box-shadow: 0 4px 40px rgba(0, 0, 0, 0.08);
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
             z-index: 1000;
         }
@@ -82,30 +52,37 @@
             border-bottom: 1px solid rgba(139, 92, 246, 0.2);
         }
 
->>>>>>> Stashed changes
         .nav-icon-link {
-            width: 42px; height: 42px; display: flex; align-items: center; justify-content: center;
-            background: rgba(255, 255, 255, 0.15); border-radius: 14px; color: white !important;
-            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-            text-decoration: none; border: 1px solid rgba(255, 255, 255, 0.1);
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.12);
+            border-radius: 20px;
+            color: white !important;
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+            text-decoration: none;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
         }
+        .nav-icon-link i { font-size: 1.6rem; }
 
         .nav-icon-link:hover {
-            background: rgba(255, 255, 255, 0.3);
-            transform: translateY(-3px) scale(1.05);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+            background: rgba(255, 255, 255, 0.25);
+            transform: translateY(-5px) scale(1.1);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
         }
 
         .dark-toggle {
-            width: 42px; height: 42px; display: flex; align-items: center; justify-content: center;
-            background: rgba(255, 255, 255, 0.15); border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 14px; color: white; cursor: pointer; transition: all 0.3s ease;
+            width: 60px; height: 60px; display: flex; align-items: center; justify-content: center;
+            background: rgba(255, 255, 255, 0.12); border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 20px; color: white; cursor: pointer; transition: all 0.4s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
         }
 
-        .dark-toggle:hover {
-            background: rgba(255, 255, 255, 0.3);
-            transform: translateY(-3px);
-        }
+        .dark-toggle i { font-size: 1.5rem; }
+
 
         .container { margin-top: 3rem; }
 
@@ -197,6 +174,10 @@
             padding: 8px 16px; border-radius: 14px;
             font-weight: 800; box-shadow: 0 4px 12px rgba(139, 92, 246, 0.3);
         }
+        /* ═══ DARK MODE TEXT FIXES ═══ */
+        body.dark-mode .text-dark { color: #f1f5f9 !important; }
+        body.dark-mode h4.text-dark { color: #f1f5f9 !important; }
+        body.dark-mode .small.text-dark { color: #cbd5e1 !important; }
 
     </style>
 </head>
@@ -232,11 +213,11 @@
                     <label class="form-label text-muted small fw-800 text-uppercase mb-2">My Current Mood</label>
                     <select name="mood" class="form-select form-select-lg shadow-none" required>
                         <option value="" disabled <c:if test="${empty mood}">selected</c:if>>Select mood...</option>
-                        <option value="Happy"       <c:if test="${mood == 'Happy'}">selected</c:if>>Happy ☀️</option>
-                        <option value="Sad"         <c:if test="${mood == 'Sad'}">selected</c:if>>Reflective 🌙</option>
-                        <option value="Romantic"    <c:if test="${mood == 'Romantic'}">selected</c:if>>Romantic ❤️</option>
-                        <option value="Adventurous" <c:if test="${mood == 'Adventurous'}">selected</c:if>>Adventurous 🚀</option>
-                        <option value="Comfort"     <c:if test="${mood == 'Comfort'}">selected</c:if>>Comfort 🛋️</option>
+                        <option value="Happy"       <c:if test="${mood == 'Happy'}">selected</c:if>>Happy</option>
+                        <option value="Sad"         <c:if test="${mood == 'Sad'}">selected</c:if>>Reflective</option>
+                        <option value="Romantic"    <c:if test="${mood == 'Romantic'}">selected</c:if>>Romantic</option>
+                        <option value="Adventurous" <c:if test="${mood == 'Adventurous'}">selected</c:if>>Adventurous</option>
+                        <option value="Comfort"     <c:if test="${mood == 'Comfort'}">selected</c:if>>Comfort</option>
                     </select>
                 </div>
                 <div class="col-lg-3">
@@ -252,11 +233,11 @@
                     <label class="form-label text-muted small fw-800 text-uppercase mb-2">Cuisine Cravings</label>
                     <select name="cuisine" class="form-select form-select-lg shadow-none" required>
                         <option value="" disabled <c:if test="${empty cuisine}">selected</c:if>>Select cuisine...</option>
-                        <option value="Indian"       <c:if test="${cuisine == 'Indian'}">selected</c:if>>Indian 🥘</option>
-                        <option value="Chinese"      <c:if test="${cuisine == 'Chinese'}">selected</c:if>>Chinese 🍜</option>
-                        <option value="Italian"      <c:if test="${cuisine == 'Italian'}">selected</c:if>>Italian 🍕</option>
-                        <option value="Fast Food"    <c:if test="${cuisine == 'Fast Food'}">selected</c:if>>Fast Food 🍔</option>
-                        <option value="South Indian" <c:if test="${cuisine == 'South Indian'}">selected</c:if>>South Indian ☕</option>
+                        <option value="Indian"       <c:if test="${cuisine == 'Indian'}">selected</c:if>>Indian</option>
+                        <option value="Chinese"      <c:if test="${cuisine == 'Chinese'}">selected</c:if>>Chinese</option>
+                        <option value="Italian"      <c:if test="${cuisine == 'Italian'}">selected</c:if>>Italian</option>
+                        <option value="Fast Food"    <c:if test="${cuisine == 'Fast Food'}">selected</c:if>>Fast Food</option>
+                        <option value="South Indian" <c:if test="${cuisine == 'South Indian'}">selected</c:if>>South Indian</option>
                     </select>
                 </div>
                 <div class="col-lg-3">

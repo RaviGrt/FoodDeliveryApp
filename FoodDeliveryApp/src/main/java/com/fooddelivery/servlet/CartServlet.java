@@ -28,58 +28,97 @@ public class CartServlet extends HttpServlet {
             throws ServletException, IOException {
         HttpSession session = request.getSession(false);
         if (session == null || session.getAttribute("user") == null) {
+            boolean isAjax = "XMLHttpRequest".equals(request.getHeader("X-Requested-With"));
+            if (isAjax) {
+                response.setContentType("application/json");
+                response.setStatus(401);
+                response.getWriter().write("{\"status\":\"error\",\"message\":\"Please login first\"}");
+                return;
+            }
             response.sendRedirect("login.jsp");
             return;
         }
-        User user = (User) session.getAttribute("user");
-        List<Cart> cartItems = cartDAO.getCartByUser(user.getUserId());
-        int restaurantId = cartDAO.getRestaurantIdFromCart(user.getUserId());
         
-        MenuDAO menuDAO = new MenuDAO();
-        RestaurantDAO resDAO = new RestaurantDAO();
-        Map<Integer, MenuItem> menuMap = new HashMap<>();
-        double subtotal = 0;
-        
-        for (Cart c : cartItems) {
-            MenuItem item = menuDAO.getItemById(c.getItemId());
-            if (item != null) {
-                menuMap.put(c.getItemId(), item);
-                subtotal += (item.getPrice() * c.getQuantity());
+        // Handle AJAX cart count request (called from restaurant.jsp via GET)
+        String action = request.getParameter("action");
+        boolean isAjax = "XMLHttpRequest".equals(request.getHeader("X-Requested-With"));
+        if ("count".equals(action) && isAjax) {
+            try {
+                User user = (User) session.getAttribute("user");
+                List<Cart> items = cartDAO.getCartByUser(user.getUserId());
+                int totalCount = items.stream().mapToInt(Cart::getQuantity).sum();
+                response.setContentType("application/json");
+                response.getWriter().write("{\"status\":\"success\",\"cartCount\":" + totalCount + "}");
+            } catch (Exception e) {
+                response.setContentType("application/json");
+                response.getWriter().write("{\"status\":\"success\",\"cartCount\":0}");
             }
+            return;
         }
         
-        double discountAmount = 0;
-        String offerText = "";
-        if (restaurantId > 0) {
-            Restaurant res = resDAO.getRestaurantById(restaurantId);
-            if (res != null) {
-                String offers = res.getOffers();
-                if (offers != null && offers.contains("%")) {
-                    try {
-                        String clean = offers.replaceAll("[^0-9]", "");
-                        if (!clean.isEmpty()) {
-                            int pct = Integer.parseInt(clean);
-                            discountAmount = subtotal * (pct / 100.0);
-                            offerText = pct + "% OFF";
-                        }
-                    } catch(Exception e) {}
-                } else if (offers != null && offers.toLowerCase().contains("off")) {
-                     discountAmount = subtotal * 0.10; // flat 10% 
-                     offerText = "10% OFF";
+        try {
+            User user = (User) session.getAttribute("user");
+            List<Cart> cartItems = cartDAO.getCartByUser(user.getUserId());
+            int restaurantId = cartDAO.getRestaurantIdFromCart(user.getUserId());
+            
+            MenuDAO menuDAO = new MenuDAO();
+            RestaurantDAO resDAO = new RestaurantDAO();
+            Map<Integer, MenuItem> menuMap = new HashMap<>();
+            double subtotal = 0;
+            
+            for (Cart c : cartItems) {
+                MenuItem item = menuDAO.getItemById(c.getItemId());
+                if (item != null) {
+                    menuMap.put(c.getItemId(), item);
+                    subtotal += (item.getPrice() * c.getQuantity());
                 }
             }
+            
+            double discountAmount = 0;
+            String offerText = "";
+            if (restaurantId > 0) {
+                Restaurant res = resDAO.getRestaurantById(restaurantId);
+                if (res != null) {
+                    String offers = res.getOffers();
+                    if (offers != null && offers.contains("%")) {
+                        try {
+                            String clean = offers.replaceAll("[^0-9]", "");
+                            if (!clean.isEmpty()) {
+                                int pct = Integer.parseInt(clean);
+                                discountAmount = subtotal * (pct / 100.0);
+                                offerText = pct + "% OFF";
+                            }
+                        } catch(Exception e) {}
+                    } else if (offers != null && offers.toLowerCase().contains("off")) {
+                         discountAmount = subtotal * 0.10; // flat 10% 
+                         offerText = "10% OFF";
+                    }
+                }
+            }
+            
+            double total = subtotal - discountAmount;
+            if (total < 0) total = 0;
+
+            request.setAttribute("cartItems", cartItems);
+            request.setAttribute("menuMap", menuMap);
+            request.setAttribute("subtotal", subtotal);
+            request.setAttribute("discountAmount", discountAmount);
+            request.setAttribute("totalAmount", total);
+            request.setAttribute("offerText", offerText);
+            request.setAttribute("restaurantId", restaurantId);
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.err.println("[CartServlet] Error loading cart: " + e.getMessage());
+            // Forward with empty cart - user sees "Your cart is feeling light" 
+            request.setAttribute("cartItems", new java.util.ArrayList<>());
+            request.setAttribute("menuMap", new HashMap<>());
+            request.setAttribute("subtotal", 0.0);
+            request.setAttribute("discountAmount", 0.0);
+            request.setAttribute("totalAmount", 0.0);
+            request.setAttribute("offerText", "");
+            request.setAttribute("restaurantId", 0);
         }
         
-        double total = subtotal - discountAmount;
-        if (total < 0) total = 0;
-
-        request.setAttribute("cartItems", cartItems);
-        request.setAttribute("menuMap", menuMap);
-        request.setAttribute("subtotal", subtotal);
-        request.setAttribute("discountAmount", discountAmount);
-        request.setAttribute("totalAmount", total);
-        request.setAttribute("offerText", offerText);
-        request.setAttribute("restaurantId", restaurantId);
         request.getRequestDispatcher("cart.jsp").forward(request, response);
     }
 

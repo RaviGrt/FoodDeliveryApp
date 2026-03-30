@@ -11,47 +11,10 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
-<<<<<<< Updated upstream
-        :root { --primary: #8b5cf6; --primary-dark: #7c3aed; --primary-light: #ede9fe; }
-        body { font-family: 'Inter', sans-serif; background: #f5f3ff; }
-        body.dark-mode { background: #1a1625 !important; color: #e9d5ff !important; }
-        body.dark-mode .card { background: #2d2048 !important; color: #e9d5ff; border: none; }
-        body.dark-mode .navbar { background: #13011f !important; }
-        body.dark-mode .bg-light { background: #2d2048 !important; }
-        body.dark-mode .text-muted { color: #c4b5fd !important; }
-        body.dark-mode .text-dark { color: #e9d5ff !important; }
-        body.dark-mode .text-purple { color: #c4b5fd !important; }
-        body.dark-mode h4, body.dark-mode h6 { color: #e9d5ff !important; }
-        body.dark-mode .step.active .icon { box-shadow: 0 0 0 5px #2d2048, 0 4px 12px rgba(16, 185, 129, 0.3) !important; }
-        body.dark-mode .step .icon { background: #2d2048; box-shadow: 0 0 0 5px #2d2048; }
-        .bg-purple { background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%) !important; }
-        .btn-purple { background: var(--primary); color: white; border: none; transition: all 0.3s ease; }
-        .btn-purple:hover { background: var(--primary-dark); color: white; transform: translateY(-2px); box-shadow: 0 4px 12px rgba(139, 92, 246, 0.3); }
-        .btn-outline-purple { color: var(--primary); border: 2px solid var(--primary); background: transparent; }
-        .btn-outline-purple:hover { background: var(--primary); color: white; }
-        .text-purple { color: var(--primary) !important; }
-        .dark-toggle { background: none; border: none; color: white; font-size: 1.3rem; cursor: pointer; }
-        .step { position: relative; padding-left: 2.5rem; border-left: 3px solid #dee2e6; padding-bottom: 2.5rem; }
-        .step:last-child { border-left: none; padding-bottom: 0; }
-        .step .icon { 
-            position: absolute; 
-            left: -16px; 
-            top: -5px; 
-            background: white; 
-            width: 35px; 
-            height: 35px; 
-            border-radius: 50%; 
-            box-shadow: 0 0 0 5px white; 
-            display: flex; 
-            align-items: center; 
-            justify-content: center; 
-            font-size: 1.3rem;
-=======
         :root {
             --primary: #8b5cf6;
             --primary-dark: #7c3aed;
             --primary-light: #ede9fe;
-            --primary-hover: #6d28d9;
             --surface: #ffffff;
             --surface-light: #f8fafc;
             --text-primary: #1e293b;
@@ -67,170 +30,351 @@
             background: linear-gradient(135deg, #f8fafc 0%, #ede9fe 100%);
             min-height: 100vh;
             color: var(--text-primary);
->>>>>>> Stashed changes
             transition: all 0.3s ease;
+            font-size: 1.05rem;
         }
-
         body.dark-mode {
             background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%);
             color: #e2e8f0;
         }
 
-        /* Premium Navbar */
+        /* ═══ NAVBAR ═══ */
         .navbar {
             background: rgba(139, 92, 246, 0.95);
-            backdrop-filter: blur(10px);
-            padding: 0.75rem 0;
-            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05);
+            backdrop-filter: blur(12px);
+            padding: 0.8rem 0;
+            box-shadow: 0 4px 40px rgba(0, 0, 0, 0.08);
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
             z-index: 1000;
         }
         body.dark-mode .navbar {
-            background: rgba(15, 23, 42, 0.9);
+            background: rgba(15, 23, 42, 0.95);
             border-bottom: 1px solid rgba(139, 92, 246, 0.2);
         }
+        .navbar-brand { font-size: 1.8rem !important; font-weight: 800 !important; letter-spacing: -1.5px; }
 
         .nav-icon-link {
-            width: 42px; height: 42px; display: flex; align-items: center; justify-content: center;
-            background: rgba(255, 255, 255, 0.15); border-radius: 14px; color: white !important;
+            width: 48px; height: 48px;
+            display: flex; align-items: center; justify-content: center;
+            background: rgba(255, 255, 255, 0.12);
+            border-radius: 16px; color: white !important;
             transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-            text-decoration: none; border: 1px solid rgba(255, 255, 255, 0.1);
+            text-decoration: none;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
         }
-
+        .nav-icon-link i { font-size: 1.25rem; color: white !important; }
         .nav-icon-link:hover {
-            background: rgba(255, 255, 255, 0.3);
-            transform: translateY(-3px) scale(1.05);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+            background: rgba(255, 255, 255, 0.25);
+            transform: translateY(-3px) scale(1.08);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
         }
-
         .dark-toggle {
-            width: 42px; height: 42px; display: flex; align-items: center; justify-content: center;
-            background: rgba(255, 255, 255, 0.15); border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 14px; color: white; cursor: pointer; transition: all 0.3s ease;
+            width: 48px; height: 48px; display: flex; align-items: center; justify-content: center;
+            background: rgba(255, 255, 255, 0.12); border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 16px; color: white; cursor: pointer; transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
         }
-
+        .dark-toggle i { font-size: 1.25rem; }
         .dark-toggle:hover {
-            background: rgba(255, 255, 255, 0.3);
+            background: rgba(255, 255, 255, 0.25);
             transform: translateY(-3px);
         }
 
-        .container { margin-top: 3rem; }
+        .container { margin-top: 2.5rem; }
 
-        h3 {
-            font-size: 2.2rem;
-            font-weight: 800;
-            letter-spacing: -1px;
-            margin-bottom: 2rem;
-            color: var(--text-primary);
-        }
-        body.dark-mode h3 { color: #f8fafc; }
-
-        /* Order Header Card */
+        /* ═══ ORDER HEADER CARD ═══ */
         .order-header-card {
-            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            background: linear-gradient(135deg, var(--primary) 0%, #6d28d9 50%, var(--primary-dark) 100%);
             border-radius: 28px;
-            padding: 3rem;
+            padding: 3rem 2rem;
             color: white;
-            box-shadow: 0 15px 40px rgba(139, 92, 246, 0.25);
+            box-shadow: 0 20px 50px rgba(139, 92, 246, 0.3);
             margin-bottom: -40px;
             position: relative;
             z-index: 1;
+            overflow: hidden;
+        }
+        .order-header-card::before {
+            content: ""; position: absolute; top: -40%; right: -10%;
+            width: 250px; height: 250px;
+            background: rgba(255,255,255,0.08);
+            border-radius: 50%;
+        }
+        .order-header-card::after {
+            content: ""; position: absolute; bottom: -30%; left: -5%;
+            width: 180px; height: 180px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 50%;
         }
 
-        /* Timeline Card */
+        .order-id-text {
+            font-size: 2.5rem;
+            font-weight: 800;
+            letter-spacing: -2px;
+            position: relative;
+            z-index: 2;
+        }
+        .order-time-text {
+            font-size: 1.05rem;
+            opacity: 0.9;
+            font-weight: 500;
+            position: relative;
+            z-index: 2;
+        }
+        .live-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(255,255,255,0.95);
+            color: var(--primary);
+            font-weight: 800;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 6px 16px;
+            border-radius: 20px;
+            position: relative;
+            z-index: 2;
+        }
+        .live-dot {
+            width: 8px; height: 8px;
+            background: #ef4444;
+            border-radius: 50%;
+            animation: blink 1.5s infinite;
+        }
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.3; }
+        }
+
+        /* ═══ TIMELINE CARD ═══ */
         .timeline-card {
             border-radius: 28px;
             border: none;
             background: var(--surface);
             box-shadow: 0 15px 50px rgba(0, 0, 0, 0.05);
-            padding: 5rem 3rem 3rem;
+            padding: 5rem 2.5rem 2.5rem;
         }
         body.dark-mode .timeline-card {
-            background: rgba(30, 41, 59, 0.7);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(139, 92, 246, 0.1);
+            background: rgba(30, 41, 59, 0.75);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(139, 92, 246, 0.15);
         }
 
-        /* Timeline Steps (Apple Style) */
+        /* ═══ TIMELINE ═══ */
         .timeline {
             position: relative;
-            padding-left: 3rem;
+            padding-left: 60px;
         }
         .timeline::before {
-            content: ""; position: absolute; left: 14px; top: 10px; bottom: 10px;
-            width: 4px; background: var(--border-color);
-            border-radius: 4px;
+            content: ""; position: absolute;
+            left: 23px; top: 5px; bottom: 5px;
+            width: 3px;
+            background: var(--border-color);
+            border-radius: 3px;
         }
-        body.dark-mode .timeline::before { background: rgba(255,255,255,0.1); }
+        body.dark-mode .timeline::before { background: rgba(255,255,255,0.08); }
 
         .timeline-step {
             position: relative;
-            padding-bottom: 3rem;
+            padding-bottom: 2.5rem;
             transition: all 0.5s ease;
         }
         .timeline-step:last-child { padding-bottom: 0; }
 
-        .step-indicator {
-            position: absolute; left: -3rem; top: 0;
-            width: 32px; height: 32px;
-            background: var(--surface);
-            border: 4px solid var(--border-color);
-            border-radius: 50%;
-            z-index: 2;
-            transition: all 0.3s ease;
+        .step-icon {
+            position: absolute;
+            left: -60px; top: -2px;
+            width: 48px; height: 48px;
+            border-radius: 16px;
             display: flex; align-items: center; justify-content: center;
+            background: var(--surface-light);
+            border: 2px solid var(--border-color);
+            font-size: 1.4rem;
+            z-index: 2;
+            transition: all 0.4s ease;
         }
-        body.dark-mode .step-indicator { background: #1e293b; border-color: rgba(255,255,255,0.1); }
+        body.dark-mode .step-icon {
+            background: #1e293b;
+            border-color: rgba(255,255,255,0.08);
+        }
 
-        .timeline-step.active .step-indicator {
-            background: var(--success);
-            border-color: var(--success);
-            box-shadow: 0 0 0 8px rgba(16, 185, 129, 0.15);
+        .timeline-step.active .step-icon {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            border-color: transparent;
+            box-shadow: 0 8px 20px rgba(16, 185, 129, 0.3);
             color: white;
         }
-        .timeline-step.active .step-indicator i { visibility: visible; }
-        .step-indicator i { font-size: 0.8rem; visibility: hidden; }
 
         .step-content {
-            opacity: 0.5;
-            transition: all 0.3s ease;
+            opacity: 0.45;
+            transition: all 0.4s ease;
+            padding-top: 2px;
         }
-        .timeline-step.active .step-content { opacity: 1; transform: translateX(10px); }
+        .timeline-step.active .step-content {
+            opacity: 1;
+        }
 
-        .step-title { font-weight: 800; font-size: 1.25rem; margin-bottom: 4px; }
-        .step-desc { font-weight: 500; font-size: 0.95rem; color: var(--text-secondary); }
+        .step-title {
+            font-weight: 800;
+            font-size: 1.1rem;
+            margin-bottom: 3px;
+            color: var(--text-primary);
+        }
+        body.dark-mode .step-title { color: #f1f5f9; }
+        .step-desc {
+            font-weight: 500;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            line-height: 1.5;
+        }
 
-        /* Order List UI */
-        .order-row-card {
+        /* Current step gets a subtle highlight */
+        .timeline-step.current .step-icon {
+            animation: pulse-glow 2s infinite;
+        }
+        @keyframes pulse-glow {
+            0% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.4); }
+            70% { box-shadow: 0 0 0 14px rgba(16, 185, 129, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+        }
+
+        /* ═══ PAYMENT FOOTER ═══ */
+        .payment-footer {
+            background: var(--surface-light);
+            border-radius: 20px;
+            padding: 1.5rem 2rem;
+            border: 1px solid var(--border-color);
+            margin-top: 2rem;
+        }
+        body.dark-mode .payment-footer {
+            background: rgba(15, 23, 42, 0.4);
+            border-color: rgba(139, 92, 246, 0.15);
+        }
+
+        .payment-label {
+            font-size: 0.7rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-secondary);
+            margin-bottom: 4px;
+        }
+        .payment-value {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--primary);
+        }
+        .payment-method {
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+        body.dark-mode .payment-method { color: #e2e8f0; }
+
+        .btn-back {
+            background: transparent;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+            font-weight: 700;
+            padding: 12px 24px;
+            border-radius: 16px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .btn-back:hover {
+            background: var(--primary);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(139, 92, 246, 0.3);
+        }
+
+        /* ═══ ORDER LIST ═══ */
+        .page-title {
+            font-size: 2rem;
+            font-weight: 800;
+            letter-spacing: -1px;
+            color: var(--text-primary);
+        }
+        body.dark-mode .page-title { color: #f8fafc; }
+
+        .btn-purple {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white; border: none; font-weight: 700;
+            padding: 12px 24px; border-radius: 14px;
+            transition: all 0.3s ease;
+            box-shadow: 0 6px 20px rgba(139, 92, 246, 0.3);
+            text-decoration: none;
+        }
+        .btn-purple:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 30px rgba(139, 92, 246, 0.45);
+            color: white;
+        }
+
+        .order-card {
             background: var(--surface);
             border-radius: 20px;
-            padding: 1.5rem;
+            padding: 1.5rem 1.8rem;
             border: 1px solid var(--border-color);
-            margin-bottom: 1rem;
             transition: all 0.3s ease;
         }
-        body.dark-mode .order-row-card {
-            background: rgba(30, 41, 59, 0.5);
-            border-color: rgba(139, 92, 246, 0.1);
+        body.dark-mode .order-card {
+            background: rgba(30, 41, 59, 0.6);
+            border-color: rgba(139, 92, 246, 0.12);
         }
-        .order-row-card:hover { transform: translateY(-5px); box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
+        .order-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 30px rgba(0,0,0,0.06);
+        }
 
-        .status-badge {
-            padding: 8px 16px;
-            border-radius: 12px;
+        .status-chip {
+            padding: 6px 14px;
+            border-radius: 10px;
             font-weight: 800;
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             text-transform: uppercase;
             letter-spacing: 0.5px;
         }
 
-        @keyframes pulse-success {
-            0% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.4); }
-            70% { box-shadow: 0 0 0 15px rgba(16, 185, 129, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+        .order-amount {
+            font-size: 1.25rem;
+            font-weight: 800;
+            color: var(--primary);
         }
-        .timeline-step.active .step-indicator { animation: pulse-success 2s infinite; }
 
+        .btn-track {
+            background: none;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+            font-weight: 700;
+            font-size: 0.85rem;
+            padding: 6px 18px;
+            border-radius: 12px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        .btn-track:hover {
+            background: var(--primary);
+            color: white;
+            transform: translateY(-1px);
+        }
+
+        .empty-icon {
+            font-size: 4rem;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 1rem;
+        }
+
+        body.dark-mode .order-card h5,
+        body.dark-mode .text-dark { color: #f1f5f9 !important; }
     </style>
     <c:if test="${not empty order and order.status != 'Delivered'}">
         <meta http-equiv="refresh" content="7">
@@ -240,16 +384,16 @@
 
 <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
     <div class="container-fluid px-4">
-        <a class="navbar-brand fw-800 fs-3" href="HomeServlet">
+        <a class="navbar-brand" href="HomeServlet">
             <i class="bi bi-basket-fill text-warning me-2"></i>Urban Eats
         </a>
-        <div class="ms-auto d-flex align-items-center gap-3">
+        <div class="ms-auto d-flex align-items-center gap-2">
             <a href="HomeServlet" class="nav-icon-link" title="Home"><i class="bi bi-house-door-fill"></i></a>
             <a href="MoodSuggestServlet" class="nav-icon-link" title="AI Suggest"><i class="bi bi-stars"></i></a>
             <a href="CartServlet" class="nav-icon-link" title="My Cart"><i class="bi bi-cart3"></i></a>
             <a href="ProfileServlet" class="nav-icon-link" title="My Profile"><i class="bi bi-person-circle"></i></a>
             <button class="dark-toggle" id="darkToggle" title="Toggle Theme"><i class="bi bi-moon-stars-fill"></i></button>
-            <a href="login.jsp" class="nav-icon-link bg-danger bg-opacity-25 border-danger border-opacity-25" title="Logout"><i class="bi bi-box-arrow-right"></i></a>
+            <a href="login.jsp" class="nav-icon-link" style="background:rgba(239,68,68,0.15); border-color:rgba(239,68,68,0.25);" title="Logout"><i class="bi bi-box-arrow-right"></i></a>
         </div>
     </div>
 </nav>
@@ -258,50 +402,69 @@
     
     <c:choose>
         <c:when test="${not empty order}">
+            <c:set var="st" value="${order.status}" />
             <div class="row justify-content-center">
-                <div class="col-lg-8">
+                <div class="col-lg-7">
                     <!-- Order Header -->
                     <div class="order-header-card text-center">
                         <div class="mb-3">
-                            <span class="badge bg-white text-primary rounded-pill fw-800 px-3 py-2">LIVE TRACKING</span>
+                            <span class="live-badge"><span class="live-dot"></span> LIVE TRACKING</span>
                         </div>
-                        <h1 class="fw-800 mb-2" style="font-size: 3rem; letter-spacing: -2px;">Order #${order.orderId}</h1>
-                        <p class="fs-5 opacity-90 fw-500 mb-0">
-                            <i class="bi bi-clock-history me-2"></i>Placed <fmt:formatDate value="${order.createdAt}" pattern="hh:mm a" />
-                        </p>
+                        <div class="order-id-text mb-1">Order #${order.orderId}</div>
+                        <div class="order-time-text">
+                            <i class="bi bi-clock-history me-1"></i>Placed <fmt:formatDate value="${order.createdAt}" pattern="hh:mm a" />
+                        </div>
                     </div>
 
-                    <!-- Timeline Content -->
+                    <!-- Timeline -->
                     <div class="timeline-card">
                         <div class="timeline">
-                            <c:set var="st" value="${order.status}" />
-                            
-                            <div class="timeline-step ${st == 'Preparing' || st == 'Food Ready' || st == 'Out for Delivery' || st == 'Delivered' ? 'active' : ''}">
-                                <div class="step-indicator"><i class="bi bi-check-lg"></i></div>
+                            <div class="timeline-step ${st == 'Preparing' || st == 'Food Ready' || st == 'Out for Delivery' || st == 'Delivered' ? 'active' : ''} ${st == 'Preparing' ? 'current' : ''}">
+                                <div class="step-icon">
+                                    <c:choose>
+                                        <c:when test="${st == 'Preparing' || st == 'Food Ready' || st == 'Out for Delivery' || st == 'Delivered'}"><i class="bi bi-check-lg" style="color:white;"></i></c:when>
+                                        <c:otherwise>📋</c:otherwise>
+                                    </c:choose>
+                                </div>
                                 <div class="step-content">
                                     <div class="step-title">Order Confirmed</div>
                                     <div class="step-desc">Your order has been received and is being prepared with care.</div>
                                 </div>
                             </div>
 
-                            <div class="timeline-step ${st == 'Food Ready' || st == 'Out for Delivery' || st == 'Delivered' ? 'active' : ''}">
-                                <div class="step-indicator"><i class="bi bi-check-lg"></i></div>
+                            <div class="timeline-step ${st == 'Food Ready' || st == 'Out for Delivery' || st == 'Delivered' ? 'active' : ''} ${st == 'Food Ready' ? 'current' : ''}">
+                                <div class="step-icon">
+                                    <c:choose>
+                                        <c:when test="${st == 'Food Ready' || st == 'Out for Delivery' || st == 'Delivered'}"><i class="bi bi-check-lg" style="color:white;"></i></c:when>
+                                        <c:otherwise>👨‍🍳</c:otherwise>
+                                    </c:choose>
+                                </div>
                                 <div class="step-content">
                                     <div class="step-title">Preparing Your Meal</div>
-                                    <div class="step-desc">The chef is working their magic. Almost ready for pickup!</div>
+                                    <div class="step-desc">The chef is working their magic. Almost ready!</div>
                                 </div>
                             </div>
 
-                            <div class="timeline-step ${st == 'Out for Delivery' || st == 'Delivered' ? 'active' : ''}">
-                                <div class="step-indicator"><i class="bi bi-check-lg"></i></div>
+                            <div class="timeline-step ${st == 'Out for Delivery' || st == 'Delivered' ? 'active' : ''} ${st == 'Out for Delivery' ? 'current' : ''}">
+                                <div class="step-icon">
+                                    <c:choose>
+                                        <c:when test="${st == 'Out for Delivery' || st == 'Delivered'}"><i class="bi bi-check-lg" style="color:white;"></i></c:when>
+                                        <c:otherwise>🛵</c:otherwise>
+                                    </c:choose>
+                                </div>
                                 <div class="step-content">
                                     <div class="step-title">Out for Delivery</div>
-                                    <div class="step-desc">A delivery hero is on their way to your doorstep.</div>
+                                    <div class="step-desc">A delivery partner is on the way to your doorstep.</div>
                                 </div>
                             </div>
 
-                            <div class="timeline-step ${st == 'Delivered' ? 'active' : ''}">
-                                <div class="step-indicator"><i class="bi bi-check-lg"></i></div>
+                            <div class="timeline-step ${st == 'Delivered' ? 'active' : ''} ${st == 'Delivered' ? 'current' : ''}">
+                                <div class="step-icon">
+                                    <c:choose>
+                                        <c:when test="${st == 'Delivered'}"><i class="bi bi-check-lg" style="color:white;"></i></c:when>
+                                        <c:otherwise>📦</c:otherwise>
+                                    </c:choose>
+                                </div>
                                 <div class="step-content">
                                     <div class="step-title">Delivered</div>
                                     <div class="step-desc">Enjoy your meal! Thank you for choosing Urban Eats.</div>
@@ -309,48 +472,51 @@
                             </div>
                         </div>
 
-                        <div class="mt-5 p-4 rounded-4 bg-light bg-opacity-50 d-flex justify-content-between align-items-center">
+                        <!-- Payment Footer -->
+                        <div class="payment-footer d-flex justify-content-between align-items-center">
                             <div>
-                                <span class="text-secondary small fw-800 text-uppercase">Payment Amount</span>
-                                <div class="fs-3 fw-800 text-primary">₹${order.totalAmount}</div>
+                                <div class="payment-label">Payment Amount</div>
+                                <div class="payment-value">₹${order.totalAmount}</div>
                             </div>
                             <div class="text-end">
-                                <span class="text-secondary small fw-800 text-uppercase">Method</span>
-                                <div class="fw-700 text-dark"><i class="bi bi-credit-card me-2"></i>${order.paymentMethod}</div>
+                                <div class="payment-label">Method</div>
+                                <div class="payment-method"><i class="bi bi-credit-card-2-front me-1"></i>${order.paymentMethod}</div>
                             </div>
                         </div>
 
-                        <a href="OrderTrackingServlet" class="btn btn-outline-primary w-100 rounded-pill py-3 fw-800 mt-4">
-                            Back to My Orders
-                        </a>
+                        <div class="text-center mt-4">
+                            <a href="OrderTrackingServlet" class="btn-back">
+                                <i class="bi bi-arrow-left"></i> Back to My Orders
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
         </c:when>
         
         <c:otherwise>
-            <div class="d-flex justify-content-between align-items-center mb-5">
-                <h3 class="fw-800 mb-0">My Orders</h3>
-                <a href="HomeServlet" class="btn btn-purple rounded-pill px-4 fw-800">New Order <i class="bi bi-plus-lg ms-2"></i></a>
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <span class="page-title">My Orders</span>
+                <a href="HomeServlet" class="btn-purple">New Order <i class="bi bi-plus-lg ms-2"></i></a>
             </div>
 
             <div class="row g-4">
                 <c:forEach var="o" items="${orders}">
                     <div class="col-lg-6">
-                        <div class="order-row-card">
+                        <div class="order-card">
                             <div class="d-flex justify-content-between align-items-center mb-3">
                                 <div>
                                     <h5 class="fw-800 mb-1 text-dark">Order #${o.orderId}</h5>
-                                    <p class="text-secondary small fw-600 mb-0"><i class="bi bi-calendar3 me-2"></i><fmt:formatDate value="${o.createdAt}" pattern="dd MMM yyyy, hh:mm a" /></p>
+                                    <p class="text-secondary small fw-600 mb-0"><i class="bi bi-calendar3 me-1"></i><fmt:formatDate value="${o.createdAt}" pattern="dd MMM yyyy, hh:mm a" /></p>
                                 </div>
-                                <span class="status-badge ${o.status == 'Delivered' ? 'bg-success bg-opacity-10 text-success' : 'bg-primary bg-opacity-10 text-primary'}">
+                                <span class="status-chip ${o.status == 'Delivered' ? 'bg-success bg-opacity-10 text-success' : 'bg-primary bg-opacity-10 text-primary'}">
                                     ${o.status}
                                 </span>
                             </div>
-                            <div class="d-flex justify-content-between align-items-center mt-4">
-                                <h4 class="fw-800 text-primary mb-0">₹${o.totalAmount}</h4>
-                                <a href="OrderTrackingServlet?id=${o.orderId}" class="btn btn-sm btn-outline-primary px-4 rounded-pill fw-800 border-2">
-                                    Track Status
+                            <div class="d-flex justify-content-between align-items-center mt-3">
+                                <span class="order-amount">₹${o.totalAmount}</span>
+                                <a href="OrderTrackingServlet?id=${o.orderId}" class="btn-track">
+                                    Track Status <i class="bi bi-arrow-right ms-1"></i>
                                 </a>
                             </div>
                         </div>
@@ -359,10 +525,10 @@
 
                 <c:if test="${empty orders}">
                     <div class="col-12 text-center py-5">
-                        <i class="bi bi-receipt fs-1 text-muted opacity-25 mb-3 d-block"></i>
-                        <h4 class="fw-800">Your order history is empty</h4>
-                        <p class="text-secondary">Start your food journey today!</p>
-                        <a href="HomeServlet" class="btn btn-purple rounded-pill px-5 py-3 mt-3 fw-800">Browse Menu</a>
+                        <div class="empty-icon"><i class="bi bi-receipt"></i></div>
+                        <h4 class="fw-800 mb-2">Your order history is empty</h4>
+                        <p class="text-secondary mb-4">Start your food journey today!</p>
+                        <a href="HomeServlet" class="btn-purple px-5 py-3">Browse Menu</a>
                     </div>
                 </c:if>
             </div>

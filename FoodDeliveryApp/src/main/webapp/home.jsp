@@ -10,47 +10,6 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
-<<<<<<< Updated upstream
-        :root { --primary: #8b5cf6; --primary-dark: #7c3aed; --primary-light: #ede9fe; --primary-hover: #6d28d9; }
-        body { font-family: 'Inter', sans-serif; background: #f5f3ff; transition: background 0.3s, color 0.3s; }
-        body.dark-mode { background: #1a1625 !important; color: #e9d5ff !important; }
-        body.dark-mode .card { background: #2d2048 !important; color: #e9d5ff !important; border: none; }
-        body.dark-mode .navbar { background: #13011f !important; }
-        body.dark-mode .modal-content { background: #2d2048; color: #e9d5ff; }
-        body.dark-mode .form-select, body.dark-mode .form-control { background: #3b2d5e !important; color: #e9d5ff !important; border: 1px solid #5b3f8c; }
-        body.dark-mode .text-muted { color: #c4b5fd !important; }
-        body.dark-mode .text-dark { color: #e9d5ff !important; }
-        body.dark-mode .text-purple { color: #c4b5fd !important; }
-        body.dark-mode .bg-light { background: #2d2048 !important; }
-        body.dark-mode h3, body.dark-mode h4, body.dark-mode h5 { color: #e9d5ff !important; }
-        .bg-purple { background: var(--primary) !important; }
-        .btn-purple { background: var(--primary); color: white; border: none; }
-        .btn-purple:hover { background: var(--primary-hover); color: white; }
-        .btn-outline-purple { color: var(--primary); border: 2px solid var(--primary); background: transparent; }
-        .btn-outline-purple:hover { background: var(--primary); color: white; }
-        .text-purple { color: var(--primary) !important; }
-        .card-hover:hover { transform: translateY(-4px); transition: 0.2s ease-in-out; box-shadow: 0 12px 30px rgba(139,92,246,0.2) !important; cursor: pointer; }
-        .dark-toggle { background: none; border: none; color: white; font-size: 1.3rem; cursor: pointer; }
-        .offer-badge { background: var(--primary-light); color: var(--primary); }
-        body.dark-mode .offer-badge { background: #3b2d5e; color: #c4b5fd; }
-        .city-select select { color: var(--primary); font-weight: 700; }
-        
-        /* Modern Toggle Switch */
-        .veg-switch { display: flex; align-items: center; cursor: pointer; user-select: none; }
-        .veg-switch input { display: none; }
-        .veg-slider { width: 44px; height: 22px; background: #cbd5e1; border-radius: 100px; position: relative; transition: 0.3s; margin-right: 10px; }
-        .veg-slider::before { content: ""; position: absolute; width: 16px; height: 16px; background: white; border-radius: 50%; top: 3px; left: 3px; transition: 0.3s; }
-        .veg-switch input:checked + .veg-slider { background: #10b981; } /* Emerald Green */
-        .veg-switch input:checked + .veg-slider::before { transform: translateX(22px); }
-        .veg-label { font-weight: 700; font-size: 0.9rem; color: #64748b; }
-        .veg-switch input:checked ~ .veg-label { color: #10b981; }
-        .navbar .bi { font-size: 0.85rem; }
-        .city-group-title { margin-top: 2rem; margin-bottom: 1.5rem; position: relative; padding-bottom: 0.5rem; border-bottom: 2px solid var(--primary-light); color: #1e293b; }
-        .city-group-title::after { content: ""; position: absolute; bottom: -2px; left: 0; width: 60px; height: 2px; background: var(--primary); }
-        body.dark-mode .city-group-title { color: #e9d5ff !important; border-bottom-color: #5b3f8c; }
-        
-        /* Navbar Icon Box Style */
-=======
         :root {
             --primary: #8b5cf6;
             --primary-dark: #7c3aed;
@@ -71,6 +30,7 @@
             min-height: 100vh;
             color: var(--text-primary);
             transition: all 0.3s ease;
+            font-size: 1.05rem;
         }
 
         body.dark-mode {
@@ -78,12 +38,12 @@
             color: #e2e8f0;
         }
 
-        /* Premium Navbar */
+        /* Premium Navbar - Cinematic Scale */
         .navbar {
             background: rgba(139, 92, 246, 0.95);
-            backdrop-filter: blur(10px);
-            padding: 0.75rem 0;
-            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05);
+            backdrop-filter: blur(12px);
+            padding: 1rem 0;
+            box-shadow: 0 4px 40px rgba(0, 0, 0, 0.08);
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
             z-index: 1000;
         }
@@ -92,126 +52,154 @@
             border-bottom: 1px solid rgba(139, 92, 246, 0.2);
         }
 
->>>>>>> Stashed changes
         .nav-icon-link {
-            width: 42px;
-            height: 42px;
+            width: 60px;
+            height: 60px;
             display: flex;
             align-items: center;
             justify-content: center;
-            background: rgba(255, 255, 255, 0.15);
-            border-radius: 14px;
+            background: rgba(255, 255, 255, 0.12);
+            border-radius: 20px;
             color: white !important;
-            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
             text-decoration: none;
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .nav-icon-link i {
+            font-size: 1.6rem;
         }
 
         .nav-icon-link:hover {
-            background: rgba(255, 255, 255, 0.3);
-            transform: translateY(-3px) scale(1.05);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+            background: rgba(255, 255, 255, 0.25);
+            transform: translateY(-5px) scale(1.1);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
         }
 
         .dark-toggle {
-            width: 42px; height: 42px; display: flex; align-items: center; justify-content: center;
-            background: rgba(255, 255, 255, 0.15); border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 14px; color: white; cursor: pointer; transition: all 0.3s ease;
+            width: 60px; height: 60px; display: flex; align-items: center; justify-content: center;
+            background: rgba(255, 255, 255, 0.12); border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 20px; color: white; cursor: pointer; transition: all 0.4s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .dark-toggle i {
+            font-size: 1.5rem;
         }
 
         .dark-toggle:hover {
-            background: rgba(255, 255, 255, 0.3);
-            transform: translateY(-3px);
+            background: rgba(255, 255, 255, 0.25);
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
         }
 
-        .container { margin-top: 2rem; }
+        .container { margin-top: 3rem; }
 
         .btn-purple {
             background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
-            color: white; border: none; font-weight: 700;
+            color: white; border: none; font-weight: 800;
+            padding: 12px 24px; border-radius: 16px;
             transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(139, 92, 246, 0.3);
+            box-shadow: 0 6px 20px rgba(139, 92, 246, 0.3);
+            font-size: 1.1rem;
         }
 
         .btn-purple:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(139, 92, 246, 0.4);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(139, 92, 246, 0.4);
             color: white;
         }
 
-        /* Filter Section */
+        /* Filter Section Scale Up */
         .filter-card {
-            border-radius: 24px;
+            border-radius: 32px;
             border: none;
             background: var(--surface);
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.05);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.06);
+            padding: 2.5rem !important;
         }
         body.dark-mode .filter-card {
             background: rgba(30, 41, 59, 0.7);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(139, 92, 246, 0.1);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(139, 92, 246, 0.15);
         }
 
         .form-select-lg, .form-control-lg {
-            border-radius: 14px;
-            font-size: 1rem;
+            border-radius: 18px;
+            font-size: 1.1rem;
             font-weight: 600;
+            height: 60px;
             border: 2px solid var(--border-color);
             transition: all 0.3s ease;
         }
 
-        .form-select-lg:focus, .form-control-lg:focus {
-            border-color: var(--primary);
-            box-shadow: 0 0 0 4px rgba(139, 92, 246, 0.1);
-        }
-
-        /* Restaurant Cards */
+        /* Restaurant Cards Scale Up */
         .restaurant-card {
-            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
         }
 
         .card {
-            border-radius: 24px;
-            border: none;
-            background: var(--surface);
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
-            transition: all 0.3s ease;
+            border-radius: 32px;
+            border: 1px solid rgba(139, 92, 246, 0.15);
+            background: linear-gradient(145deg, #ffffff 0%, #f5f3ff 100%);
+            box-shadow: 0 10px 40px rgba(139, 92, 246, 0.08);
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
             overflow: hidden;
         }
 
         .restaurant-card:hover {
-            transform: translateY(-8px);
+            transform: translateY(-12px);
         }
         .restaurant-card:hover .card {
-            box-shadow: 0 20px 40px rgba(139, 92, 246, 0.15);
+            box-shadow: 0 25px 60px rgba(139, 92, 246, 0.18);
         }
 
         body.dark-mode .card {
-            background: rgba(30, 41, 59, 0.7);
-            border: 1px solid rgba(139, 92, 246, 0.1);
+            background: rgba(30, 41, 59, 0.75);
+            border: 1px solid rgba(139, 92, 246, 0.12);
         }
 
         .rating-badge {
             background: #10b981;
             color: white;
-            padding: 4px 10px;
-            border-radius: 10px;
+            padding: 6px 14px;
+            border-radius: 14px;
             font-weight: 800;
+            font-size: 1.05rem;
             display: flex;
             align-items: center;
-            gap: 4px;
+            gap: 6px;
         }
 
         .offer-banner {
             background: var(--primary-light);
             color: var(--primary);
-            padding: 8px 12px;
-            border-radius: 12px;
-            font-weight: 700;
-            font-size: 0.85rem;
+            padding: 12px 18px;
+            border-radius: 16px;
+            font-weight: 800;
+            font-size: 0.95rem;
         }
         body.dark-mode .offer-banner {
             background: rgba(139, 92, 246, 0.2);
+            color: #c4b5fd;
+        }
+
+        .city-title {
+            margin: 4rem 0 2.5rem;
+            font-weight: 800;
+            font-size: 2.2rem;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            color: var(--text-primary);
+            letter-spacing: -1.5px;
+        }
+        body.dark-mode .city-title { color: #f8fafc; }
+        .city-title::after {
+            content: ""; flex: 1; height: 3px;
+            background: linear-gradient(90deg, var(--primary) 0%, transparent 100%);
+            opacity: 0.3;
         }
 
         /* Veg Switch */
@@ -224,29 +212,33 @@
         .veg-label { font-weight: 700; font-size: 0.95rem; color: var(--text-secondary); }
         .veg-switch input:checked ~ .veg-label { color: #10b981; }
 
-        .city-title {
-            margin: 3rem 0 2rem;
-            font-weight: 800;
-            font-size: 1.75rem;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            color: var(--text-primary);
+        .form-select-lg:focus, .form-control-lg:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 4px rgba(139, 92, 246, 0.1);
         }
-        body.dark-mode .city-title { color: #f8fafc; }
-        .city-title::after {
-            content: ""; flex: 1; height: 2px;
-            background: var(--border-color);
-            opacity: 0.5;
+
+        /* ═══ DARK MODE TEXT FIXES ═══ */
+        body.dark-mode .text-dark { color: #f1f5f9 !important; }
+        body.dark-mode .card-body h5,
+        body.dark-mode .card-body h4,
+        body.dark-mode .card-body h3 { color: #f1f5f9 !important; }
+        body.dark-mode .card-body .text-secondary { color: #94a3b8 !important; }
+        body.dark-mode .badge.bg-light { background: rgba(30, 41, 59, 0.6) !important; color: #cbd5e1 !important; }
+        body.dark-mode .form-select-lg,
+        body.dark-mode .form-control-lg,
+        body.dark-mode .input-group-text.bg-light {
+            background: rgba(15, 23, 42, 0.4) !important;
+            border-color: rgba(139, 92, 246, 0.2) !important;
+            color: #f1f5f9 !important;
         }
     </style>
 </head>
 <body>
 
 <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
-    <div class="container-fluid px-4">
-        <a class="navbar-brand fw-800 fs-3" href="HomeServlet">
-            <i class="bi bi-basket-fill text-warning me-2"></i>Urban Eats
+    <div class="container-fluid px-5">
+        <a class="navbar-brand fw-900" href="HomeServlet" style="font-size: 2.2rem; letter-spacing: -2px;">
+            <i class="bi bi-basket-fill text-warning me-2"></i>Urban <span style="color:rgba(255,255,255,0.9)">Eats</span>
         </a>
         <div class="ms-auto d-flex align-items-center gap-3">
             <a href="MoodSuggestServlet" class="nav-icon-link" title="AI Suggest"><i class="bi bi-stars"></i></a>

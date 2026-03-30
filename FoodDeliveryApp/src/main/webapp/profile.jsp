@@ -11,38 +11,6 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
-<<<<<<< Updated upstream
-        :root { --primary: #8b5cf6; --primary-dark: #7c3aed; --primary-light: #ede9fe; --accent: #f59e0b; }
-        body { font-family: 'Inter', sans-serif; background: #f8fafc; color: #1e293b; }
-        .bg-purple-gradient { background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%); }
-        .text-purple { color: var(--primary) !important; }
-        .btn-purple { background: var(--primary); color: white; border: none; transition: 0.3s; }
-        .btn-purple:hover { background: var(--primary-dark); transform: translateY(-2px); box-shadow: 0 4px 12px rgba(139, 92, 246, 0.3); color: white; }
-        .card { border: none; border-radius: 1.25rem; box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05); }
-        .profile-avatar { width: 100px; height: 100px; background: var(--primary-light); color: var(--primary); font-size: 3rem; display: flex; align-items: center; justify-content: center; border-radius: 50%; border: 4px solid white; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1); margin-top: -50px; }
-        .stat-card { background: white; border-radius: 1rem; padding: 1.5rem; text-align: center; border-bottom: 4px solid var(--primary); }
-        .order-item { border-left: 4px solid var(--primary); background: white; transition: 0.2s; border-radius: 0.75rem; }
-        .order-item:hover { transform: scale(1.02); }
-        .nav-link-custom { color: rgba(255,255,255,0.8); font-weight: 600; text-decoration: none; padding: 0.5rem 1rem; border-radius: 50rem; transition: 0.3s; }
-        .nav-link-custom:hover { background: rgba(255,255,255,0.2); color: white; }
-        .form-control { border-radius: 0.75rem; padding: 0.75rem 1rem; border: 1px solid #e2e8f0; }
-        .form-control:focus { border-color: var(--primary); box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.2); }
-        body.dark-mode { background: #1a1625 !important; color: #e9d5ff !important; }
-        body.dark-mode .card, body.dark-mode .modal-content, body.dark-mode .stat-card, body.dark-mode .order-item { background: #2d2048 !important; color: #e9d5ff !important; border: none !important; }
-        body.dark-mode .navbar { background: #13011f !important; }
-        body.dark-mode .text-muted { color: #c4b5fd !important; }
-        body.dark-mode .text-dark { color: #e9d5ff !important; }
-        body.dark-mode .text-purple { color: #c4b5fd !important; }
-        body.dark-mode h2, body.dark-mode h4, body.dark-mode h5 { color: #e9d5ff !important; }
-        body.dark-mode .form-label { color: #c4b5fd !important; }
-        body.dark-mode .stat-card .text-purple { color: #e9d5ff !important; }
-        body.dark-mode .profile-avatar { background: #3b2d5e !important; color: #e9d5ff !important; border-color: #2d2048 !important; }
-        body.dark-mode .bg-white { background: #3b2d5e !important; color: #e9d5ff !important; }
-        body.dark-mode .bg-light { background: #2d2048 !important; }
-        .navbar .bi { font-size: 0.85rem; }
-        
-        /* Navbar Icon Box Style */
-=======
         :root {
             --primary: #8b5cf6;
             --primary-dark: #7c3aed;
@@ -63,6 +31,7 @@
             min-height: 100vh;
             color: var(--text-primary);
             transition: all 0.3s ease;
+            font-size: 1.05rem;
         }
 
         body.dark-mode {
@@ -70,12 +39,12 @@
             color: #e2e8f0;
         }
 
-        /* Premium Navbar */
+        /* Premium Navbar - Cinematic Scale (Standardized) */
         .navbar {
             background: rgba(139, 92, 246, 0.95);
-            backdrop-filter: blur(10px);
-            padding: 0.75rem 0;
-            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05);
+            backdrop-filter: blur(12px);
+            padding: 1rem 0;
+            box-shadow: 0 4px 40px rgba(0, 0, 0, 0.08);
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
             z-index: 1000;
         }
@@ -84,30 +53,37 @@
             border-bottom: 1px solid rgba(139, 92, 246, 0.2);
         }
 
->>>>>>> Stashed changes
         .nav-icon-link {
-            width: 42px; height: 42px; display: flex; align-items: center; justify-content: center;
-            background: rgba(255, 255, 255, 0.15); border-radius: 14px; color: white !important;
-            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-            text-decoration: none; border: 1px solid rgba(255, 255, 255, 0.1);
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.12);
+            border-radius: 20px;
+            color: white !important;
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+            text-decoration: none;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
         }
+        .nav-icon-link i { font-size: 1.6rem; }
 
         .nav-icon-link:hover {
-            background: rgba(255, 255, 255, 0.3);
-            transform: translateY(-3px) scale(1.05);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+            background: rgba(255, 255, 255, 0.25);
+            transform: translateY(-5px) scale(1.1);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
         }
 
         .dark-toggle {
-            width: 42px; height: 42px; display: flex; align-items: center; justify-content: center;
-            background: rgba(255, 255, 255, 0.15); border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 14px; color: white; cursor: pointer; transition: all 0.3s ease;
+            width: 60px; height: 60px; display: flex; align-items: center; justify-content: center;
+            background: rgba(255, 255, 255, 0.12); border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 20px; color: white; cursor: pointer; transition: all 0.4s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
         }
 
-        .dark-toggle:hover {
-            background: rgba(255, 255, 255, 0.3);
-            transform: translateY(-3px);
-        }
+        .dark-toggle i { font-size: 1.5rem; }
+
 
         /* Profile Card */
         .profile-header {
@@ -190,6 +166,13 @@
             background: rgba(15, 23, 42, 0.4); border-color: rgba(139, 92, 246, 0.2); color: white;
         }
         .form-control-lg:focus { border-color: var(--primary); box-shadow: 0 0 0 4px rgba(139, 92, 246, 0.1); }
+
+        /* ═══ DARK MODE TEXT FIXES ═══ */
+        body.dark-mode .text-dark { color: #f1f5f9 !important; }
+        body.dark-mode .profile-card h1 { color: #f1f5f9 !important; }
+        body.dark-mode .profile-card .fs-5 { color: #cbd5e1 !important; }
+        body.dark-mode .order-card .fw-800 { color: #f1f5f9 !important; }
+        body.dark-mode h3 { color: #f8fafc; }
     </style>
 </head>
 <body class="pb-5">

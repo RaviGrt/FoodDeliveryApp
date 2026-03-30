@@ -10,54 +10,6 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
-<<<<<<< Updated upstream
-        :root { --primary: #8b5cf6; --primary-dark: #7c3aed; --primary-light: #ede9fe; --primary-hover: #6d28d9; }
-        body { font-family: 'Inter', sans-serif; background: #f5f3ff; }
-        body.dark-mode { background: #1a1625 !important; color: #e9d5ff !important; }
-        body.dark-mode .card, body.dark-mode .list-group-item { background: #2d2048 !important; color: #e9d5ff !important; border-color: #3b2d5e; }
-        body.dark-mode .navbar { background: #13011f !important; }
-        body.dark-mode .text-muted { color: #c4b5fd !important; }
-        body.dark-mode .text-dark { color: #e9d5ff !important; }
-        body.dark-mode .text-purple { color: #c4b5fd !important; }
-        body.dark-mode h2, body.dark-mode h4, body.dark-mode h5 { color: #e9d5ff !important; }
-        body.dark-mode .bg-light { background: #3b2d5e !important; }
-        .bg-purple { background: var(--primary) !important; }
-        .btn-purple { background: var(--primary); color: white; border: none; }
-        .btn-purple:hover { background: var(--primary-hover); color: white; }
-        .btn-outline-purple { color: var(--primary); border: 2px solid var(--primary); background: transparent; }
-        .btn-outline-purple:hover { background: var(--primary); color: white; }
-        .text-purple { color: var(--primary) !important; }
-        .dark-toggle { background: none; border: none; color: white; font-size: 1.3rem; cursor: pointer; }
-        .offer-badge { background: var(--primary-light); color: var(--primary); }
-        body.dark-mode .offer-badge { background: #3b2d5e; color: #c4b5fd; }
-        .rest-header { background: linear-gradient(135deg, #8b5cf6 0%, #a78bfa 100%); }
-        
-        /* Modern Toggle Switch */
-        .veg-switch { display: flex; align-items: center; cursor: pointer; user-select: none; }
-        .veg-switch input { display: none; }
-        .veg-slider { width: 44px; height: 22px; background: #cbd5e1; border-radius: 100px; position: relative; transition: 0.3s; margin-right: 10px; }
-        .veg-slider::before { content: ""; position: absolute; width: 16px; height: 16px; background: white; border-radius: 50%; top: 3px; left: 3px; transition: 0.3s; }
-        .veg-switch input:checked + .veg-slider { background: #10b981; } /* Emerald Green */
-        .veg-switch input:checked + .veg-slider::before { transform: translateX(22px); }
-        .veg-label { font-weight: 700; font-size: 0.9rem; color: #64748b; }
-        .veg-switch input:checked ~ .veg-label { color: #10b981; }
-        .navbar .bi { font-size: 0.85rem; }
-        
-        /* Navbar Icon Box Style */
-        .nav-icon-link {
-            width: 40px;
-            height: 40px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: rgba(255, 255, 255, 0.2);
-            border-radius: 12px;
-            color: white !important;
-            transition: all 0.2s ease;
-            text-decoration: none;
-            font-size: 1.2rem;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-=======
         :root {
             --primary: #8b5cf6;
             --primary-dark: #7c3aed;
@@ -68,7 +20,6 @@
             --text-primary: #1e293b;
             --text-secondary: #64748b;
             --border-color: #e2e8f0;
->>>>>>> Stashed changes
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -79,6 +30,7 @@
             min-height: 100vh;
             color: var(--text-primary);
             transition: all 0.3s ease;
+            font-size: 1.05rem;
         }
 
         body.dark-mode {
@@ -86,12 +38,12 @@
             color: #e2e8f0;
         }
 
-        /* Premium Navbar */
+        /* Premium Navbar - Cinematic Scale (Standardized) */
         .navbar {
             background: rgba(139, 92, 246, 0.95);
-            backdrop-filter: blur(10px);
-            padding: 0.75rem 0;
-            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05);
+            backdrop-filter: blur(12px);
+            padding: 1rem 0;
+            box-shadow: 0 4px 40px rgba(0, 0, 0, 0.08);
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
             z-index: 1000;
         }
@@ -101,110 +53,152 @@
         }
 
         .nav-icon-link {
-            width: 42px; height: 42px; display: flex; align-items: center; justify-content: center;
-            background: rgba(255, 255, 255, 0.15); border-radius: 14px; color: white !important;
-            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-            text-decoration: none; border: 1px solid rgba(255, 255, 255, 0.1);
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.12);
+            border-radius: 20px;
+            color: white !important;
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+            text-decoration: none;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
         }
 
+        .nav-icon-link i { font-size: 1.6rem; }
+
         .nav-icon-link:hover {
-            background: rgba(255, 255, 255, 0.3);
-            transform: translateY(-3px) scale(1.05);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+            background: rgba(255, 255, 255, 0.25);
+            transform: translateY(-5px) scale(1.1);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
         }
 
         .dark-toggle {
-            width: 42px; height: 42px; display: flex; align-items: center; justify-content: center;
-            background: rgba(255, 255, 255, 0.15); border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 14px; color: white; cursor: pointer; transition: all 0.3s ease;
+            width: 60px; height: 60px; display: flex; align-items: center; justify-content: center;
+            background: rgba(255, 255, 255, 0.12); border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 20px; color: white; cursor: pointer; transition: all 0.4s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
         }
+
+        .dark-toggle i { font-size: 1.5rem; }
 
         .dark-toggle:hover {
-            background: rgba(255, 255, 255, 0.3);
-            transform: translateY(-3px);
+            background: rgba(255, 255, 255, 0.25);
+            transform: translateY(-5px);
         }
 
-        /* Restaurant Header Overlay */
+        /* Restaurant Header Overlay Scale Up */
         .rest-header {
             background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
-            border-radius: 28px;
-            padding: 3rem;
+            border-radius: 40px;
+            padding: 3.5rem;
             color: white;
-            box-shadow: 0 15px 40px rgba(139, 92, 246, 0.25);
-            margin-bottom: 3rem;
+            box-shadow: 0 25px 60px rgba(139, 92, 246, 0.3);
+            margin-bottom: 4rem;
             position: relative;
             overflow: hidden;
         }
         .rest-header::after {
-            content: ""; position: absolute; top: -50%; right: -10%;
-            width: 300px; height: 300px;
-            background: rgba(255,255,255,0.1);
+            content: ""; position: absolute; top: -40%; right: -10%;
+            width: 450px; height: 450px;
+            background: rgba(255,255,255,0.08);
             border-radius: 50%;
         }
 
         .rating-chip {
             background: #10b981;
-            padding: 6px 14px;
-            border-radius: 14px;
+            padding: 10px 20px;
+            border-radius: 18px;
             font-weight: 800;
-            font-size: 1.1rem;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            font-size: 1.3rem;
+            box-shadow: 0 6px 15px rgba(0,0,0,0.15);
         }
 
         .menu-card {
-            border-radius: 24px;
+            border-radius: 32px;
             border: none;
             background: var(--surface);
-            box-shadow: 0 4px 25px rgba(0, 0, 0, 0.04);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.04);
             overflow: hidden;
+            padding: 1rem;
         }
         body.dark-mode .menu-card {
             background: rgba(30, 41, 59, 0.7);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(139, 92, 246, 0.1);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(139, 92, 246, 0.15);
         }
 
         .menu-item {
-            padding: 2.5rem;
+            padding: 2rem;
             border-bottom: 1px solid var(--border-color);
             transition: all 0.3s ease;
         }
         body.dark-mode .menu-item { border-bottom-color: rgba(139, 92, 246, 0.1); }
-        .menu-item:hover { background: rgba(139, 92, 246, 0.02); }
+        .menu-item:hover { background: rgba(139, 92, 246, 0.03); }
 
         .btn-purple {
             background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
-            color: white; border: none; font-weight: 700;
+            color: white; border: none; font-weight: 800;
+            padding: 14px 28px; border-radius: 18px;
             transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(139, 92, 246, 0.2);
+            box-shadow: 0 6px 20px rgba(139, 92, 246, 0.25);
+            font-size: 1.05rem;
         }
-        .btn-purple:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(139, 92, 246, 0.35); color: white; }
+        .btn-purple:hover { transform: translateY(-3px); box-shadow: 0 12px 30px rgba(139, 92, 246, 0.4); color: white; }
 
-        /* Quantity Widget */
+        /* Quantity Widget Scale Up */
         .qty-widget {
             background: var(--surface-light);
-            border-radius: 14px;
+            border-radius: 16px;
             border: 1px solid var(--border-color);
             display: flex; align-items: center;
+            padding: 6px;
         }
-        body.dark-mode .qty-widget { background: rgba(15, 23, 42, 0.4); border-color: rgba(139, 92, 246, 0.2); }
+        body.dark-mode .qty-widget { background: rgba(15, 23, 42, 0.5); border-color: rgba(139, 92, 246, 0.25); }
         .qty-widget button {
-            background: none; border: none; color: var(--primary);
-            width: 36px; height: 36px; font-weight: 800; cursor: pointer;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(139, 92, 246, 0.2);
+            color: var(--primary);
+            width: 40px; height: 40px;
+            border-radius: 12px;
+            font-size: 1.2rem;
+            font-weight: 800; cursor: pointer;
+            transition: all 0.2s ease;
         }
+        .qty-widget button:hover { background: var(--primary); color: white; }
         .qty-widget input {
-            width: 40px; border: none; background: transparent; text-align: center;
-            font-weight: 800; color: var(--text-primary);
+            width: 45px; border: none; background: transparent; text-align: center;
+            font-weight: 800; font-size: 1.2rem; color: var(--text-primary);
+        }
+
+        body.dark-mode .menu-item h4.text-dark { color: #e9d5ff !important; }
+        body.dark-mode .menu-item .text-secondary { color: rgba(233, 213, 255, 0.72) !important; }
+
+        body.dark-mode .qty-widget button {
+            background: rgba(255, 255, 255, 0.06);
+            border-color: rgba(139, 92, 246, 0.35);
+            color: #e9d5ff;
         }
         body.dark-mode .qty-widget input { color: #f8fafc; }
+
+        /* Hide number spinners for a cleaner stepper */
+        .qty-widget input[type="number"]::-webkit-outer-spin-button,
+        .qty-widget input[type="number"]::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+        .qty-widget input[type="number"] { -moz-appearance: textfield; }
+
 
         /* Veg Switch */
         .veg-switch { display: flex; align-items: center; cursor: pointer; user-select: none; }
         .veg-switch input { display: none; }
-        .veg-slider { width: 48px; height: 24px; background: #cbd5e1; border-radius: 100px; position: relative; transition: 0.3s; margin-right: 12px; }
+        .veg-slider { width: 52px; height: 26px; background: #cbd5e1; border-radius: 100px; position: relative; transition: 0.3s; margin-right: 12px; }
         .veg-slider::before { content: ""; position: absolute; width: 18px; height: 18px; background: white; border-radius: 50%; top: 3px; left: 3px; transition: 0.3s; }
         .veg-switch input:checked + .veg-slider { background: #10b981; }
-        .veg-switch input:checked + .veg-slider::before { transform: translateX(24px); }
+        .veg-switch input:checked + .veg-slider::before { transform: translateX(26px); }
         .veg-label { font-weight: 700; font-size: 0.95rem; color: var(--text-secondary); }
         .veg-switch input:checked ~ .veg-label { color: #10b981; }
 
@@ -233,6 +227,10 @@
             text-decoration: none; font-size: 0.9rem; transition: all 0.3s ease;
         }
         .btn-view-cart:hover { background: #f8fafc; transform: scale(1.05); }
+        
+        /* ═══ DARK MODE TEXT FIXES ═══ */
+        body.dark-mode .text-dark { color: #f1f5f9 !important; }
+        body.dark-mode h4.text-dark { color: #f1f5f9 !important; }
 
     </style>
 </head>
@@ -246,6 +244,7 @@
         <div class="ms-auto d-flex align-items-center gap-3">
             <a href="HomeServlet" class="nav-icon-link" title="Home"><i class="bi bi-house-door-fill"></i></a>
             <a href="MoodSuggestServlet" class="nav-icon-link" title="AI Suggest"><i class="bi bi-stars"></i></a>
+            <a href="CartServlet" class="nav-icon-link" title="My Cart"><i class="bi bi-cart3"></i></a>
             <a href="OrderTrackingServlet" class="nav-icon-link" title="My Orders"><i class="bi bi-box-seam"></i></a>
             <a href="ProfileServlet" class="nav-icon-link" title="My Profile"><i class="bi bi-person-circle"></i></a>
             <button class="dark-toggle" id="darkToggle" title="Toggle Theme"><i class="bi bi-moon-stars-fill"></i></button>
@@ -263,7 +262,7 @@
                     <span class="badge bg-white text-primary rounded-pill fw-800 px-3 py-2">Open Now</span>
                     <span class="badge bg-white bg-opacity-20 text-white rounded-pill fw-700 px-3 py-2"><i class="bi bi-clock me-1"></i> ${restaurant.deliveryTime}m</span>
                 </div>
-                <h1 class="fw-800 mb-2" style="font-size: 3.5rem; letter-spacing: -2px;">${restaurant.name}</h1>
+                <h1 class="fw-800 mb-2" style="font-size: clamp(2.2rem, 4.5vw, 3.5rem); letter-spacing: -2px;">${restaurant.name}</h1>
                 <p class="fs-5 opacity-90 fw-500 mb-0"><i class="bi bi-geo-alt-fill me-2"></i>${restaurant.city}</p>
             </div>
             <div class="col-md-4 text-md-end">
@@ -293,7 +292,7 @@
     <div class="menu-card mb-5">
         <c:forEach var="item" items="${menu}">
             <div class="menu-item border-bottom last-child-border-0" data-is-veg="${item.isVeg()}">
-                <div class="row align-items-center g-4">
+                <div class="row align-items-center g-3">
                     <div class="col-md-1">
                         <i class="bi bi-record-btn-fill fs-3 ${item.veg ? 'text-success' : 'text-danger'}"></i>
                     </div>
@@ -303,7 +302,7 @@
                         <p class="text-secondary small mb-0 pe-md-5">${item.description}</p>
                     </div>
                     <div class="col-md-4 text-md-end">
-                        <form action="CartServlet" method="post" class="d-inline-flex flex-column align-items-md-end gap-3 ajax-add-form">
+                        <form action="CartServlet" method="post" class="d-inline-flex flex-column align-items-md-end gap-2 ajax-add-form">
                             <input type="hidden" name="action" value="add">
                             <input type="hidden" name="itemId" value="${item.itemId}">
                             <input type="hidden" name="restaurantId" value="${restaurant.restaurantId}">
@@ -314,7 +313,7 @@
                                 <button type="button" onclick="this.previousElementSibling.stepUp()">+</button>
                             </div>
                             
-                            <button type="submit" class="btn btn-purple px-5 py-2 fw-800 rounded-pill">
+                            <button type="submit" class="btn btn-purple px-4 py-2 fw-800 rounded-3">
                                 ADD TO BAG
                             </button>
                         </form>
@@ -336,7 +335,7 @@
 <!-- Floating Cart Bar -->
 <div id="floatingCartBar">
     <div class="d-flex align-items-center gap-3">
-        <div class="bg-white bg-opacity-20 p-2 rounded-4">
+        <div class="bg-white text-primary p-2 rounded-4" style="box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
             <i class="bi bi-cart-fill fs-4"></i>
         </div>
         <div>
