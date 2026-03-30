@@ -13,6 +13,11 @@
         body.dark-mode .card { background: #2d2048 !important; color: #e9d5ff; border: none; }
         body.dark-mode .bg-light, body.dark-mode .form-control { background: #3b2d5e !important; color: #e9d5ff !important; border: none; }
         body.dark-mode .text-muted { color: #c4b5fd !important; }
+        body.dark-mode .text-dark { color: #e9d5ff !important; }
+        body.dark-mode .text-purple { color: #c4b5fd !important; }
+        body.dark-mode h1, body.dark-mode h2, body.dark-mode h4 { color: #e9d5ff !important; }
+        body.dark-mode .form-label { color: #c4b5fd !important; }
+        body.dark-mode .alert { background: rgba(59, 45, 94, 0.5) !important; color: #e9d5ff !important; border: 1px solid rgba(139, 92, 246, 0.2) !important; }
         .btn-purple { background: var(--primary); color: white; border: none; }
         .btn-purple:hover { background: var(--primary-dark); color: white; }
         .text-purple { color: var(--primary) !important; }

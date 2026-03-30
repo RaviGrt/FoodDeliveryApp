@@ -39,6 +39,11 @@
         body.dark-mode .list-group-item { background: rgba(45, 32, 72, 0.5); border-color: rgba(139, 92, 246, 0.2); color: #e9d5ff; }
         body.dark-mode .text-muted { color: #c4b5fd !important; }
         body.dark-mode .text-dark { color: #e9d5ff !important; }
+        body.dark-mode .text-purple { color: #c4b5fd !important; }
+        body.dark-mode h3, body.dark-mode h5 { color: #e9d5ff !important; }
+        body.dark-mode .bill-row { color: #e9d5ff !important; }
+        body.dark-mode .quantity-controls { background: rgba(59, 45, 94, 0.5) !important; border-color: rgba(139, 92, 246, 0.3) !important; }
+        body.dark-mode .quantity-controls span { color: #e9d5ff !important; }
 
         .navbar {
             background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);

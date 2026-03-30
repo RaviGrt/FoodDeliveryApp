@@ -64,6 +64,13 @@
             color: #e9d5ff;
         }
 
+        body.dark-mode .text-dark { color: #e9d5ff !important; }
+        body.dark-mode .text-purple { color: #c4b5fd !important; }
+        body.dark-mode h1, body.dark-mode h2, body.dark-mode .card-title { color: #e9d5ff !important; }
+        body.dark-mode .card-subtitle { color: #c4b5fd !important; }
+        body.dark-mode .logo-icon { background: linear-gradient(135deg, #a78bfa 0%, #8b5cf6 100%); -webkit-background-clip: text; }
+        body.dark-mode #step-password div[style*="background:#f8fafc"] { background: #3b2d5e !important; border-color: #5b3f8c !important; }
+
         .btn-purple {
             background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
             color: white;

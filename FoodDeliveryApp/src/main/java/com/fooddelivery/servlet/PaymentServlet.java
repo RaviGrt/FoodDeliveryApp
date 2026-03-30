@@ -57,9 +57,12 @@ public class PaymentServlet extends HttpServlet {
             cartDAO.clearCart(user.getUserId());
             notificationService.notifyOrderStatusChange(orderId, "Preparing");
             
-            // Background thread to simulate order status updates every 8 seconds
             new Thread(() -> {
                 try {
+                    Thread.sleep(2000); // 2-second gap after preparing
+                    orderDAO.updateOrderStatus(orderId, "Food Ready");
+                    notificationService.notifyOrderStatusChange(orderId, "Food Ready");
+
                     Thread.sleep(8000);
                     orderDAO.updateOrderStatus(orderId, "Out for Delivery");
                     notificationService.notifyOrderStatusChange(orderId, "Out for Delivery");

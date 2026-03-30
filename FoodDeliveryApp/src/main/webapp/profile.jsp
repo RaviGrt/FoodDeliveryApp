@@ -31,7 +31,11 @@
         body.dark-mode .navbar { background: #13011f !important; }
         body.dark-mode .text-muted { color: #c4b5fd !important; }
         body.dark-mode .text-dark { color: #e9d5ff !important; }
-        body.dark-mode .form-control { background: #3b2d5e !important; color: #e9d5ff !important; border: 1px solid #5b3f8c; }
+        body.dark-mode .text-purple { color: #c4b5fd !important; }
+        body.dark-mode h2, body.dark-mode h4, body.dark-mode h5 { color: #e9d5ff !important; }
+        body.dark-mode .form-label { color: #c4b5fd !important; }
+        body.dark-mode .stat-card .text-purple { color: #e9d5ff !important; }
+        body.dark-mode .profile-avatar { background: #3b2d5e !important; color: #e9d5ff !important; border-color: #2d2048 !important; }
         body.dark-mode .bg-white { background: #3b2d5e !important; color: #e9d5ff !important; }
         body.dark-mode .bg-light { background: #2d2048 !important; }
         .navbar .bi { font-size: 0.85rem; }

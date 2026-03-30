@@ -16,6 +16,10 @@
         body.dark-mode .navbar { background: #13011f !important; }
         body.dark-mode .bg-light { background: #2d2048 !important; }
         body.dark-mode .text-muted { color: #c4b5fd !important; }
+        body.dark-mode .text-dark { color: #e9d5ff !important; }
+        body.dark-mode .text-purple { color: #c4b5fd !important; }
+        body.dark-mode h4, body.dark-mode h6 { color: #e9d5ff !important; }
+        body.dark-mode .step.active .icon { box-shadow: 0 0 0 5px #2d2048, 0 4px 12px rgba(16, 185, 129, 0.3) !important; }
         body.dark-mode .step .icon { background: #2d2048; box-shadow: 0 0 0 5px #2d2048; }
         .bg-purple { background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%) !important; }
         .btn-purple { background: var(--primary); color: white; border: none; transition: all 0.3s ease; }

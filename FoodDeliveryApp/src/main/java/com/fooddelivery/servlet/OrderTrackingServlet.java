@@ -20,6 +20,11 @@ public class OrderTrackingServlet extends HttpServlet {
         String current = order.getStatus();
         String next = current;
         if ("Preparing".equals(current)) {
+            try {
+                Thread.sleep(2000); // Wait 2 seconds before marking as ready
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
             next = "Food Ready";
         } else if ("Food Ready".equals(current)) {
             next = "Out for Delivery";

@@ -12,8 +12,12 @@
         body.dark-mode { background: #1a1625 !important; color: #e9d5ff !important; }
         body.dark-mode .card { background: #2d2048 !important; color: #e9d5ff; border: none; }
         body.dark-mode .navbar { background: #13011f !important; }
-        body.dark-mode .form-check { background: #2d2048; border-color: #5b3f8c !important; color: #e9d5ff; }
         body.dark-mode .text-muted { color: #c4b5fd !important; }
+        body.dark-mode .text-dark { color: #e9d5ff !important; }
+        body.dark-mode .text-purple { color: #c4b5fd !important; }
+        body.dark-mode h4 { color: #e9d5ff !important; }
+        body.dark-mode #cardDetails { background: #3b2d5e !important; border-color: #5b3f8c !important; }
+        body.dark-mode .form-control { background: #1a1625 !important; color: #e9d5ff !important; }
         .bg-purple { background: var(--primary) !important; }
         .btn-purple { background: var(--primary); color: white; border: none; }
         .btn-purple:hover { background: var(--primary-dark); color: white; }

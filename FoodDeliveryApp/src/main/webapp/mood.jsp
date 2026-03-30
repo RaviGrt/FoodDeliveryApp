@@ -20,6 +20,10 @@
         body.dark-mode .navbar { background: #13011f !important; }
         body.dark-mode .form-select, body.dark-mode .form-control { background: #3b2d5e !important; color: #e9d5ff !important; border: 1px solid #5b3f8c; }
         body.dark-mode .text-muted { color: #c4b5fd !important; }
+        body.dark-mode .text-dark { color: #e9d5ff !important; }
+        body.dark-mode .text-purple { color: #c4b5fd !important; }
+        body.dark-mode h2, body.dark-mode h4, body.dark-mode h5 { color: #e9d5ff !important; }
+        body.dark-mode .form-label { color: #c4b5fd !important; }
         .bg-purple { background: var(--primary) !important; }
         .btn-purple { background: var(--primary); color: white; border: none; }
         .btn-purple:hover { background: var(--primary-hover); color: white; }
