@@ -17,21 +17,42 @@
         body.dark-mode .bg-light { background: #2d2048 !important; }
         body.dark-mode .text-muted { color: #c4b5fd !important; }
         body.dark-mode .step .icon { background: #2d2048; box-shadow: 0 0 0 5px #2d2048; }
-        .bg-purple { background: var(--primary) !important; }
-        .btn-purple { background: var(--primary); color: white; border: none; }
-        .btn-purple:hover { background: var(--primary-dark); color: white; }
+        .bg-purple { background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%) !important; }
+        .btn-purple { background: var(--primary); color: white; border: none; transition: all 0.3s ease; }
+        .btn-purple:hover { background: var(--primary-dark); color: white; transform: translateY(-2px); box-shadow: 0 4px 12px rgba(139, 92, 246, 0.3); }
         .btn-outline-purple { color: var(--primary); border: 2px solid var(--primary); background: transparent; }
         .btn-outline-purple:hover { background: var(--primary); color: white; }
         .text-purple { color: var(--primary) !important; }
         .dark-toggle { background: none; border: none; color: white; font-size: 1.3rem; cursor: pointer; }
         .step { position: relative; padding-left: 2.5rem; border-left: 3px solid #dee2e6; padding-bottom: 2.5rem; }
         .step:last-child { border-left: none; padding-bottom: 0; }
-        .step .icon { position: absolute; left: -16px; top: -5px; background: white; width: 30px; height: 30px; border-radius: 50%; box-shadow: 0 0 0 5px white; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; }
-        .step.active { border-left-color: #198754; }
-        .step.active .icon { color: #198754; background: #e8f5e9; }
-        .step.inactive .icon { color: #adb5bd; background: #f8f9fa; }
+        .step .icon { 
+            position: absolute; 
+            left: -16px; 
+            top: -5px; 
+            background: white; 
+            width: 35px; 
+            height: 35px; 
+            border-radius: 50%; 
+            box-shadow: 0 0 0 5px white; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            font-size: 1.3rem;
+            transition: all 0.3s ease;
+        }
+        .step.active { border-left-color: #10b981; }
+        .step.active .icon { 
+            color: white; 
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            box-shadow: 0 0 0 5px white, 0 4px 12px rgba(16, 185, 129, 0.3);
+            transform: scale(1.1);
+        }
+        .step.inactive .icon { 
+            color: #cbd5e1; 
+            background: #f1f5f9;
+        }
         .order-header { background: linear-gradient(135deg, #8b5cf6 0%, #a78bfa 100%); }
-        .navbar .bi { font-size: 0.85rem; }
         
         /* Navbar Icon Box Style */
         .nav-icon-link {
@@ -57,6 +78,15 @@
         .logout-box { background: rgba(255, 255, 255, 0.1); }
         .dark-toggle { width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; background: rgba(255, 255, 255, 0.1); border-radius: 12px; border: 1px solid rgba(255, 255, 255, 0.1); transition: 0.2s; color: white; }
         .dark-toggle:hover { background: rgba(255, 255, 255, 0.25); transform: translateY(-2px); }
+        
+        @keyframes slideInFromLeft {
+            from { opacity: 0; transform: translateX(-20px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        .step { animation: slideInFromLeft 0.5s ease-out; }
+        .step:nth-child(2) { animation-delay: 0.1s; }
+        .step:nth-child(3) { animation-delay: 0.2s; }
+        .step:nth-child(4) { animation-delay: 0.3s; }
     </style>
     <c:if test="${not empty order and order.status != 'Delivered'}">
         <meta http-equiv="refresh" content="5">
@@ -65,12 +95,11 @@
 <body class="pb-5">
 <nav class="navbar navbar-expand-lg navbar-dark bg-purple shadow-sm mb-4">
     <div class="container-fluid px-4">
-        <a class="navbar-brand fw-bold" href="HomeServlet"><i class="bi bi-basket-fill text-warning"></i> Urban Eats</a>
+        <a class="navbar-brand fw-bold" href="HomeServlet"><i class="bi bi-basket-fill text-warning me-2"></i>Urban Eats</a>
         <div class="ms-auto d-flex align-items-center gap-2">
             <a href="HomeServlet" class="nav-icon-link" title="Home"><i class="bi bi-house-door-fill"></i></a>
             <a href="MoodSuggestServlet" class="nav-icon-link" title="Mood Suggest"><i class="bi bi-stars"></i></a>
             <a href="CartServlet" class="nav-icon-link" title="My Cart"><i class="bi bi-cart3"></i></a>
-            <!-- Hidden Orders Icon -->
             <a href="ProfileServlet" class="nav-icon-link" title="My Profile"><i class="bi bi-person-circle"></i></a>
             <button class="dark-toggle mx-1" id="darkToggle" title="Toggle dark mode"><i class="bi bi-moon-stars-fill"></i></button>
             <a href="login.jsp" class="nav-icon-link logout-box shadow-sm ms-2" title="Logout"><i class="bi bi-box-arrow-right"></i></a>
@@ -85,36 +114,36 @@
                 <div class="col-md-7 col-lg-6">
                     <div class="card border-0 shadow-sm rounded-4 overflow-hidden mb-4">
                         <div class="order-header p-4 text-white text-center">
-                            <h4 class="fw-bold mb-1">Order #${order.orderId}</h4>
-                            <p class="mb-0 opacity-75 small"><i class="bi bi-clock"></i> Placed on <fmt:formatDate value="${order.createdAt}" pattern="dd MMM yyyy, hh:mm a" /></p>
+                            <h4 class="fw-bold mb-1"><i class="bi bi-bag-check me-2"></i>Order #${order.orderId}</h4>
+                            <p class="mb-0 opacity-75 small"><i class="bi bi-calendar3"></i> Placed on <fmt:formatDate value="${order.createdAt}" pattern="dd MMM yyyy, hh:mm a" /></p>
                         </div>
                         <div class="card-body p-5">
-                            <h5 class="fw-bold mb-5 d-flex align-items-center"><i class="bi bi-activity text-purple me-2 fs-4"></i> Live Tracking</h5>
+                            <h5 class="fw-bold mb-5"><i class="bi bi-geo-alt-fill text-purple me-2"></i>Live Tracking</h5>
                             <c:set var="st" value="${order.status}" />
                             <div class="step ${st == 'Preparing' || st == 'Food Ready' || st == 'Out for Delivery' || st == 'Delivered' ? 'active' : 'inactive'}">
                                 <div class="icon"><i class="bi bi-check-lg"></i></div>
                                 <h6 class="fw-bold mb-1">Order Confirmed</h6>
-                                <p class="text-muted small mb-0">Your food is being prepared.</p>
+                                <p class="text-muted small mb-0"><i class="bi bi-hourglass-split me-1"></i>Your food is being prepared.</p>
                             </div>
                             <div class="step ${st == 'Food Ready' || st == 'Out for Delivery' || st == 'Delivered' ? 'active' : 'inactive'}">
                                 <div class="icon"><i class="bi bi-box-seam"></i></div>
                                 <h6 class="fw-bold mb-1">Food Ready</h6>
-                                <p class="text-muted small mb-0">Food is packed and ready for pickup.</p>
+                                <p class="text-muted small mb-0"><i class="bi bi-check-circle me-1"></i>Food is packed and ready for pickup.</p>
                             </div>
                             <div class="step ${st == 'Out for Delivery' || st == 'Delivered' ? 'active' : 'inactive'}">
                                 <div class="icon"><i class="bi bi-bicycle"></i></div>
                                 <h6 class="fw-bold mb-1">Out for Delivery</h6>
-                                <p class="text-muted small mb-0">Delivery partner is on the way.</p>
+                                <p class="text-muted small mb-0"><i class="bi bi-pin-map me-1"></i>Delivery partner is on the way.</p>
                             </div>
                             <div class="step ${st == 'Delivered' ? 'active' : 'inactive'}" style="border: none;">
                                 <div class="icon"><i class="bi bi-house-check"></i></div>
                                 <h6 class="fw-bold mb-1">Delivered</h6>
-                                <p class="text-muted small mb-0">Enjoy your meal!</p>
+                                <p class="text-muted small mb-0"><i class="bi bi-hand-thumbs-up me-1"></i>Enjoy your meal!</p>
                             </div>
                         </div>
                         <div class="bg-light p-4 border-top">
                             <div class="d-flex justify-content-between align-items-center">
-                                <span class="text-muted fw-bold">Paid via ${order.paymentMethod}</span>
+                                <span class="text-muted small fw-bold"><i class="bi bi-credit-card me-1"></i>Paid via ${order.paymentMethod}</span>
                                 <span class="fw-bold fs-4 text-purple">₹${order.totalAmount}</span>
                             </div>
                         </div>
@@ -124,28 +153,32 @@
         </c:when>
         <c:otherwise>
             <div class="d-flex justify-content-between align-items-end mb-4">
-                <h3 class="fw-bold mb-0">My Orders</h3>
+                <h3 class="fw-bold mb-0"><i class="bi bi-clock-history me-2 text-purple"></i>My Orders</h3>
             </div>
             <div class="row">
                 <c:forEach var="o" items="${orders}">
                     <div class="col-md-6 mb-4">
-                        <div class="card border-0 shadow-sm rounded-4 h-100">
+                        <div class="card border-0 shadow-sm rounded-4 h-100 transition-all">
                             <div class="card-body p-4">
                                 <div class="d-flex justify-content-between mb-3 border-bottom pb-3">
                                     <div>
-                                        <h5 class="fw-bold mb-1">Order #${o.orderId}</h5>
-                                        <p class="text-muted small mb-0"><i class="bi bi-calendar3"></i> <fmt:formatDate value="${o.createdAt}" pattern="dd MMM yyyy, hh:mm a" /></p>
+                                        <h5 class="fw-bold mb-1"><i class="bi bi-receipt me-2 text-primary"></i>Order #${o.orderId}</h5>
+                                        <p class="text-muted small mb-0"><i class="bi bi-calendar3 me-1"></i><fmt:formatDate value="${o.createdAt}" pattern="dd MMM yyyy, hh:mm a" /></p>
                                     </div>
                                     <div class="text-end">
-                                        <span class="badge ${o.status == 'Delivered' ? 'bg-success' : 'bg-warning text-dark'} px-3 py-2 rounded-pill shadow-sm">${o.status}</span>
+                                        <span class="badge ${o.status == 'Delivered' ? 'bg-success' : o.status == 'Out for Delivery' ? 'bg-warning text-dark' : 'bg-info text-white'} px-3 py-2 rounded-pill shadow-sm">
+                                            <i class="bi bi-circle-fill me-1" style="font-size: 0.5rem;"></i>${o.status}
+                                        </span>
                                     </div>
                                 </div>
                                 <div class="d-flex justify-content-between align-items-center mt-3">
                                     <div>
-                                        <p class="text-muted small mb-0">Total Amount</p>
+                                        <p class="text-muted small mb-0"><i class="bi bi-cash me-1"></i>Total Amount</p>
                                         <p class="fw-bold fs-5 mb-0 text-purple">₹${o.totalAmount}</p>
                                     </div>
-                                    <a href="OrderTrackingServlet?id=${o.orderId}" class="btn btn-outline-purple btn-sm rounded-pill fw-bold px-4 py-2 mt-2">Track &amp; Details</a>
+                                    <a href="OrderTrackingServlet?id=${o.orderId}" class="btn btn-outline-purple btn-sm rounded-pill fw-bold px-4 py-2">
+                                        <i class="bi bi-arrow-right me-1"></i>Details
+                                    </a>
                                 </div>
                             </div>
                         </div>
@@ -153,10 +186,12 @@
                 </c:forEach>
                 <c:if test="${empty orders}">
                     <div class="col-12 text-center my-5 py-5 bg-white rounded-4 shadow-sm border-0">
-                        <i class="bi bi-receipt text-muted fs-1 d-block mb-3"></i>
+                        <i class="bi bi-inbox text-muted fs-1 d-block mb-3"></i>
                         <h4 class="fw-bold text-muted">No past orders found.</h4>
                         <p class="text-muted">Looks like you haven't placed an order yet.</p>
-                        <a href="HomeServlet" class="btn btn-purple btn-lg rounded-pill px-5 mt-3 fw-bold">Start Ordering</a>
+                        <a href="HomeServlet" class="btn btn-purple btn-lg rounded-pill px-5 mt-3 fw-bold">
+                            <i class="bi bi-shop me-2"></i>Start Ordering
+                        </a>
                     </div>
                 </c:if>
             </div>

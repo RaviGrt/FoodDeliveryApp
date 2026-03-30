@@ -104,7 +104,7 @@
 <body>
 <nav class="navbar navbar-expand-lg navbar-dark bg-purple shadow-sm">
     <div class="container-fluid px-4">
-        <a class="navbar-brand fw-bold" href="HomeServlet"><i class="bi bi-basket-fill text-warning"></i> Urban Eats</a>
+        <a class="navbar-brand fw-bold" href="HomeServlet"><i class="bi bi-basket-fill text-warning me-2"></i>Urban Eats</a>
         <div class="ms-auto d-flex align-items-center gap-2">
             <a href="HomeServlet" class="nav-icon-link" title="Home"><i class="bi bi-house-door-fill"></i></a>
             <a href="MoodSuggestServlet" class="nav-icon-link" title="Mood Suggest"><i class="bi bi-stars"></i></a>
@@ -120,56 +120,64 @@
 <div class="container mt-4">
     <div class="card shadow-sm border-0 mb-4 rounded-4 overflow-hidden">
         <div class="rest-header p-4 text-white">
-            <div class="d-flex justify-content-between align-items-center mb-1">
-                <h2 class="fw-bold mb-0">${restaurant.name}</h2>
-                <span class="badge bg-success fs-6"><i class="bi bi-star-fill"></i> ${restaurant.rating}</span>
+            <div class="d-flex justify-content-between align-items-center mb-2">
+                <h2 class="fw-bold mb-0"><i class="bi bi-shop me-2"></i>${restaurant.name}</h2>
+                <span class="badge bg-success fs-6 px-3 py-2"><i class="bi bi-star-fill me-1"></i>${restaurant.rating}</span>
             </div>
-            <p class="opacity-75 mb-0 fs-5"><i class="bi bi-geo-alt"></i> ${restaurant.city} &nbsp;|&nbsp; <i class="bi bi-clock"></i> ${restaurant.deliveryTime} mins</p>
+            <p class="opacity-85 mb-0 fs-5">
+                <i class="bi bi-geo-alt"></i> ${restaurant.city}
+                <span class="mx-2 opacity-75">•</span>
+                <i class="bi bi-bicycle me-1"></i>${restaurant.deliveryTime} mins
+            </p>
         </div>
         <c:if test="${not empty restaurant.offers}">
-            <div class="px-4 py-3 offer-badge fw-bold"><i class="bi bi-tag-fill"></i> ${restaurant.offers}</div>
+            <div class="px-4 py-3 offer-badge fw-bold">
+                <i class="bi bi-tag-fill me-2"></i>${restaurant.offers}
+            </div>
         </c:if>
     </div>
 
-    <div class="d-flex justify-content-between align-items-center mb-3">
-        <h4 class="fw-bold mb-0">Order Online</h4>
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h4 class="fw-bold mb-0"><i class="bi bi-menu-button-wide me-2 text-purple"></i>Order Online</h4>
         <div class="pe-2">
             <label class="veg-switch">
                 <input type="checkbox" id="vegToggleMenu">
                 <span class="veg-slider"></span>
-                <span class="veg-label">Veg Only</span>
+                <span class="veg-label"><i class="bi bi-leaf me-1"></i>Veg Only</span>
             </label>
         </div>
     </div>
     <div class="list-group shadow-sm border-0 mb-5 rounded-4 overflow-hidden">
         <c:forEach var="item" items="${menu}">
             <div class="list-group-item p-4 border-0 border-bottom menu-item" data-is-veg="${item.isVeg()}">
-                <div class="d-flex justify-content-between align-items-center">
-                    <div>
-                        <h5 class="mb-1 fw-bold">
-                            <i class="bi bi-stop-circle${item.veg ? '-fill text-success' : ' text-danger'}"></i> ${item.name}
+                <div class="d-flex justify-content-between align-items-start gap-3">
+                    <div style="flex: 1;">
+                        <h5 class="mb-2 fw-bold">
+                            <i class="bi bi-stop-circle-fill me-2" style="color: ${item.veg ? '#10b981' : '#ef4444'};"></i>${item.name}
                         </h5>
-                        <p class="mb-2 fw-bold fs-5 text-purple">₹${item.price}</p>
+                        <p class="mb-2 fw-bold fs-5 text-purple" style="color: var(--primary); font-size: 1.1rem;">₹${item.price}</p>
                         <p class="mb-0 text-muted small pe-4">${item.description}</p>
                     </div>
-                    <form action="CartServlet" method="post" class="d-flex flex-column align-items-end" style="width: 120px;">
+                    <form action="CartServlet" method="post" class="d-flex flex-column align-items-end" style="width: 130px;">
                         <input type="hidden" name="action" value="add">
                         <input type="hidden" name="itemId" value="${item.itemId}">
                         <input type="hidden" name="restaurantId" value="${restaurant.restaurantId}">
-                        <div class="input-group mb-2 shadow-sm rounded-pill overflow-hidden">
-                            <button class="btn btn-light border-0 px-2" type="button" onclick="this.nextElementSibling.stepDown()">-</button>
-                            <input type="number" name="quantity" value="1" min="1" max="99" class="form-control text-center border-0 bg-light px-0" style="min-width: 40px;" readonly>
-                            <button class="btn btn-light border-0 px-2" type="button" onclick="this.previousElementSibling.stepUp()">+</button>
+                        <div class="input-group mb-3 shadow-sm rounded-pill overflow-hidden" style="background: white; border: 1px solid #e5e7eb;">
+                            <button class="btn btn-light border-0 px-3 py-1" type="button" onclick="this.nextElementSibling.stepDown()" style="background: #f3f4f6; color: var(--primary); font-weight: bold;">−</button>
+                            <input type="number" name="quantity" value="1" min="1" max="99" class="form-control text-center border-0 bg-white px-0" style="min-width: 50px; font-weight: bold;" readonly>
+                            <button class="btn btn-light border-0 px-3 py-1" type="button" onclick="this.previousElementSibling.stepUp()" style="background: #f3f4f6; color: var(--primary); font-weight: bold;">+</button>
                         </div>
-                        <button type="submit" class="btn btn-outline-purple btn-sm w-100 fw-bold rounded-pill">ADD</button>
+                        <button type="submit" class="btn btn-purple btn-sm w-100 fw-bold rounded-pill px-2 py-2" style="background: var(--primary); transition: all 0.3s ease;">
+                            <i class="bi bi-plus-circle me-1"></i>ADD
+                        </button>
                     </form>
                 </div>
             </div>
         </c:forEach>
         <c:if test="${empty menu}">
             <div class="p-5 text-center text-muted">
-                <i class="bi bi-journal-x fs-1 mb-2"></i>
-                <p>Menu is currently unavailable.</p>
+                <i class="bi bi-journal-x fs-1 mb-2 d-block"></i>
+                <p class="fw-bold">Menu is currently unavailable.</p>
             </div>
         </c:if>
     </div>
@@ -178,16 +186,23 @@
 <!-- Floating Cart Bar -->
 <div id="floatingCartBar">
     <div class="cart-info">
-        <i class="bi bi-bag-check-fill fs-4"></i>
+        <i class="bi bi-bag-check-fill fs-4" style="animation: bounce 0.6s infinite;"></i>
         <div>
             <span id="cartItemCount" class="fw-bold fs-5">0</span>
-            <span class="small opacity-75 d-block">Items in your cart</span>
+            <span class="small opacity-75 d-block" style="font-size: 0.75rem;">Items added</span>
         </div>
     </div>
-    <a href="CartServlet" class="btn-view-cart text-uppercase">
+    <a href="CartServlet" class="btn-view-cart text-uppercase" style="border-radius: 12px;">
         View Cart <i class="bi bi-arrow-right ms-1"></i>
     </a>
 </div>
+
+<style>
+@keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-4px); }
+}
+</style>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <script>

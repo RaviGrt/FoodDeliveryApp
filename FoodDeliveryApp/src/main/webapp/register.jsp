@@ -28,28 +28,43 @@
                 <h2 class="fw-bold text-purple"><i class="bi bi-basket-fill text-warning"></i> Urban Eats</h2>
                 <p class="text-muted">Premium Food Delivery</p>
             </div>
-            <% String err = request.getParameter("error"); if (err != null) { %>
-                <div class="alert alert-danger border-0 shadow-sm"><%= err %></div>
+            <% 
+                String err = request.getParameter("error"); 
+                String msg = request.getParameter("msg");
+                String phone = request.getParameter("phone");
+                if (msg != null) { 
+            %>
+                <div class="alert alert-info border-0 shadow-sm" style="background: #f0f9ff; color: #0369a1; border-left: 4px solid #0369a1;">
+                    <strong>New User?</strong> <%= msg %>
+                </div>
+            <% } %>
+            <% if (err != null) { %>
+                <div class="alert alert-danger border-0 shadow-sm" style="background: #fef2f2; color: #b91c1c; border-left: 4px solid #b91c1c;">
+                    Error: <%= err %>
+                </div>
             <% } %>
             <div class="card p-4 shadow-sm border-0 rounded-4">
-                <h4 class="mb-4 fw-bold">Create Account</h4>
+                <h4 class="mb-1 fw-bold">Create Account</h4>
+                <p class="text-muted small mb-4">Join Urban Eats and start exploring delicious food</p>
                 <form action="RegisterServlet" method="post">
                     <div class="mb-3">
                         <label class="form-label text-muted small fw-bold">Full Name</label>
-                        <input type="text" id="regName" name="name" class="form-control bg-light border-0" required placeholder="Letters only">
+                        <input type="text" id="regName" name="name" class="form-control bg-light border-0" required placeholder="">
                     </div>
                     <div class="mb-3">
                         <label class="form-label text-muted small fw-bold">Email</label>
-                        <input type="email" id="regEmail" name="email" class="form-control bg-light border-0" required placeholder="name@domain.com">
+                        <input type="email" id="regEmail" name="email" class="form-control bg-light border-0" required placeholder="">
                     </div>
                     <div class="mb-3">
                         <label class="form-label text-muted small fw-bold">Password</label>
-                        <input type="password" id="regPassword" name="password" class="form-control bg-light border-0" required placeholder="Min 6 characters">
+                        <input type="password" id="regPassword" name="password" class="form-control bg-light border-0" required placeholder="">
                     </div>
                     <div class="mb-4">
                         <label class="form-label text-muted small fw-bold">Phone Number</label>
-                        <input type="text" id="regPhone" name="phone" class="form-control bg-light border-0" required maxlength="10"
-                               value="<%= request.getParameter("phone") != null ? request.getParameter("phone") : "" %>">
+                        <input type="text" id="regPhone" name="phone" class="form-control bg-light border-0" required maxlength="10" inputmode="numeric"
+                               value="<%= request.getParameter("phone") != null ? request.getParameter("phone") : "" %>"
+                               placeholder="">
+                        <small class="text-muted d-block mt-2">Enter your 10-digit mobile number</small>
                     </div>
                     <button type="submit" class="btn btn-purple btn-lg w-100 fw-bold rounded-pill">Register</button>
                 </form>
@@ -74,6 +89,20 @@
         toggleBtn.innerHTML = isDark ? '<i class="bi bi-sun-fill"></i>' : '<i class="bi bi-moon-stars-fill"></i>';
     });
 
+    // Phone input filtering - Only allow digits
+    const regPhone = document.getElementById('regPhone');
+    if (regPhone) {
+        regPhone.addEventListener('input', function() {
+            this.value = this.value.replace(/\D/g, '').slice(0, 10);
+        });
+        
+        regPhone.addEventListener('keypress', function(e) {
+            if (!/[0-9]/.test(e.key) && e.key !== 'Backspace' && e.key !== 'Delete') {
+                e.preventDefault();
+            }
+        });
+    }
+
     // Form Validation for Registration
     document.querySelector('form').addEventListener('submit', function(e) {
         const phone = document.getElementById('regPhone').value.trim();
@@ -82,8 +111,8 @@
         const password = document.getElementById('regPassword').value;
         
         const phoneRegex = /^[0-9]{10}$/;
-        const nameRegex = /^[A-Za-z\s]{2,50}$/;
-        const emailRegex = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,6}$/;
+        const nameRegex = /^(?=.*[A-Za-z])[A-Za-z\s]{2,50}$/;
+        const emailRegex = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,6}$/;;
         
         if (!phoneRegex.test(phone)) {
             e.preventDefault();
@@ -93,7 +122,7 @@
         }
         if (!nameRegex.test(name)) {
             e.preventDefault();
-            alert('Please enter a valid name (letters only).');
+            alert('Name must contain at least one letter (numbers only are not allowed).');
             window.location.href = 'error.jsp?type=invalid_name';
             return;
         }

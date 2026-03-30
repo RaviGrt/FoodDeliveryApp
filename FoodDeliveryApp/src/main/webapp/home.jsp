@@ -39,8 +39,9 @@
         .veg-label { font-weight: 700; font-size: 0.9rem; color: #64748b; }
         .veg-switch input:checked ~ .veg-label { color: #10b981; }
         .navbar .bi { font-size: 0.85rem; }
-        .city-group-title { margin-top: 2rem; margin-bottom: 1.5rem; position: relative; padding-bottom: 0.5rem; border-bottom: 2px solid var(--primary-light); }
+        .city-group-title { margin-top: 2rem; margin-bottom: 1.5rem; position: relative; padding-bottom: 0.5rem; border-bottom: 2px solid var(--primary-light); color: #1e293b; }
         .city-group-title::after { content: ""; position: absolute; bottom: -2px; left: 0; width: 60px; height: 2px; background: var(--primary); }
+        body.dark-mode .city-group-title { color: #e9d5ff !important; border-bottom-color: #5b3f8c; }
         
         /* Navbar Icon Box Style */
         .nav-icon-link {
@@ -143,7 +144,7 @@
         <c:forEach var="r" items="${restaurants}">
             <c:if test="${r.city != lastCity}">
                 <div class="col-12 city-group-title mb-4 restaurant-card-group-header" data-city="${r.city}">
-                    <h3 class="fw-extrabold mb-0 text-dark">
+                    <h3 class="fw-extrabold mb-0">
                         <i class="bi bi-geo-alt-fill text-purple me-2"></i>Restaurants in <c:out value="${r.city}"/>
                     </h3>
                 </div>

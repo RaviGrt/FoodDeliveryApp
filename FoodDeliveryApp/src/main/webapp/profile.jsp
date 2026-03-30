@@ -73,7 +73,6 @@
             <a href="MoodSuggestServlet" class="nav-icon-link" title="Mood Suggest"><i class="bi bi-stars"></i></a>
             <a href="CartServlet" class="nav-icon-link" title="My Cart"><i class="bi bi-cart3"></i></a>
             <a href="OrderTrackingServlet" class="nav-icon-link" title="My Orders"><i class="bi bi-box-seam"></i></a>
-            <!-- Hidden Profile Icon as we are on Profile page -->
             <button class="dark-toggle mx-1" id="darkToggle" title="Toggle dark mode"><i class="bi bi-moon-stars-fill"></i></button>
             <a href="login.jsp" class="nav-icon-link logout-box shadow-sm ms-2" title="Logout"><i class="bi bi-box-arrow-right"></i></a>
         </div>
@@ -100,46 +99,49 @@
             <div class="card overflow-hidden">
                 <div class="bg-purple-gradient" style="height: 120px;"></div>
                 <div class="card-body px-4 px-md-5">
-                    <div class="d-flex flex-column flex-md-row justify-content-between align-items-center align-items-md-end mb-4">
-                        <div class="profile-avatar">
-                            ${user.name.substring(0,1).toUpperCase()}
+                    <div class="d-flex flex-column flex-md-row justify-content-between align-items-center align-items-md-end mb-4 gap-3">
+                        <div class="d-flex align-items-end gap-3">
+                            <div class="profile-avatar">
+                                <i class="bi bi-person-fill"></i>
+                            </div>
+                            <div>
+                                <h2 class="fw-bold mb-1">${user.name}</h2>
+                                <p class="text-muted mb-0"><i class="bi bi-geo-alt-fill text-purple me-1"></i> ${user.city}</p>
+                            </div>
                         </div>
-                        <div class="mt-3 mt-md-0 d-flex gap-2">
-                            <button class="btn btn-purple rounded-pill px-4 py-2 fw-bold" data-bs-toggle="modal" data-bs-target="#editProfileModal">
-                                <i class="bi bi-pencil-square me-2"></i>Edit Profile
-                            </button>
-                        </div>
-                    </div>
-                    
-                    <div class="row align-items-center mb-4">
-                        <div class="col-md-7">
-                            <h2 class="fw-bold mb-1">${user.name}</h2>
-                            <p class="text-muted mb-0"><i class="bi bi-geo-alt-fill text-purple me-1"></i> ${user.city}</p>
-                        </div>
+                        <button class="btn btn-purple rounded-pill px-4 py-2 fw-bold" data-bs-toggle="modal" data-bs-target="#editProfileModal">
+                            <i class="bi bi-pencil-square me-2"></i>Edit Profile
+                        </button>
                     </div>
 
                     <div class="row g-3 mb-5">
-                        <div class="col-md-6">
+                        <div class="col-md-4">
                             <div class="stat-card shadow-sm">
-                                <div class="text-purple fs-3 fw-bold">${totalOrders}</div>
+                                <div class="text-purple fs-3 fw-bold"><i class="bi bi-bag-check me-2"></i>${totalOrders}</div>
                                 <div class="text-muted small fw-bold text-uppercase">Total Orders</div>
                             </div>
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-md-4">
                             <div class="stat-card shadow-sm">
-                                <div class="text-purple fs-3 fw-bold">Gold</div>
+                                <div class="text-primary fs-3 fw-bold"><i class="bi bi-star-fill me-2"></i>Gold</div>
                                 <div class="text-muted small fw-bold text-uppercase">Member Level</div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="stat-card shadow-sm">
+                                <div class="text-success fs-3 fw-bold"><i class="bi bi-heart-fill me-2"></i>45</div>
+                                <div class="text-muted small fw-bold text-uppercase">Favorites</div>
                             </div>
                         </div>
                     </div>
 
                     <div class="row g-4">
                         <div class="col-md-6">
-                            <label class="form-label text-muted small fw-bold text-uppercase">Email Address</label>
+                            <label class="form-label text-muted small fw-bold text-uppercase mb-2"><i class="bi bi-envelope-fill me-2 text-primary"></i>Email Address</label>
                             <div class="fs-6 fw-bold">${user.email}</div>
                         </div>
                         <div class="col-md-6">
-                            <label class="form-label text-muted small fw-bold text-uppercase">Phone Number</label>
+                            <label class="form-label text-muted small fw-bold text-uppercase mb-2"><i class="bi bi-telephone-fill me-2 text-success"></i>Phone Number</label>
                             <div class="fs-6 fw-bold">${user.phone}</div>
                         </div>
                     </div>
@@ -148,28 +150,32 @@
 
             <!-- Recent Orders Section -->
             <div class="mt-5">
-                <div class="d-flex justify-content-between align-items-center mb-3 px-2">
-                    <h4 class="fw-bold mb-0">Recent Orders</h4>
+                <div class="d-flex justify-content-between align-items-center mb-4 px-2">
+                    <h4 class="fw-bold mb-0"><i class="bi bi-clock-history me-2 text-purple"></i>Recent Orders</h4>
                     <a href="OrderTrackingServlet" class="text-purple fw-bold text-decoration-none small">View All <i class="bi bi-arrow-right"></i></a>
                 </div>
                 <div class="row g-3">
                     <c:forEach var="ord" items="${lastOrders}">
                         <div class="col-12">
-                            <div class="order-item p-3 shadow-sm d-flex justify-content-between align-items-center">
+                            <div class="order-item p-4 shadow-sm d-flex justify-content-between align-items-center">
                                 <div>
-                                    <div class="fw-bold">Order #${ord.orderId}</div>
-                                    <div class="text-muted small"><fmt:formatDate value="${ord.createdAt}" pattern="dd MMM yyyy, hh:mm a" /></div>
+                                    <div class="fw-bold fs-6"><i class="bi bi-receipt me-2 text-primary"></i>Order #${ord.orderId}</div>
+                                    <div class="text-muted small"><i class="bi bi-calendar3 me-1"></i><fmt:formatDate value="${ord.createdAt}" pattern="dd MMM yyyy, hh:mm a" /></div>
                                 </div>
                                 <div class="text-end">
-                                    <div class="fw-bold text-purple mb-1">₹${ord.totalAmount}</div>
-                                    <span class="badge ${ord.status == 'Delivered' ? 'bg-success' : 'bg-warning text-dark'} rounded-pill px-3">${ord.status}</span>
+                                    <div class="fw-bold text-purple mb-2" style="font-size: 1.1rem;">₹${ord.totalAmount}</div>
+                                    <span class="badge ${ord.status == 'Delivered' ? 'bg-success' : ord.status == 'Out for Delivery' ? 'bg-warning text-dark' : 'bg-info text-white'} rounded-pill px-3 py-2">
+                                        <i class="bi bi-circle-fill me-1" style="font-size: 0.5rem;"></i>${ord.status}
+                                    </span>
                                 </div>
                             </div>
                         </div>
                     </c:forEach>
                     <c:if test="${empty lastOrders}">
                         <div class="col-12 text-center py-5">
-                            <p class="text-muted">No orders found yet!</p>
+                            <i class="bi bi-inbox fs-1 text-muted mb-3 d-block"></i>
+                            <p class="text-muted fw-bold">No orders found yet!</p>
+                            <a href="HomeServlet" class="btn btn-purple rounded-pill px-4 mt-3 fw-bold">Browse Restaurants</a>
                         </div>
                     </c:if>
                 </div>
@@ -182,33 +188,47 @@
 <div class="modal fade" id="editProfileModal" tabindex="-1">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content border-0 rounded-4 shadow">
-            <div class="modal-header border-0 pb-0">
-                <h5 class="modal-title fw-bold">Update Profile</h5>
+            <div class="modal-header border-0 pb-0 pt-4">
+                <h5 class="modal-title fw-bold"><i class="bi bi-pencil-square text-purple me-2"></i>Update Profile</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
             <form action="ProfileServlet" method="POST" id="profileForm">
                 <div class="modal-body p-4">
                     <div class="mb-3">
-                        <label class="form-label small fw-bold text-muted">FULL NAME</label>
-                        <input type="text" name="name" class="form-control" value="${user.name}" required>
+                        <label class="form-label small fw-bold text-muted"><i class="bi bi-person-fill text-primary me-2"></i>FULL NAME</label>
+                        <div class="input-group mb-2">
+                            <span class="input-group-text border-0 bg-light"><i class="bi bi-person"></i></span>
+                            <input type="text" name="name" class="form-control border-0 bg-light" value="${user.name}" required>
+                        </div>
                     </div>
                     <div class="mb-3">
-                        <label class="form-label small fw-bold text-muted">EMAIL ADDRESS</label>
-                        <input type="email" name="email" class="form-control" value="${user.email}" required>
+                        <label class="form-label small fw-bold text-muted"><i class="bi bi-envelope-fill text-success me-2"></i>EMAIL ADDRESS</label>
+                        <div class="input-group mb-2">
+                            <span class="input-group-text border-0 bg-light"><i class="bi bi-envelope"></i></span>
+                            <input type="email" name="email" class="form-control border-0 bg-light" value="${user.email}" required>
+                        </div>
                     </div>
                     <div class="mb-3">
-                        <label class="form-label small fw-bold text-muted">PHONE NUMBER</label>
-                        <input type="tel" name="phone" class="form-control" value="${user.phone}" pattern="[0-9]{10}" maxlength="10" required>
-                        <div class="form-text small">Must be exactly 10 digits.</div>
+                        <label class="form-label small fw-bold text-muted"><i class="bi bi-telephone-fill text-info me-2"></i>PHONE NUMBER</label>
+                        <div class="input-group mb-2">
+                            <span class="input-group-text border-0 bg-light"><i class="bi bi-telephone"></i></span>
+                            <input type="tel" name="phone" class="form-control border-0 bg-light" value="${user.phone}" pattern="[0-9]{10}" maxlength="10" required>
+                        </div>
+                        <div class="form-text small text-muted">Must be exactly 10 digits.</div>
                     </div>
                     <div class="mb-0">
-                        <label class="form-label small fw-bold text-muted">CITY</label>
-                        <input type="text" name="city" class="form-control" value="${user.city}" required>
+                        <label class="form-label small fw-bold text-muted"><i class="bi bi-geo-alt-fill text-warning me-2"></i>CITY</label>
+                        <div class="input-group mb-2">
+                            <span class="input-group-text border-0 bg-light"><i class="bi bi-geo-alt"></i></span>
+                            <input type="text" name="city" class="form-control border-0 bg-light" value="${user.city}" required>
+                        </div>
                     </div>
                 </div>
-                <div class="modal-footer border-0 pt-0 p-4">
-                    <button type="button" class="btn btn-light rounded-pill px-4 py-2" data-bs-dismiss="modal">Cancel</button>
-                    <button type="submit" class="btn btn-purple rounded-pill px-5 py-2 fw-bold">Save Changes</button>
+                <div class="modal-footer border-0 pt-0 p-4 gap-2">
+                    <button type="button" class="btn btn-light rounded-pill px-4 py-2 fw-bold" data-bs-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-purple rounded-pill px-5 py-2 fw-bold">
+                        <i class="bi bi-check-circle me-2"></i>Save Changes
+                    </button>
                 </div>
             </form>
         </div>

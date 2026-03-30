@@ -18,6 +18,20 @@ public class LoginServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) 
             throws ServletException, IOException {
         String phone = request.getParameter("phone");
+        String checkOnly = request.getParameter("checkOnly");
+        
+        // Handle user existence check from frontend
+        if (checkOnly != null && checkOnly.equals("true")) {
+            response.setContentType("text/plain");
+            User existingUser = userDAO.getUserByPhone(phone);
+            if (existingUser != null) {
+                response.getWriter().print("exists");
+            } else {
+                response.getWriter().print("notfound");
+            }
+            return;
+        }
+        
         String password = request.getParameter("password");
 
         User user = userDAO.login(phone, password);
@@ -30,9 +44,9 @@ public class LoginServlet extends HttpServlet {
             User existingUser = userDAO.getUserByPhone(phone);
             if (existingUser == null) {
                 // Must register if phone does not exist
-                response.sendRedirect("register.jsp?msg=Please+Register");
+                response.sendRedirect("register.jsp?phone=" + phone + "&msg=Please+Register+First");
             } else {
-                response.sendRedirect("login.jsp?error=Invalid+Credentials");
+                response.sendRedirect("login.jsp?error=Invalid+Credentials&phone=" + phone);
             }
         }
     }

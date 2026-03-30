@@ -27,6 +27,14 @@ public class RegisterServlet extends HttpServlet {
             response.sendRedirect("error.jsp?type=invalid_phone");
             return;
         }
+        
+        // Check if phone already exists
+        User existingUser = userDAO.getUserByPhone(phone.trim());
+        if (existingUser != null) {
+            response.sendRedirect("register.jsp?error=Phone+Number+Already+Registered&phone=" + phone);
+            return;
+        }
+        
         // Validation for Email
         if (email == null || !email.trim().matches("^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,6}$")) {
             response.sendRedirect("error.jsp?type=invalid_email");
@@ -47,9 +55,9 @@ public class RegisterServlet extends HttpServlet {
         boolean registered = userDAO.register(user);
 
         if (registered) {
-            response.sendRedirect("login.jsp?msg=Registration+Successful");
+            response.sendRedirect("login.jsp?msg=Registration+Successful.+Please+Login");
         } else {
-            response.sendRedirect("register.jsp?error=Registration+Failed");
+            response.sendRedirect("register.jsp?error=Registration+Failed&phone=" + phone);
         }
     }
 }

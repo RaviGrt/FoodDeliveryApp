@@ -99,18 +99,18 @@
                     <label class="form-label fw-bold text-purple"><i class="bi bi-emoji-smile"></i> Your Mood</label>
                     <select name="mood" class="form-select form-select-lg border-0 bg-light" required id="moodSelect">
                         <option value="" disabled <c:if test="${empty mood}">selected</c:if>>Select a mood...</option>
-                        <option value="Happy"       <c:if test="${mood == 'Happy'}">selected</c:if>>😄 Happy</option>
-                        <option value="Sad"         <c:if test="${mood == 'Sad'}">selected</c:if>>😢 Sad</option>
-                        <option value="Romantic"    <c:if test="${mood == 'Romantic'}">selected</c:if>>😍 Romantic</option>
-                        <option value="Adventurous" <c:if test="${mood == 'Adventurous'}">selected</c:if>>🤠 Adventurous</option>
-                        <option value="Comfort"     <c:if test="${mood == 'Comfort'}">selected</c:if>>🤗 Comfort</option>
+                        <option value="Happy"       <c:if test="${mood == 'Happy'}">selected</c:if>>Happy</option>
+                        <option value="Sad"         <c:if test="${mood == 'Sad'}">selected</c:if>>Sad</option>
+                        <option value="Romantic"    <c:if test="${mood == 'Romantic'}">selected</c:if>>Romantic</option>
+                        <option value="Adventurous" <c:if test="${mood == 'Adventurous'}">selected</c:if>>Adventurous</option>
+                        <option value="Comfort"     <c:if test="${mood == 'Comfort'}">selected</c:if>>Comfort</option>
                     </select>
                 </div>
                 <div class="col-md-4">
                     <label class="form-label fw-bold text-purple"><i class="bi bi-geo-alt-fill"></i> City</label>
                     <select name="city" class="form-select form-select-lg border-0 bg-light" required>
                         <option value="" disabled <c:if test="${empty city}">selected</c:if>>Select city...</option>
-                        <option value="All" <c:if test="${city == 'All'}">selected</c:if>>🌍 All Cities</option>
+                        <option value="All" <c:if test="${city == 'All'}">selected</c:if>>All Cities</option>
                         <c:forEach var="c" items="${allCities}">
                             <option value="${c}" <c:if test="${c == city}">selected</c:if>>${c}</option>
                         </c:forEach>
@@ -120,11 +120,11 @@
                     <label class="form-label fw-bold text-purple"><i class="bi bi-bowl-hot"></i> Cuisine Preference</label>
                     <select name="cuisine" class="form-select form-select-lg border-0 bg-light" required id="cuisineSelect">
                         <option value="" disabled <c:if test="${empty cuisine}">selected</c:if>>Select a cuisine...</option>
-                        <option value="Indian"       <c:if test="${cuisine == 'Indian'}">selected</c:if>>🇮🇳 Indian</option>
-                        <option value="Chinese"      <c:if test="${cuisine == 'Chinese'}">selected</c:if>>🥢 Chinese</option>
-                        <option value="Italian"      <c:if test="${cuisine == 'Italian'}">selected</c:if>>🍝 Italian</option>
-                        <option value="Fast Food"    <c:if test="${cuisine == 'Fast Food'}">selected</c:if>>🍔 Fast Food</option>
-                        <option value="South Indian" <c:if test="${cuisine == 'South Indian'}">selected</c:if>>🥥 South Indian</option>
+                        <option value="Indian"       <c:if test="${cuisine == 'Indian'}">selected</c:if>>Indian</option>
+                        <option value="Chinese"      <c:if test="${cuisine == 'Chinese'}">selected</c:if>>Chinese</option>
+                        <option value="Italian"      <c:if test="${cuisine == 'Italian'}">selected</c:if>>Italian</option>
+                        <option value="Fast Food"    <c:if test="${cuisine == 'Fast Food'}">selected</c:if>>Fast Food</option>
+                        <option value="South Indian" <c:if test="${cuisine == 'South Indian'}">selected</c:if>>South Indian</option>
                     </select>
                 </div>
                 <div class="col-12 text-center mt-2">
