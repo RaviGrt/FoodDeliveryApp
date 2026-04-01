@@ -269,10 +269,7 @@
                     </div>
                 </div>
 
-                <p class="text-center text-secondary small px-3">
-                    Secure login powered by Urban Eats Encryption. <br>
-                    <a href="#" class="link-custom mx-1">Terms</a> · <a href="#" class="link-custom mx-1">Privacy Policy</a>
-                </p>
+
             </div>
         </div>
     </div>

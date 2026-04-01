@@ -66,16 +66,19 @@
 
 <div class="container menu-container">
     <div class="text-center mb-5">
-        <c:choose>
-            <c:when test="${not empty sessionScope.user.profileImage}">
-                <img src="ImageServlet?path=${sessionScope.user.profileImage}" alt="Profile" class="avatar-lg">
-            </c:when>
-            <c:otherwise>
-                <div class="avatar-lg bg-white d-flex align-items-center justify-content-center mx-auto" style="font-size: 3rem; color: var(--primary);">
-                    <i class="bi bi-person-circle"></i>
-                </div>
-            </c:otherwise>
-        </c:choose>
+        <div class="avatar-lg bg-white d-flex align-items-center justify-content-center mx-auto position-relative" style="overflow: hidden;">
+            <c:choose>
+                <c:when test="${not empty sessionScope.user.profileImage and sessionScope.user.profileImage != 'null' and sessionScope.user.profileImage != ''}">
+                    <img src="ImageServlet?path=${sessionScope.user.profileImage}" alt="" 
+                         style="width: 100%; height: 100%; object-fit: cover; position: absolute; top:0; left:0; z-index: 2;"
+                         onerror="this.style.display='none';">
+                    <i class="bi bi-person-fill" style="font-size: 3.5rem; color: var(--primary); z-index: 1;"></i>
+                </c:when>
+                <c:otherwise>
+                    <i class="bi bi-person-fill" style="font-size: 3.5rem; color: var(--primary);"></i>
+                </c:otherwise>
+            </c:choose>
+        </div>
         <h2 class="fw-800 mt-3">${sessionScope.user.name}</h2>
         <p class="text-secondary fw-500">${sessionScope.user.email}</p>
     </div>

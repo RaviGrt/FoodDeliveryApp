@@ -91,16 +91,19 @@
     <div class="card edit-card">
         <div class="text-center">
             <h2 class="fw-800 mb-4" style="font-size: 2.2rem; letter-spacing: -1.5px;">Update Profile</h2>
-            <c:choose>
-                <c:when test="${not empty sessionScope.user.profileImage}">
-                    <img src="ImageServlet?path=${sessionScope.user.profileImage}" alt="Profile" class="avatar-preview">
-                </c:when>
-                <c:otherwise>
-                    <div class="avatar-preview bg-light d-flex align-items-center justify-content-center mx-auto" style="font-size: 3.5rem; color: var(--primary);">
-                        <i class="bi bi-person-circle"></i>
-                    </div>
-                </c:otherwise>
-            </c:choose>
+            <div class="avatar-preview bg-light d-flex align-items-center justify-content-center mx-auto position-relative" style="overflow: hidden;">
+                <c:choose>
+                    <c:when test="${not empty sessionScope.user.profileImage and sessionScope.user.profileImage != 'null' and sessionScope.user.profileImage != ''}">
+                        <img src="ImageServlet?path=${sessionScope.user.profileImage}" alt="" 
+                             style="width: 100%; height: 100%; object-fit: cover; position: absolute; top:0; left:0; z-index: 2;"
+                             onerror="this.style.display='none';">
+                        <i class="bi bi-person-fill" style="font-size: 4.5rem; color: var(--primary); z-index: 1;"></i>
+                    </c:when>
+                    <c:otherwise>
+                        <i class="bi bi-person-fill" style="font-size: 4.5rem; color: var(--primary);"></i>
+                    </c:otherwise>
+                </c:choose>
+            </div>
         </div>
 
         <c:if test="${not empty param.error}">

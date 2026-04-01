@@ -202,9 +202,7 @@
                     </div>
                 </div>
 
-                <p class="text-center text-secondary small mt-4 px-3">
-                    By joining, you agree to our <a href="#" class="link-custom">Terms of Service</a> & <a href="#" class="link-custom">Privacy Policy</a>
-                </p>
+
             </div>
         </div>
     </div>

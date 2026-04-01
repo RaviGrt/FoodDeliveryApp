@@ -13,13 +13,17 @@
             
             <%-- Global Profile Icon with Dropdown --%>
             <div class="profile-dropdown">
-                <div class="nav-icon-link" style="padding: 0; overflow: hidden; border: 2px solid rgba(255,255,255,0.3); width: 60px; height: 60px; min-width: 60px; cursor: pointer;">
+                <div class="nav-icon-link d-flex align-items-center justify-content-center" style="padding: 0; overflow: hidden; border: 2px solid rgba(255,255,255,0.3); width: 60px; height: 60px; min-width: 60px; cursor: pointer; position: relative;">
                     <c:choose>
-                        <c:when test="${not empty sessionScope.user.profileImage}">
-                            <img src="ImageServlet?path=${sessionScope.user.profileImage}" alt="Profile" style="width: 100%; height: 100%; object-fit: cover; aspect-ratio: 1/1;">
+                        <c:when test="${not empty sessionScope.user.profileImage and sessionScope.user.profileImage != 'null' and sessionScope.user.profileImage != ''}">
+                            <img src="ImageServlet?path=${sessionScope.user.profileImage}" 
+                                 alt="" 
+                                 style="width: 100%; height: 100%; object-fit: cover; position: absolute; top:0; left:0; z-index: 2;"
+                                 onerror="this.style.display='none';">
+                            <i class="bi bi-person-fill" style="font-size: 1.6rem; z-index: 1;"></i>
                         </c:when>
                         <c:otherwise>
-                            <i class="bi bi-person-circle"></i>
+                            <i class="bi bi-person-fill" style="font-size: 1.6rem;"></i>
                         </c:otherwise>
                     </c:choose>
                 </div>
