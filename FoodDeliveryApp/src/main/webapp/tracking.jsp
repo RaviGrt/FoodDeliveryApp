@@ -10,78 +10,14 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
     <style>
-        :root {
-            --primary: #8b5cf6;
-            --primary-dark: #7c3aed;
-            --primary-light: #ede9fe;
-            --surface: #ffffff;
-            --surface-light: #f8fafc;
-            --text-primary: #1e293b;
-            --text-secondary: #64748b;
-            --border-color: #e2e8f0;
-            --success: #10b981;
+        .tracking-wrapper {
+            margin-top: 2rem;
+            min-height: calc(100vh - 100px);
+            display: flex;
+            flex-direction: column;
         }
-
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-
-        body {
-            font-family: 'Inter', sans-serif;
-            background: linear-gradient(135deg, #f8fafc 0%, #ede9fe 100%);
-            min-height: 100vh;
-            color: var(--text-primary);
-            transition: all 0.3s ease;
-            font-size: 1.05rem;
-        }
-        body.dark-mode {
-            background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%);
-            color: #e2e8f0;
-        }
-
-        /* ═══ NAVBAR ═══ */
-        .navbar {
-            background: rgba(139, 92, 246, 0.95);
-            backdrop-filter: blur(12px);
-            padding: 0.8rem 0;
-            box-shadow: 0 4px 40px rgba(0, 0, 0, 0.08);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            z-index: 1000;
-        }
-        body.dark-mode .navbar {
-            background: rgba(15, 23, 42, 0.95);
-            border-bottom: 1px solid rgba(139, 92, 246, 0.2);
-        }
-        .navbar-brand { font-size: 1.8rem !important; font-weight: 800 !important; letter-spacing: -1.5px; }
-
-        .nav-icon-link {
-            width: 48px; height: 48px;
-            display: flex; align-items: center; justify-content: center;
-            background: rgba(255, 255, 255, 0.12);
-            border-radius: 16px; color: white !important;
-            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-            text-decoration: none;
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-        }
-        .nav-icon-link i { font-size: 1.25rem; color: white !important; }
-        .nav-icon-link:hover {
-            background: rgba(255, 255, 255, 0.25);
-            transform: translateY(-3px) scale(1.08);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
-        }
-        .dark-toggle {
-            width: 48px; height: 48px; display: flex; align-items: center; justify-content: center;
-            background: rgba(255, 255, 255, 0.12); border: 1px solid rgba(255, 255, 255, 0.15);
-            border-radius: 16px; color: white; cursor: pointer; transition: all 0.3s ease;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-        }
-        .dark-toggle i { font-size: 1.25rem; }
-        .dark-toggle:hover {
-            background: rgba(255, 255, 255, 0.25);
-            transform: translateY(-3px);
-        }
-
-        .container { margin-top: 2.5rem; }
 
         /* ═══ ORDER HEADER CARD ═══ */
         .order-header-card {
@@ -155,6 +91,7 @@
             background: var(--surface);
             box-shadow: 0 15px 50px rgba(0, 0, 0, 0.05);
             padding: 5rem 2.5rem 2.5rem;
+            flex: 1;
         }
         body.dark-mode .timeline-card {
             background: rgba(30, 41, 59, 0.75);
@@ -215,6 +152,9 @@
         .timeline-step.active .step-content {
             opacity: 1;
         }
+        body.dark-mode .timeline-step.active .step-content {
+            opacity: 1;
+        }
 
         .step-title {
             font-weight: 800;
@@ -222,13 +162,15 @@
             margin-bottom: 3px;
             color: var(--text-primary);
         }
-        body.dark-mode .step-title { color: #f1f5f9; }
+        body.dark-mode .step-title { color: #f1f5f9 !important; }
         .step-desc {
             font-weight: 500;
             font-size: 0.9rem;
             color: var(--text-secondary);
             line-height: 1.5;
         }
+        body.dark-mode .step-desc { color: #94a3b8 !important; }
+        body.dark-mode .timeline-step.active .step-desc { color: #cbd5e1 !important; }
 
         /* Current step gets a subtle highlight */
         .timeline-step.current .step-icon {
@@ -380,31 +322,17 @@
         <meta http-equiv="refresh" content="7">
     </c:if>
 </head>
-<body class="pb-5">
+<body class="${sessionScope.theme == 'light' ? 'light-mode' : 'dark-mode'} pb-5">
 
-<nav class="navbar navbar-expand-lg navbar-dark sticky-top">
-    <div class="container-fluid px-4">
-        <a class="navbar-brand" href="HomeServlet">
-            <i class="bi bi-basket-fill text-warning me-2"></i>Urban Eats
-        </a>
-        <div class="ms-auto d-flex align-items-center gap-2">
-            <a href="HomeServlet" class="nav-icon-link" title="Home"><i class="bi bi-house-door-fill"></i></a>
-            <a href="MoodSuggestServlet" class="nav-icon-link" title="AI Suggest"><i class="bi bi-stars"></i></a>
-            <a href="CartServlet" class="nav-icon-link" title="My Cart"><i class="bi bi-cart3"></i></a>
-            <a href="ProfileServlet" class="nav-icon-link" title="My Profile"><i class="bi bi-person-circle"></i></a>
-            <button class="dark-toggle" id="darkToggle" title="Toggle Theme"><i class="bi bi-moon-stars-fill"></i></button>
-            <a href="login.jsp" class="nav-icon-link" style="background:rgba(239,68,68,0.15); border-color:rgba(239,68,68,0.25);" title="Logout"><i class="bi bi-box-arrow-right"></i></a>
-        </div>
-    </div>
-</nav>
+<jsp:include page="header.jsp" />
 
-<div class="container pb-5">
+<div class="container tracking-wrapper pb-5">
     
     <c:choose>
         <c:when test="${not empty order}">
             <c:set var="st" value="${order.status}" />
             <div class="row justify-content-center">
-                <div class="col-lg-7">
+                <div class="col-lg-9">
                     <!-- Order Header -->
                     <div class="order-header-card text-center">
                         <div class="mb-3">
@@ -536,22 +464,7 @@
     </c:choose>
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-<script>
-    const body = document.body;
-    const toggleBtn = document.getElementById('darkToggle');
 
-    if (localStorage.getItem('darkMode') === 'on') {
-        body.classList.add('dark-mode');
-        toggleBtn.innerHTML = '<i class="bi bi-sun-fill"></i>';
-    }
 
-    toggleBtn.addEventListener('click', () => {
-        body.classList.toggle('dark-mode');
-        const isDark = body.classList.contains('dark-mode');
-        localStorage.setItem('darkMode', isDark ? 'on' : 'off');
-        toggleBtn.innerHTML = isDark ? '<i class="bi bi-sun-fill"></i>' : '<i class="bi bi-moon-stars-fill"></i>';
-    });
-</script>
 </body>
 </html>

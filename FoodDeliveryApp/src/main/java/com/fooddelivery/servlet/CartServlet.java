@@ -39,9 +39,10 @@ public class CartServlet extends HttpServlet {
             return;
         }
         
-        // Handle AJAX cart count request (called from restaurant.jsp via GET)
         String action = request.getParameter("action");
         boolean isAjax = "XMLHttpRequest".equals(request.getHeader("X-Requested-With"));
+
+        // AJAX: return cart item count
         if ("count".equals(action) && isAjax) {
             try {
                 User user = (User) session.getAttribute("user");
@@ -55,7 +56,35 @@ public class CartServlet extends HttpServlet {
             }
             return;
         }
+
+        // AJAX: check if adding from a different restaurant would conflict
+        if ("checkConflict".equals(action) && isAjax) {
+            try {
+                User user = (User) session.getAttribute("user");
+                int newResId = Integer.parseInt(request.getParameter("restaurantId"));
+                int existingResId = cartDAO.getRestaurantIdFromCart(user.getUserId());
+                boolean conflict = (existingResId > 0 && existingResId != newResId);
+
+                String existingResName = "";
+                if (conflict) {
+                    RestaurantDAO resDAO = new RestaurantDAO();
+                    Restaurant existingRes = resDAO.getRestaurantById(existingResId);
+                    if (existingRes != null) {
+                        existingResName = existingRes.getName();
+                    }
+                }
+
+                response.setContentType("application/json");
+                response.getWriter().write("{\"status\":\"success\",\"conflict\":" + conflict 
+                    + ",\"existingRestaurantName\":\"" + existingResName.replace("\"", "\\\"") + "\"}");
+            } catch (Exception e) {
+                response.setContentType("application/json");
+                response.getWriter().write("{\"status\":\"success\",\"conflict\":false}");
+            }
+            return;
+        }
         
+        // Default GET: load cart page
         try {
             User user = (User) session.getAttribute("user");
             List<Cart> cartItems = cartDAO.getCartByUser(user.getUserId());
@@ -109,7 +138,6 @@ public class CartServlet extends HttpServlet {
         } catch (Exception e) {
             e.printStackTrace();
             System.err.println("[CartServlet] Error loading cart: " + e.getMessage());
-            // Forward with empty cart - user sees "Your cart is feeling light" 
             request.setAttribute("cartItems", new java.util.ArrayList<>());
             request.setAttribute("menuMap", new HashMap<>());
             request.setAttribute("subtotal", 0.0);
@@ -146,6 +174,36 @@ public class CartServlet extends HttpServlet {
             int itemId = Integer.parseInt(request.getParameter("itemId"));
             int qty = Integer.parseInt(request.getParameter("quantity"));
             int restaurantId = Integer.parseInt(request.getParameter("restaurantId"));
+            boolean forceAdd = "true".equals(request.getParameter("force"));
+            
+            boolean cartCleared = false;
+            int existingResId = cartDAO.getRestaurantIdFromCart(user.getUserId());
+
+            // Restaurant conflict detected
+            if (existingResId > 0 && existingResId != restaurantId) {
+                if (!forceAdd) {
+                    // Not forced — tell the client there's a conflict (for non-AJAX fallback)
+                    if (isAjax) {
+                        String existingResName = "";
+                        RestaurantDAO resDAO = new RestaurantDAO();
+                        Restaurant existingRes = resDAO.getRestaurantById(existingResId);
+                        if (existingRes != null) {
+                            existingResName = existingRes.getName();
+                        }
+                        response.setContentType("application/json");
+                        response.getWriter().write("{\"status\":\"conflict\",\"existingRestaurantName\":\""
+                            + existingResName.replace("\"", "\\\"") + "\"}");
+                        return;
+                    }
+                    // Non-AJAX: redirect back with a conflict flag (graceful degradation)
+                    session.setAttribute("cartConflict", "true");
+                    response.sendRedirect("RestaurantServlet?id=" + restaurantId);
+                    return;
+                }
+                // Force=true: user confirmed — clear the old cart
+                cartDAO.clearCart(user.getUserId());
+                cartCleared = true;
+            }
             
             // Constrain quantity to 1-99
             if (qty < 1) qty = 1;
@@ -155,12 +213,14 @@ public class CartServlet extends HttpServlet {
             cartDAO.addToCart(cart);
             
             if (isAjax) {
-                // Return updated count for the floating bar
                 List<Cart> items = cartDAO.getCartByUser(user.getUserId());
                 int totalCount = items.stream().mapToInt(Cart::getQuantity).sum();
                 response.setContentType("application/json");
-                response.getWriter().write("{\"status\":\"success\",\"cartCount\":" + totalCount + "}");
+                response.getWriter().write("{\"status\":\"success\",\"cartCount\":" + totalCount + ",\"cleared\":" + cartCleared + "}");
             } else {
+                if (cartCleared) {
+                    session.setAttribute("cartClearedMsg", "true");
+                }
                 response.sendRedirect("RestaurantServlet?id=" + restaurantId);
             }
         } else if ("count".equals(action)) {
@@ -174,7 +234,6 @@ public class CartServlet extends HttpServlet {
             cartDAO.updateQuantity(cartId, newQty);
             
             if (isAjax) {
-                // Recalculate everything for JSON response
                 List<Cart> cartItems = cartDAO.getCartByUser(user.getUserId());
                 int resId = cartDAO.getRestaurantIdFromCart(user.getUserId());
                 MenuDAO menuDAO = new MenuDAO();

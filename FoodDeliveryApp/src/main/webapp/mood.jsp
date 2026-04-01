@@ -9,81 +9,8 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
     <style>
-        :root {
-            --primary: #8b5cf6;
-            --primary-dark: #7c3aed;
-            --primary-light: #ede9fe;
-            --primary-hover: #6d28d9;
-            --surface: #ffffff;
-            --surface-light: #f8fafc;
-            --text-primary: #1e293b;
-            --text-secondary: #64748b;
-            --border-color: #e2e8f0;
-        }
-
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-
-        body {
-            font-family: 'Inter', sans-serif;
-            background: linear-gradient(135deg, #f8fafc 0%, #ede9fe 100%);
-            min-height: 100vh;
-            color: var(--text-primary);
-            transition: all 0.3s ease;
-            font-size: 1.05rem;
-        }
-
-        body.dark-mode {
-            background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%);
-            color: #e2e8f0;
-        }
-
-        /* Premium Navbar - Cinematic Scale (Standardized) */
-        .navbar {
-            background: rgba(139, 92, 246, 0.95);
-            backdrop-filter: blur(12px);
-            padding: 1rem 0;
-            box-shadow: 0 4px 40px rgba(0, 0, 0, 0.08);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            z-index: 1000;
-        }
-        body.dark-mode .navbar {
-            background: rgba(15, 23, 42, 0.9);
-            border-bottom: 1px solid rgba(139, 92, 246, 0.2);
-        }
-
-        .nav-icon-link {
-            width: 60px;
-            height: 60px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: rgba(255, 255, 255, 0.12);
-            border-radius: 20px;
-            color: white !important;
-            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-            text-decoration: none;
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-        }
-        .nav-icon-link i { font-size: 1.6rem; }
-
-        .nav-icon-link:hover {
-            background: rgba(255, 255, 255, 0.25);
-            transform: translateY(-5px) scale(1.1);
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
-        }
-
-        .dark-toggle {
-            width: 60px; height: 60px; display: flex; align-items: center; justify-content: center;
-            background: rgba(255, 255, 255, 0.12); border: 1px solid rgba(255, 255, 255, 0.15);
-            border-radius: 20px; color: white; cursor: pointer; transition: all 0.4s ease;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-        }
-
-        .dark-toggle i { font-size: 1.5rem; }
-
-
         .container { margin-top: 3rem; }
 
         /* Mood Hero Section */
@@ -181,23 +108,9 @@
 
     </style>
 </head>
-<body>
+<body class="${sessionScope.theme == 'light' ? 'light-mode' : 'dark-mode'}">
 
-<nav class="navbar navbar-expand-lg navbar-dark sticky-top">
-    <div class="container-fluid px-4">
-        <a class="navbar-brand fw-800 fs-3" href="HomeServlet">
-            <i class="bi bi-basket-fill text-warning me-2"></i>Urban Eats
-        </a>
-        <div class="ms-auto d-flex align-items-center gap-3">
-            <a href="HomeServlet" class="nav-icon-link" title="Home"><i class="bi bi-house-door-fill"></i></a>
-            <a href="CartServlet" class="nav-icon-link" title="My Cart"><i class="bi bi-cart3"></i></a>
-            <a href="OrderTrackingServlet" class="nav-icon-link" title="My Orders"><i class="bi bi-box-seam"></i></a>
-            <a href="ProfileServlet" class="nav-icon-link" title="My Profile"><i class="bi bi-person-circle"></i></a>
-            <button class="dark-toggle" id="darkToggle" title="Toggle Theme"><i class="bi bi-moon-stars-fill"></i></button>
-            <a href="login.jsp" class="nav-icon-link bg-danger bg-opacity-25 border-danger border-opacity-25" title="Logout"><i class="bi bi-box-arrow-right"></i></a>
-        </div>
-    </div>
-</nav>
+<jsp:include page="header.jsp" />
 
 <div class="container pb-5">
     
@@ -242,7 +155,7 @@
                 </div>
                 <div class="col-lg-3">
                     <button type="submit" class="btn btn-purple btn-lg w-100 py-3 rounded-pill">
-                        Curate Suggestions <i class="bi bi-stars ms-2"></i>
+                        Create Suggestion <i class="bi bi-stars ms-2"></i>
                     </button>
                 </div>
             </div>
@@ -286,7 +199,7 @@
                                 </div>
                             </div>
 
-                            <form action="CartServlet" method="post">
+                            <form action="CartServlet" method="post" class="ajax-add-form">
                                 <input type="hidden" name="action" value="add">
                                 <input type="hidden" name="itemId" value="${s.itemId}">
                                 <input type="hidden" name="restaurantId" value="${s.restaurantId}">
@@ -312,21 +225,156 @@
     </c:if>
 </div>
 
+<!-- ═══ RESTAURANT SWITCH CONFIRMATION MODAL ═══ -->
+<div class="modal-overlay" id="switchModal" style="position:fixed;inset:0;background:rgba(0,0,0,0.55);backdrop-filter:blur(8px);z-index:9998;display:none;align-items:center;justify-content:center;">
+    <div style="background:var(--surface,#fff);border-radius:28px;padding:2.5rem;max-width:440px;width:90%;box-shadow:0 30px 80px rgba(0,0,0,0.25);text-align:center;animation:modalPop 0.35s cubic-bezier(0.175,0.885,0.32,1.275);">
+        <div style="width:72px;height:72px;background:linear-gradient(135deg,#fef3c7,#fde68a);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 1.5rem;font-size:2rem;">
+            <i class="bi bi-exclamation-triangle-fill text-warning"></i>
+        </div>
+        <h4 class="fw-800" style="margin-bottom:0.75rem;">Switch Restaurant?</h4>
+        <p style="color:var(--text-secondary,#64748b);font-size:0.95rem;line-height:1.6;margin-bottom:1.75rem;">
+            Your bag contains items from <strong id="existingResName"></strong>. 
+            Adding this item will clear your current bag and start fresh.
+        </p>
+        <div style="display:flex;gap:12px;justify-content:center;">
+            <button id="switchCancel" style="background:var(--surface-light,#f8fafc);border:2px solid var(--border-color,#e2e8f0);color:var(--text-primary,#1e293b);font-weight:700;padding:12px 28px;border-radius:16px;cursor:pointer;transition:all 0.2s ease;font-size:0.95rem;">No, Keep Bag</button>
+            <button id="switchConfirm" style="background:linear-gradient(135deg,#ef4444,#dc2626);color:white;border:none;font-weight:800;padding:12px 28px;border-radius:16px;cursor:pointer;transition:all 0.2s ease;box-shadow:0 6px 20px rgba(239,68,68,0.3);font-size:0.95rem;">
+                <i class="bi bi-arrow-repeat me-1"></i>Yes, Switch
+            </button>
+        </div>
+    </div>
+</div>
+<style>
+    @keyframes modalPop {
+        from { transform: scale(0.85) translateY(30px); opacity: 0; }
+        to   { transform: scale(1) translateY(0); opacity: 1; }
+    }
+    .modal-overlay.show { display: flex !important; }
+    .cart-toast {
+        position: fixed; top: 20px; right: 20px;
+        padding: 16px 28px; border-radius: 16px;
+        font-weight: 700; font-size: 0.95rem;
+        z-index: 9999;
+        box-shadow: 0 12px 35px rgba(0,0,0,0.2);
+        display: flex; align-items: center; gap: 10px;
+        animation: toastSlideIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        transition: opacity 0.4s ease, transform 0.4s ease;
+    }
+    .cart-toast.toast-warning { background: linear-gradient(135deg, #f59e0b, #d97706); color: white; }
+    @keyframes toastSlideIn {
+        from { transform: translateX(120%); opacity: 0; }
+        to   { transform: translateX(0); opacity: 1; }
+    }
+</style>
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <script>
-    const body = document.body;
-    const toggleBtn = document.getElementById('darkToggle');
 
-    if (localStorage.getItem('darkMode') === 'on') {
-        body.classList.add('dark-mode');
-        toggleBtn.innerHTML = '<i class="bi bi-sun-fill"></i>';
-    }
+    document.addEventListener("DOMContentLoaded", function() {
+        // Toast helper
+        function showToast(message, type) {
+            document.querySelectorAll('.cart-toast').forEach(t => t.remove());
+            const toast = document.createElement('div');
+            toast.className = 'cart-toast toast-' + type;
+            toast.innerHTML = '<i class="bi bi-arrow-repeat"></i>' + message;
+            document.body.appendChild(toast);
+            setTimeout(() => {
+                toast.style.opacity = '0';
+                toast.style.transform = 'translateX(120%)';
+                setTimeout(() => toast.remove(), 400);
+            }, 4000);
+        }
 
-    toggleBtn.addEventListener('click', () => {
-        body.classList.toggle('dark-mode');
-        const isDark = body.classList.contains('dark-mode');
-        localStorage.setItem('darkMode', isDark ? 'on' : 'off');
-        toggleBtn.innerHTML = isDark ? '<i class="bi bi-sun-fill"></i>' : '<i class="bi bi-moon-stars-fill"></i>';
+        // Modal handling
+        const switchModal = document.getElementById('switchModal');
+        const switchCancel = document.getElementById('switchCancel');
+        const switchConfirm = document.getElementById('switchConfirm');
+        const existingResNameEl = document.getElementById('existingResName');
+        let pendingFormData = null;
+        let pendingBtn = null;
+
+        function openSwitchModal(name) {
+            existingResNameEl.textContent = name;
+            switchModal.classList.add('show');
+        }
+        function closeSwitchModal() {
+            switchModal.classList.remove('show');
+            if (pendingBtn) { pendingBtn.disabled = false; pendingBtn.style.opacity = '1'; }
+            pendingFormData = null;
+            pendingBtn = null;
+        }
+        switchCancel.addEventListener('click', closeSwitchModal);
+        switchModal.addEventListener('click', function(e) { if (e.target === switchModal) closeSwitchModal(); });
+
+        switchConfirm.addEventListener('click', function() {
+            if (!pendingFormData || !pendingBtn) return;
+            switchModal.classList.remove('show');
+            pendingFormData.append('force', 'true');
+            fetch('CartServlet', {
+                method: 'POST',
+                headers: { 'X-Requested-With': 'XMLHttpRequest', 'Content-Type': 'application/x-www-form-urlencoded' },
+                body: new URLSearchParams(pendingFormData)
+            })
+            .then(res => res.json())
+            .then(data => {
+                if (data.status === 'success') {
+                    showToast('Cart cleared & item added from new restaurant!', 'warning');
+                    const btn = pendingBtn;
+                    const oldText = btn.innerText;
+                    btn.innerText = '✓ Added';
+                    btn.classList.remove('btn-outline-primary');
+                    btn.classList.add('btn-success');
+                    setTimeout(() => {
+                        btn.innerText = oldText;
+                        btn.classList.remove('btn-success');
+                        btn.classList.add('btn-outline-primary');
+                        btn.disabled = false;
+                        btn.style.opacity = '1';
+                    }, 1200);
+                }
+                pendingFormData = null;
+                pendingBtn = null;
+            })
+            .catch(() => { closeSwitchModal(); });
+        });
+
+        // AJAX add with conflict detection
+        document.querySelectorAll('.ajax-add-form').forEach(form => {
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                const btn = this.querySelector('button[type="submit"]');
+                btn.disabled = true;
+                btn.style.opacity = '0.7';
+                const formData = new FormData(this);
+
+                fetch('CartServlet', {
+                    method: 'POST',
+                    headers: { 'X-Requested-With': 'XMLHttpRequest', 'Content-Type': 'application/x-www-form-urlencoded' },
+                    body: new URLSearchParams(formData)
+                })
+                .then(res => res.json())
+                .then(data => {
+                    if (data.status === 'conflict') {
+                        pendingFormData = formData;
+                        pendingBtn = btn;
+                        openSwitchModal(data.existingRestaurantName || 'another restaurant');
+                    } else if (data.status === 'success') {
+                        const oldText = btn.innerText;
+                        btn.innerText = '✓ Added';
+                        btn.classList.remove('btn-outline-primary');
+                        btn.classList.add('btn-success');
+                        setTimeout(() => {
+                            btn.innerText = oldText;
+                            btn.classList.remove('btn-success');
+                            btn.classList.add('btn-outline-primary');
+                            btn.disabled = false;
+                            btn.style.opacity = '1';
+                        }, 1000);
+                    }
+                })
+                .catch(() => { btn.disabled = false; btn.style.opacity = '1'; });
+            });
+        });
     });
 </script>
 </body>

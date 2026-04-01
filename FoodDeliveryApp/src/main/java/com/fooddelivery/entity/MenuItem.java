@@ -7,6 +7,8 @@ public class MenuItem {
     private double price;
     private String description;
     private boolean isVeg;
+    private String category;      // New field for Search
+    private String restaurantName; // New field for Search Results
 
     public MenuItem() {}
 
@@ -17,6 +19,13 @@ public class MenuItem {
         this.price = price;
         this.description = description;
         this.isVeg = isVeg;
+    }
+
+    // Extended constructor for search results
+    public MenuItem(int itemId, int restaurantId, String name, double price, String description, boolean isVeg, String category, String restaurantName) {
+        this(itemId, restaurantId, name, price, description, isVeg);
+        this.category = category;
+        this.restaurantName = restaurantName;
     }
 
     public int getItemId() { return itemId; }
@@ -31,4 +40,8 @@ public class MenuItem {
     public void setDescription(String description) { this.description = description; }
     public boolean isVeg() { return isVeg; }
     public void setVeg(boolean veg) { isVeg = veg; }
+    public String getCategory() { return category; }
+    public void setCategory(String category) { this.category = category; }
+    public String getRestaurantName() { return restaurantName; }
+    public void setRestaurantName(String restaurantName) { this.restaurantName = restaurantName; }
 }

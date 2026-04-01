@@ -42,6 +42,13 @@
             color: #e9d5ff;
         }
 
+        body.dark-mode h1, body.dark-mode h2 { color: #f1f5f9 !important; }
+        body.dark-mode .text-secondary { color: #cbd5e1 !important; }
+        body.dark-mode .bg-light { background: rgba(59, 45, 94, 0.4) !important; color: #e9d5ff !important; border-color: rgba(139, 92, 246, 0.2) !important; }
+        body.dark-mode .text-primary { color: #c4b5fd !important; }
+        body.dark-mode .step { background: rgba(139, 92, 246, 0.15); }
+        body.dark-mode .step.active { background: linear-gradient(90deg, var(--primary) 0%, var(--primary-dark) 100%); }
+
         body.dark-mode .card {
             background: rgba(45, 32, 72, 0.82);
             border: 1px solid rgba(139, 92, 246, 0.2);

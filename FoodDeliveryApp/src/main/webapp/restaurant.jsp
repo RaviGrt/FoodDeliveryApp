@@ -9,85 +9,9 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
     <style>
-        :root {
-            --primary: #8b5cf6;
-            --primary-dark: #7c3aed;
-            --primary-light: #ede9fe;
-            --primary-hover: #6d28d9;
-            --surface: #ffffff;
-            --surface-light: #f8fafc;
-            --text-primary: #1e293b;
-            --text-secondary: #64748b;
-            --border-color: #e2e8f0;
-        }
-
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-
-        body {
-            font-family: 'Inter', sans-serif;
-            background: linear-gradient(135deg, #f8fafc 0%, #ede9fe 100%);
-            min-height: 100vh;
-            color: var(--text-primary);
-            transition: all 0.3s ease;
-            font-size: 1.05rem;
-        }
-
-        body.dark-mode {
-            background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%);
-            color: #e2e8f0;
-        }
-
-        /* Premium Navbar - Cinematic Scale (Standardized) */
-        .navbar {
-            background: rgba(139, 92, 246, 0.95);
-            backdrop-filter: blur(12px);
-            padding: 1rem 0;
-            box-shadow: 0 4px 40px rgba(0, 0, 0, 0.08);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            z-index: 1000;
-        }
-        body.dark-mode .navbar {
-            background: rgba(15, 23, 42, 0.9);
-            border-bottom: 1px solid rgba(139, 92, 246, 0.2);
-        }
-
-        .nav-icon-link {
-            width: 60px;
-            height: 60px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: rgba(255, 255, 255, 0.12);
-            border-radius: 20px;
-            color: white !important;
-            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-            text-decoration: none;
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-        }
-
-        .nav-icon-link i { font-size: 1.6rem; }
-
-        .nav-icon-link:hover {
-            background: rgba(255, 255, 255, 0.25);
-            transform: translateY(-5px) scale(1.1);
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
-        }
-
-        .dark-toggle {
-            width: 60px; height: 60px; display: flex; align-items: center; justify-content: center;
-            background: rgba(255, 255, 255, 0.12); border: 1px solid rgba(255, 255, 255, 0.15);
-            border-radius: 20px; color: white; cursor: pointer; transition: all 0.4s ease;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-        }
-
-        .dark-toggle i { font-size: 1.5rem; }
-
-        .dark-toggle:hover {
-            background: rgba(255, 255, 255, 0.25);
-            transform: translateY(-5px);
-        }
+        /* Restaurant Header Overlay Scale Up */
 
         /* Restaurant Header Overlay Scale Up */
         .rest-header {
@@ -187,9 +111,10 @@
         .qty-widget input[type="number"]::-webkit-outer-spin-button,
         .qty-widget input[type="number"]::-webkit-inner-spin-button {
             -webkit-appearance: none;
+            appearance: none;
             margin: 0;
         }
-        .qty-widget input[type="number"] { -moz-appearance: textfield; }
+        .qty-widget input[type="number"] { -moz-appearance: textfield; appearance: textfield; }
 
 
         /* Veg Switch */
@@ -232,28 +157,124 @@
         body.dark-mode .text-dark { color: #f1f5f9 !important; }
         body.dark-mode h4.text-dark { color: #f1f5f9 !important; }
 
+        /* ═══ RESTAURANT SWITCH CONFIRMATION MODAL ═══ */
+        .modal-overlay {
+            position: fixed; inset: 0;
+            background: rgba(0, 0, 0, 0.55);
+            backdrop-filter: blur(8px);
+            z-index: 9998;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            animation: fadeIn 0.25s ease;
+        }
+        .modal-overlay.show { display: flex; }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to   { opacity: 1; }
+        }
+        @keyframes modalPop {
+            from { transform: scale(0.85) translateY(30px); opacity: 0; }
+            to   { transform: scale(1) translateY(0); opacity: 1; }
+        }
+
+        .switch-modal {
+            background: var(--surface);
+            border-radius: 28px;
+            padding: 2.5rem;
+            max-width: 440px;
+            width: 90%;
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.25);
+            text-align: center;
+            animation: modalPop 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        body.dark-mode .switch-modal {
+            background: #1e293b;
+            border: 1px solid rgba(139, 92, 246, 0.2);
+        }
+
+        .switch-modal .modal-icon {
+            width: 72px; height: 72px;
+            background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            margin: 0 auto 1.5rem;
+            font-size: 2rem;
+        }
+
+        .switch-modal h4 { font-weight: 800; margin-bottom: 0.75rem; }
+        .switch-modal p  { color: var(--text-secondary); font-size: 0.95rem; line-height: 1.6; margin-bottom: 1.75rem; }
+        body.dark-mode .switch-modal p { color: #94a3b8; }
+
+        .switch-modal .btn-row {
+            display: flex; gap: 12px; justify-content: center;
+        }
+        .switch-modal .btn-cancel {
+            background: var(--surface-light);
+            border: 2px solid var(--border-color);
+            color: var(--text-primary);
+            font-weight: 700;
+            padding: 12px 28px;
+            border-radius: 16px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-size: 0.95rem;
+        }
+        body.dark-mode .switch-modal .btn-cancel {
+            background: rgba(255,255,255,0.06);
+            border-color: rgba(139,92,246,0.2);
+            color: #e2e8f0;
+        }
+        .switch-modal .btn-cancel:hover { transform: translateY(-2px); }
+        .switch-modal .btn-confirm {
+            background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+            color: white;
+            border: none;
+            font-weight: 800;
+            padding: 12px 28px;
+            border-radius: 16px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            box-shadow: 0 6px 20px rgba(239, 68, 68, 0.3);
+            font-size: 0.95rem;
+        }
+        .switch-modal .btn-confirm:hover { transform: translateY(-2px); box-shadow: 0 10px 28px rgba(239, 68, 68, 0.45); }
+
+        /* Toast notification */
+        .cart-toast {
+            position: fixed; top: 20px; right: 20px;
+            padding: 16px 28px; border-radius: 16px;
+            font-weight: 700; font-size: 0.95rem;
+            z-index: 9999;
+            box-shadow: 0 12px 35px rgba(0,0,0,0.2);
+            display: flex; align-items: center; gap: 10px;
+            animation: toastSlideIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transition: opacity 0.4s ease, transform 0.4s ease;
+        }
+        .cart-toast.toast-success { background: #10b981; color: white; }
+        .cart-toast.toast-warning { background: linear-gradient(135deg, #f59e0b, #d97706); color: white; }
+        @keyframes toastSlideIn {
+            from { transform: translateX(120%); opacity: 0; }
+            to   { transform: translateX(0); opacity: 1; }
+        }
+
     </style>
 </head>
-<body>
+<body class="${sessionScope.theme == 'light' ? 'light-mode' : 'dark-mode'}">
 
-<nav class="navbar navbar-expand-lg navbar-dark sticky-top">
-    <div class="container-fluid px-4">
-        <a class="navbar-brand fw-800 fs-3" href="HomeServlet">
-            <i class="bi bi-basket-fill text-warning me-2"></i>Urban Eats
-        </a>
-        <div class="ms-auto d-flex align-items-center gap-3">
-            <a href="HomeServlet" class="nav-icon-link" title="Home"><i class="bi bi-house-door-fill"></i></a>
-            <a href="MoodSuggestServlet" class="nav-icon-link" title="AI Suggest"><i class="bi bi-stars"></i></a>
-            <a href="CartServlet" class="nav-icon-link" title="My Cart"><i class="bi bi-cart3"></i></a>
-            <a href="OrderTrackingServlet" class="nav-icon-link" title="My Orders"><i class="bi bi-box-seam"></i></a>
-            <a href="ProfileServlet" class="nav-icon-link" title="My Profile"><i class="bi bi-person-circle"></i></a>
-            <button class="dark-toggle" id="darkToggle" title="Toggle Theme"><i class="bi bi-moon-stars-fill"></i></button>
-            <a href="login.jsp" class="nav-icon-link bg-danger bg-opacity-25 border-danger border-opacity-25" title="Logout"><i class="bi bi-box-arrow-right"></i></a>
-        </div>
-    </div>
-</nav>
+<jsp:include page="header.jsp" />
 
 <div class="container pb-5">
+    
+    <c:if test="${not empty sessionScope.cartClearedMsg}">
+        <div class="alert alert-warning alert-dismissible fade show mt-4" role="alert" style="border-radius: 16px; font-weight: 600; border: none; background: linear-gradient(135deg, #fef3c7, #fde68a); color: #92400e;">
+            <i class="bi bi-arrow-repeat me-2"></i>Your cart was cleared because you switched to a different restaurant. Your new item has been added!
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        <c:remove var="cartClearedMsg" scope="session" />
+    </c:if>
+
     <!-- Header Section -->
     <div class="rest-header mt-5">
         <div class="row align-items-center g-4">
@@ -298,7 +319,7 @@
                     </div>
                     <div class="col-md-7">
                         <h4 class="fw-800 mb-1 text-dark">${item.name}</h4>
-                        <h5 class="fw-800 text-primary mb-3">₹${item.price}</h5>
+                        <h5 class="fw-800 text-primary mb-3">&#8377;${item.price}</h5>
                         <p class="text-secondary small mb-0 pe-md-5">${item.description}</p>
                     </div>
                     <div class="col-md-4 text-md-end">
@@ -348,22 +369,28 @@
     </a>
 </div>
 
+<!-- ═══ RESTAURANT SWITCH CONFIRMATION MODAL ═══ -->
+<div class="modal-overlay" id="switchModal">
+    <div class="switch-modal">
+        <div class="modal-icon">
+            <i class="bi bi-exclamation-triangle-fill text-warning"></i>
+        </div>
+        <h4>Switch Restaurant?</h4>
+        <p id="switchModalMsg">
+            Your bag contains items from <strong id="existingResName"></strong>. 
+            Adding this item will clear your current bag and start fresh.
+        </p>
+        <div class="btn-row">
+            <button class="btn-cancel" id="switchCancel">No, Keep Bag</button>
+            <button class="btn-confirm" id="switchConfirm">
+                <i class="bi bi-arrow-repeat me-1"></i>Yes, Switch
+            </button>
+        </div>
+    </div>
+</div>
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <script>
-    const body = document.body;
-    const toggleBtn = document.getElementById('darkToggle');
-
-    if (localStorage.getItem('darkMode') === 'on') {
-        body.classList.add('dark-mode');
-        toggleBtn.innerHTML = '<i class="bi bi-sun-fill"></i>';
-    }
-
-    toggleBtn.addEventListener('click', () => {
-        body.classList.toggle('dark-mode');
-        const isDark = body.classList.contains('dark-mode');
-        localStorage.setItem('darkMode', isDark ? 'on' : 'off');
-        toggleBtn.innerHTML = isDark ? '<i class="bi bi-sun-fill"></i>' : '<i class="bi bi-moon-stars-fill"></i>';
-    });
 
     document.addEventListener("DOMContentLoaded", function() {
         // Veg Filtering
@@ -390,12 +417,100 @@
             }
         }
 
+        // ═══ TOAST HELPER ═══
+        function showToast(message, type) {
+            // Remove any existing toast
+            document.querySelectorAll('.cart-toast').forEach(t => t.remove());
+
+            const toast = document.createElement('div');
+            toast.className = 'cart-toast toast-' + type;
+            toast.innerHTML = '<i class="bi ' + (type === 'success' ? 'bi-check-circle-fill' : 'bi-arrow-repeat') + '"></i>' + message;
+            document.body.appendChild(toast);
+            setTimeout(() => {
+                toast.style.opacity = '0';
+                toast.style.transform = 'translateX(120%)';
+                setTimeout(() => toast.remove(), 400);
+            }, 4000);
+        }
+
+        // ═══ MODAL HANDLING ═══
+        const switchModal   = document.getElementById('switchModal');
+        const switchCancel  = document.getElementById('switchCancel');
+        const switchConfirm = document.getElementById('switchConfirm');
+        const existingResNameEl = document.getElementById('existingResName');
+        let pendingFormData = null;
+        let pendingBtn      = null;
+
+        function openSwitchModal(existingName) {
+            existingResNameEl.textContent = existingName;
+            switchModal.classList.add('show');
+        }
+
+        function closeSwitchModal() {
+            switchModal.classList.remove('show');
+            if (pendingBtn) {
+                pendingBtn.disabled = false;
+                pendingBtn.style.opacity = '1';
+            }
+            pendingFormData = null;
+            pendingBtn = null;
+        }
+
+        switchCancel.addEventListener('click', closeSwitchModal);
+        switchModal.addEventListener('click', function(e) {
+            if (e.target === switchModal) closeSwitchModal();
+        });
+
+        // User confirmed: force add (clear + add)
+        switchConfirm.addEventListener('click', function() {
+            if (!pendingFormData || !pendingBtn) return;
+            switchModal.classList.remove('show');
+
+            pendingFormData.append('force', 'true');
+
+            fetch('CartServlet', {
+                method: 'POST',
+                headers: { 
+                    'X-Requested-With': 'XMLHttpRequest',
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                body: new URLSearchParams(pendingFormData)
+            })
+            .then(res => res.json())
+            .then(data => {
+                if (data.status === 'success') {
+                    syncCartBar(data.cartCount);
+                    showToast('Cart cleared & item added from new restaurant!', 'warning');
+                    const btn = pendingBtn;
+                    const oldText = btn.innerText;
+                    btn.innerText = 'ADDED';
+                    btn.classList.add('bg-success');
+                    setTimeout(() => {
+                        btn.innerText = oldText;
+                        btn.classList.remove('bg-success');
+                        btn.disabled = false;
+                        btn.style.opacity = '1';
+                    }, 1200);
+                }
+                pendingFormData = null;
+                pendingBtn = null;
+            })
+            .catch(() => {
+                if (pendingBtn) {
+                    pendingBtn.disabled = false;
+                    pendingBtn.style.opacity = '1';
+                }
+                pendingFormData = null;
+                pendingBtn = null;
+            });
+        });
+
         // Initial Sync
         fetch('CartServlet?action=count', { headers: { 'X-Requested-With': 'XMLHttpRequest' }})
         .then(res => res.json())
         .then(data => { if (data.status === 'success') syncCartBar(data.cartCount); });
 
-        // AJAX Add Logic
+        // ═══ AJAX ADD LOGIC WITH CONFLICT DETECTION ═══
         document.querySelectorAll('.ajax-add-form').forEach(form => {
             form.addEventListener('submit', function(e) {
                 e.preventDefault();
@@ -403,17 +518,24 @@
                 btn.disabled = true;
                 btn.style.opacity = '0.7';
 
+                const formData = new FormData(this);
+
                 fetch('CartServlet', {
                     method: 'POST',
                     headers: { 
                         'X-Requested-With': 'XMLHttpRequest',
                         'Content-Type': 'application/x-www-form-urlencoded'
                     },
-                    body: new URLSearchParams(new FormData(this))
+                    body: new URLSearchParams(formData)
                 })
                 .then(res => res.json())
                 .then(data => {
-                    if (data.status === 'success') {
+                    if (data.status === 'conflict') {
+                        // ── Show confirmation modal ──
+                        pendingFormData = formData;
+                        pendingBtn = btn;
+                        openSwitchModal(data.existingRestaurantName || 'another restaurant');
+                    } else if (data.status === 'success') {
                         syncCartBar(data.cartCount);
                         const oldText = btn.innerText;
                         btn.innerText = 'ADDED';

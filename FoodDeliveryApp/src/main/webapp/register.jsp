@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%-- Urban Eats v2.1 - Premium Register --%>
+<%-- Urban Eats v2.2 - Premium Register with Phone Pre-fill --%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -40,6 +40,9 @@
             background: linear-gradient(135deg, #1a1625 0%, #2d1b65 100%);
             color: #e9d5ff;
         }
+
+        body.dark-mode h1, body.dark-mode h2 { color: #f1f5f9 !important; }
+        body.dark-mode .text-secondary { color: #cbd5e1 !important; }
 
         body.dark-mode .card {
             background: rgba(45, 32, 72, 0.82);
@@ -116,10 +119,23 @@
             display: inline-block;
         }
 
+        .link-custom {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 700;
+            transition: all 0.2s ease;
+        }
+        .link-custom:hover { color: var(--primary-dark); text-decoration: underline; }
+
     </style>
 </head>
 <body>
     <button class="dark-toggle-fixed" id="darkToggle" title="Toggle dark mode"><i class="bi bi-moon-stars-fill"></i></button>
+
+    <%
+        String prefillPhone = request.getParameter("phone");
+        if (prefillPhone == null) prefillPhone = "";
+    %>
 
     <div class="container">
         <div class="row justify-content-center align-items-center min-vh-100 py-5">
@@ -136,13 +152,13 @@
                     String msg = request.getParameter("msg");
                     if (msg != null) { 
                 %>
-                    <div class="alert alert-info border-0 d-flex align-items-center mb-4" style="background: #f0f9ff; color: #0369a1;">
-                        <i class="bi bi-info-circle-fill me-3 fs-4"></i>
+                    <div class="alert border-0 d-flex align-items-center mb-4" style="background: linear-gradient(135deg, #f0f9ff, #e0f2fe); color: #0369a1; border-radius: 16px;">
+                        <i class="bi bi-stars me-3 fs-4"></i>
                         <div><strong>Welcome!</strong> <%= msg %></div>
                     </div>
                 <% } %>
                 <% if (err != null) { %>
-                    <div class="alert alert-danger border-0 d-flex align-items-center mb-4" style="background: #fef2f2; color: #b91c1c;">
+                    <div class="alert border-0 d-flex align-items-center mb-4" style="background: linear-gradient(135deg, #fef2f2, #fee2e2); color: #b91c1c; border-radius: 16px;">
                         <i class="bi bi-exclamation-triangle-fill me-3 fs-4"></i>
                         <div><%= err %></div>
                     </div>
@@ -164,11 +180,14 @@
                             </div>
                             <div class="col-md-12 mb-3">
                                 <label class="form-label">Create Password</label>
-                                <input type="password" id="regPassword" name="password" class="form-control" required autocomplete="new-password" value="">
+                                <input type="password" id="regPassword" name="password" class="form-control" required autocomplete="new-password" value="" minlength="6">
                             </div>
                             <div class="col-md-12 mb-4">
                                 <label class="form-label">Phone Number</label>
-                                <input type="text" id="regPhone" name="phone" class="form-control" required maxlength="10" inputmode="numeric" autocomplete="off" value="">
+                                <input type="text" id="regPhone" name="phone" 
+                                       class="form-control" 
+                                       required maxlength="10" inputmode="numeric" autocomplete="off" 
+                                       value="<%= prefillPhone %>">
                             </div>
                         </div>
                         <button type="submit" class="btn btn-purple btn-lg w-100 py-3 rounded-pill shadow-sm mb-4">
@@ -207,7 +226,7 @@
             toggleBtn.innerHTML = isDark ? '<i class="bi bi-sun-fill"></i>' : '<i class="bi bi-moon-stars-fill"></i>';
         });
 
-        // Combined Validation Logic
+        // Input formatting
         const regPhone = document.getElementById('regPhone');
         const regName = document.getElementById('regName');
 

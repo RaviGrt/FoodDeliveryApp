@@ -7,6 +7,7 @@ public class User {
     private String password;
     private String phone;
     private String city;
+    private String profileImage;
 
     public User() {}
 
@@ -31,4 +32,6 @@ public class User {
     public void setPhone(String phone) { this.phone = phone; }
     public String getCity() { return city; }
     public void setCity(String city) { this.city = city; }
+    public String getProfileImage() { return profileImage; }
+    public void setProfileImage(String profileImage) { this.profileImage = profileImage; }
 }

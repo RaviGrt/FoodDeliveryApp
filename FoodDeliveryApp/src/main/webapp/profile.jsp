@@ -10,95 +10,27 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
     <style>
-        :root {
-            --primary: #8b5cf6;
-            --primary-dark: #7c3aed;
-            --primary-light: #ede9fe;
-            --primary-hover: #6d28d9;
-            --surface: #ffffff;
-            --surface-light: #f8fafc;
-            --text-primary: #1e293b;
-            --text-secondary: #64748b;
-            --border-color: #e2e8f0;
-        }
-
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-
-        body {
-            font-family: 'Inter', sans-serif;
-            background: linear-gradient(135deg, #f8fafc 0%, #ede9fe 100%);
-            min-height: 100vh;
-            color: var(--text-primary);
-            transition: all 0.3s ease;
-            font-size: 1.05rem;
-        }
-
-        body.dark-mode {
-            background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%);
-            color: #e2e8f0;
-        }
-
-        /* Premium Navbar - Cinematic Scale (Standardized) */
-        .navbar {
-            background: rgba(139, 92, 246, 0.95);
-            backdrop-filter: blur(12px);
-            padding: 1rem 0;
-            box-shadow: 0 4px 40px rgba(0, 0, 0, 0.08);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            z-index: 1000;
-        }
-        body.dark-mode .navbar {
-            background: rgba(15, 23, 42, 0.9);
-            border-bottom: 1px solid rgba(139, 92, 246, 0.2);
-        }
-
-        .nav-icon-link {
-            width: 60px;
-            height: 60px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: rgba(255, 255, 255, 0.12);
-            border-radius: 20px;
-            color: white !important;
-            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-            text-decoration: none;
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-        }
-        .nav-icon-link i { font-size: 1.6rem; }
-
-        .nav-icon-link:hover {
-            background: rgba(255, 255, 255, 0.25);
-            transform: translateY(-5px) scale(1.1);
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
-        }
-
-        .dark-toggle {
-            width: 60px; height: 60px; display: flex; align-items: center; justify-content: center;
-            background: rgba(255, 255, 255, 0.12); border: 1px solid rgba(255, 255, 255, 0.15);
-            border-radius: 20px; color: white; cursor: pointer; transition: all 0.4s ease;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-        }
-
-        .dark-toggle i { font-size: 1.5rem; }
-
-
-        /* Profile Card */
+        /* Profile Header */
         .profile-header {
             background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
             height: 160px;
             border-radius: 28px 28px 0 0;
+            position: relative;
+            overflow: hidden;
+        }
+        .profile-header::after {
+            content: ""; position: absolute; top: -50%; right: -15%;
+            width: 350px; height: 350px;
+            background: rgba(255,255,255,0.06); border-radius: 50%;
         }
 
         .profile-card {
-            border-radius: 28px;
-            border: none;
+            border-radius: 28px; border: none;
             background: var(--surface);
             box-shadow: 0 15px 40px rgba(0, 0, 0, 0.05);
-            margin-top: -60px;
-            overflow: visible;
+            margin-top: -60px; overflow: visible;
         }
         body.dark-mode .profile-card {
             background: rgba(30, 41, 59, 0.7);
@@ -106,25 +38,41 @@
             border: 1px solid rgba(139, 92, 246, 0.1);
         }
 
+        /* Avatar with Upload */
+        .avatar-container {
+            position: relative; display: inline-block;
+            margin-top: -60px; margin-bottom: 20px;
+        }
         .avatar-box {
             width: 120px; height: 120px;
-            background: white;
-            border-radius: 32px;
+            background: white; border-radius: 32px;
             display: flex; align-items: center; justify-content: center;
-            font-size: 3.5rem;
-            color: var(--primary);
+            font-size: 3.5rem; color: var(--primary);
             box-shadow: 0 10px 25px rgba(0,0,0,0.1);
             border: 4px solid var(--surface);
-            margin-top: -60px;
-            margin-bottom: 20px;
+            overflow: hidden;
+        }
+        .avatar-box img {
+            width: 100%; height: 100%; object-fit: cover;
         }
         body.dark-mode .avatar-box { background: #1e293b; border-color: #334155; }
 
+        .avatar-upload-btn {
+            position: absolute; bottom: -4px; right: -4px;
+            width: 38px; height: 38px;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            border: 3px solid white; border-radius: 12px;
+            display: flex; align-items: center; justify-content: center;
+            color: white; cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(139,92,246,0.3);
+        }
+        .avatar-upload-btn:hover { transform: scale(1.15); }
+        .avatar-upload-btn input { display: none; }
+
         .stat-card {
-            background: var(--surface-light);
-            padding: 1.5rem;
-            border-radius: 20px;
-            text-align: center;
+            background: var(--surface-light); padding: 1.5rem;
+            border-radius: 20px; text-align: center;
             border: 1px solid var(--border-color);
             transition: all 0.3s ease;
         }
@@ -134,19 +82,15 @@
         }
         .stat-card:hover { transform: translateY(-5px); border-color: var(--primary); }
 
-        /* Order Items */
         .order-card {
-            background: var(--surface);
-            border-radius: 20px;
-            padding: 1.5rem;
-            border-left: 6px solid var(--primary);
+            background: var(--surface); border-radius: 20px;
+            padding: 1.5rem; border-left: 6px solid var(--primary);
             margin-bottom: 1rem;
             box-shadow: 0 4px 15px rgba(0,0,0,0.02);
             transition: all 0.3s ease;
         }
         body.dark-mode .order-card {
-            background: rgba(30, 41, 59, 0.5);
-            border-color: var(--primary);
+            background: rgba(30, 41, 59, 0.5); border-color: var(--primary);
         }
         .order-card:hover { transform: scale(1.01); box-shadow: 0 10px 25px rgba(139,92,246,0.1); }
 
@@ -167,39 +111,51 @@
         }
         .form-control-lg:focus { border-color: var(--primary); box-shadow: 0 0 0 4px rgba(139, 92, 246, 0.1); }
 
-        /* ═══ DARK MODE TEXT FIXES ═══ */
+        /* Info Rows */
+        .info-row {
+            padding: 1.2rem 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+        .info-row:last-child { border-bottom: none; }
+        body.dark-mode .info-row { border-bottom-color: rgba(139,92,246,0.1); }
+
+        /* Image Upload Progress */
+        .upload-overlay {
+            position: absolute; inset: 0;
+            background: rgba(139,92,246,0.85);
+            border-radius: 32px;
+            display: none; align-items: center; justify-content: center;
+            color: white; font-weight: 700;
+        }
+        .upload-overlay.active { display: flex; }
+
+        /* Dark mode text */
         body.dark-mode .text-dark { color: #f1f5f9 !important; }
         body.dark-mode .profile-card h1 { color: #f1f5f9 !important; }
         body.dark-mode .profile-card .fs-5 { color: #cbd5e1 !important; }
         body.dark-mode .order-card .fw-800 { color: #f1f5f9 !important; }
         body.dark-mode h3 { color: #f8fafc; }
+        body.dark-mode .modal-content { background: #1e293b; color: #e2e8f0; }
+        body.dark-mode .modal-content .form-control-lg { background: rgba(15,23,42,0.4); color: white; border-color: rgba(139,92,246,0.2); }
     </style>
 </head>
-<body class="pb-5">
+<body class="${sessionScope.theme == 'light' ? 'light-mode' : 'dark-mode'} pb-5">
 
-<nav class="navbar navbar-expand-lg navbar-dark sticky-top">
-    <div class="container-fluid px-4">
-        <a class="navbar-brand fw-800 fs-3" href="HomeServlet">
-            <i class="bi bi-basket-fill text-warning me-2"></i>Urban Eats
-        </a>
-        <div class="ms-auto d-flex align-items-center gap-3">
-            <a href="HomeServlet" class="nav-icon-link" title="Home"><i class="bi bi-house-door-fill"></i></a>
-            <a href="MoodSuggestServlet" class="nav-icon-link" title="AI Suggest"><i class="bi bi-stars"></i></a>
-            <a href="CartServlet" class="nav-icon-link" title="My Cart"><i class="bi bi-cart3"></i></a>
-            <a href="OrderTrackingServlet" class="nav-icon-link" title="My Orders"><i class="bi bi-box-seam"></i></a>
-            <button class="dark-toggle" id="darkToggle" title="Toggle Theme"><i class="bi bi-moon-stars-fill"></i></button>
-            <a href="login.jsp" class="nav-icon-link bg-danger bg-opacity-25 border-danger border-opacity-25" title="Logout"><i class="bi bi-box-arrow-right"></i></a>
-        </div>
-    </div>
-</nav>
+<jsp:include page="header.jsp" />
 
 <div class="container mt-5">
     <div class="row justify-content-center">
         <div class="col-lg-9">
             
+            <!-- Success / Error Alerts -->
             <c:if test="${not empty success}">
-                <div class="alert alert-success border-0 rounded-4 shadow-sm mb-4 p-3 d-flex align-items-center">
-                    <i class="bi bi-check-circle-fill fs-4 me-3"></i> <strong>Success!</strong> ${success}
+                <div class="alert border-0 rounded-4 shadow-sm mb-4 p-3 d-flex align-items-center" style="background: linear-gradient(135deg, #f0fdf4, #dcfce7); color: #15803d;">
+                    <i class="bi bi-check-circle-fill fs-4 me-3"></i> <strong>Success!</strong>&nbsp; ${success}
+                </div>
+            </c:if>
+            <c:if test="${not empty error}">
+                <div class="alert border-0 rounded-4 shadow-sm mb-4 p-3 d-flex align-items-center" style="background: linear-gradient(135deg, #fef2f2, #fee2e2); color: #b91c1c;">
+                    <i class="bi bi-exclamation-triangle-fill fs-4 me-3"></i> ${error}
                 </div>
             </c:if>
 
@@ -207,11 +163,36 @@
             <div class="card profile-card p-4 p-md-5">
                 <div class="d-flex flex-column flex-md-row justify-content-between align-items-center align-items-md-start">
                     <div class="text-center text-md-start">
-                        <div class="avatar-box mx-auto mx-md-0">
-                            <i class="bi bi-person-bounding-box"></i>
-                        </div>
+                        
+                        <!-- Avatar with Upload -->
+                        <form action="ProfileServlet" method="POST" enctype="multipart/form-data" id="imageUploadForm" class="d-inline-block">
+                            <input type="hidden" name="action" value="uploadImage">
+                            <div class="avatar-container mx-auto mx-md-0">
+                                <div class="avatar-box" id="avatarBox">
+                                    <c:choose>
+                                        <c:when test="${not empty user.profileImage}">
+                                            <img src="ImageServlet?path=${user.profileImage}" alt="Profile" id="avatarImg">
+                                        </c:when>
+                                        <c:otherwise>
+                                            <i class="bi bi-person-bounding-box" id="avatarIcon"></i>
+                                        </c:otherwise>
+                                    </c:choose>
+                                </div>
+                                <label class="avatar-upload-btn" title="Change Photo">
+                                    <i class="bi bi-camera-fill" style="font-size: 0.9rem;"></i>
+                                    <input type="file" name="profileImage" id="profileImageInput" accept="image/jpeg,image/png" style="display:none;">
+                                </label>
+                            </div>
+                        </form>
+                        
                         <h1 class="fw-800 mb-1" style="font-size: 2.5rem; letter-spacing: -1.5px;">${user.name}</h1>
-                        <p class="text-secondary fw-600 mb-4"><i class="bi bi-geo-alt-fill text-primary me-2"></i>Resident of ${user.city}</p>
+                        <p class="text-secondary fw-600 mb-4">
+                            <i class="bi bi-geo-alt-fill text-primary me-2"></i>
+                            <c:choose>
+                                <c:when test="${user.city == 'Pending'}">Set your city in profile settings</c:when>
+                                <c:otherwise>Resident of ${user.city}</c:otherwise>
+                            </c:choose>
+                        </p>
                     </div>
                     <button class="btn btn-purple btn-lg rounded-pill px-4" data-bs-toggle="modal" data-bs-target="#editProfileModal">
                         <i class="bi bi-pencil-square me-2"></i>Edit Profile
@@ -227,24 +208,32 @@
                     </div>
                     <div class="col-md-4">
                         <div class="stat-card">
-                            <h2 class="fw-800 text-warning mb-1">Elite</h2>
+                            <h2 class="fw-800 text-warning mb-1">
+                                <c:choose>
+                                    <c:when test="${totalOrders >= 20}">Elite</c:when>
+                                    <c:when test="${totalOrders >= 10}">Gold</c:when>
+                                    <c:when test="${totalOrders >= 5}">Silver</c:when>
+                                    <c:otherwise>New</c:otherwise>
+                                </c:choose>
+                            </h2>
                             <span class="text-secondary small fw-700 text-uppercase letter-wide">Account Rank</span>
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="stat-card">
                             <h2 class="fw-800 text-success mb-1">Active</h2>
-                            <span class="text-secondary small fw-700 text-uppercase letter-wide">Member Since 2024</span>
+                            <span class="text-secondary small fw-700 text-uppercase letter-wide">Member Status</span>
                         </div>
                     </div>
                 </div>
 
+                <!-- Contact Info -->
                 <div class="row g-5">
-                    <div class="col-md-6">
+                    <div class="col-md-6 info-row">
                         <label class="text-secondary small fw-800 text-uppercase mb-2">Registered Email</label>
                         <div class="fs-5 fw-600"><i class="bi bi-envelope-at me-2 text-primary"></i>${user.email}</div>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-6 info-row">
                         <label class="text-secondary small fw-800 text-uppercase mb-2">Mobile Number</label>
                         <div class="fs-5 fw-600"><i class="bi bi-phone-vibrate me-2 text-success"></i>${user.phone}</div>
                     </div>
@@ -263,11 +252,11 @@
                         <div class="col-12">
                             <div class="order-card d-flex flex-wrap justify-content-between align-items-center">
                                 <div>
-                                    <div class="fw-800 fs-5 mb-1 text-dark">Order ID #${ord.orderId}</div>
+                                    <div class="fw-800 fs-5 mb-1 text-dark"><i class="bi bi-hash me-1"></i>Order #${ord.orderId}</div>
                                     <div class="text-secondary small fw-600"><i class="bi bi-calendar3 me-2"></i><fmt:formatDate value="${ord.createdAt}" pattern="dd MMM yyyy" /></div>
                                 </div>
                                 <div class="text-md-end mt-3 mt-md-0">
-                                    <div class="fw-800 text-primary fs-4 mb-2">₹${ord.totalAmount}</div>
+                                    <div class="fw-800 text-primary fs-4 mb-2">&#8377;${ord.totalAmount}</div>
                                     <span class="badge rounded-pill px-3 py-2 fw-700 ${ord.status == 'Delivered' ? 'bg-success bg-opacity-10 text-success' : 'bg-primary bg-opacity-10 text-primary'}">
                                         <i class="bi bi-circle-fill me-2" style="font-size: 0.5rem;"></i>${ord.status}
                                     </span>
@@ -276,7 +265,7 @@
                         </div>
                     </c:forEach>
                     <c:if test="${empty lastOrders}">
-                        <div class="card text-center p-5 border-0 bg-light">
+                        <div class="card text-center p-5 border-0 bg-light" style="border-radius: 20px;">
                             <i class="bi bi-clock-history fs-1 text-muted opacity-25 mb-3"></i>
                             <h5 class="fw-700">No recent orders found</h5>
                             <p class="text-secondary">Ready to try something delicious?</p>
@@ -298,7 +287,7 @@
                 <h4 class="modal-title fw-800">Update Profile Details</h4>
                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
-            <form action="ProfileServlet" method="POST" id="profileForm">
+            <form action="ProfileServlet" method="POST" enctype="multipart/form-data" id="profileForm">
                 <div class="modal-body p-4">
                     <div class="mb-4">
                         <label class="form-label small fw-800 text-muted text-uppercase mb-2">Display Name</label>
@@ -328,19 +317,44 @@
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <script>
-    const body = document.body;
-    const toggleBtn = document.getElementById('darkToggle');
+    // ═══ PROFILE IMAGE UPLOAD ═══
+    document.getElementById('profileImageInput').addEventListener('change', function() {
+        const file = this.files[0];
+        if (!file) return;
 
-    if (localStorage.getItem('darkMode') === 'on') {
-        body.classList.add('dark-mode');
-        toggleBtn.innerHTML = '<i class="bi bi-sun-fill"></i>';
-    }
+        // Client-side validation
+        const validTypes = ['image/jpeg', 'image/png', 'image/jpg'];
+        if (!validTypes.includes(file.type)) {
+            alert('Only JPG and PNG images are allowed.');
+            this.value = '';
+            return;
+        }
+        if (file.size > 5 * 1024 * 1024) {
+            alert('Image too large. Maximum size is 5MB.');
+            this.value = '';
+            return;
+        }
 
-    toggleBtn.addEventListener('click', () => {
-        body.classList.toggle('dark-mode');
-        const isDark = body.classList.contains('dark-mode');
-        localStorage.setItem('darkMode', isDark ? 'on' : 'off');
-        toggleBtn.innerHTML = isDark ? '<i class="bi bi-sun-fill"></i>' : '<i class="bi bi-moon-stars-fill"></i>';
+        // Preview the image immediately
+        const avatarBox = document.getElementById('avatarBox');
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            const existingImg = avatarBox.querySelector('img');
+            const existingIcon = avatarBox.querySelector('i');
+            if (existingImg) {
+                existingImg.src = e.target.result;
+            } else {
+                if (existingIcon) existingIcon.remove();
+                const img = document.createElement('img');
+                img.src = e.target.result;
+                img.alt = 'Profile';
+                avatarBox.appendChild(img);
+            }
+        };
+        reader.readAsDataURL(file);
+
+        // Submit the form directly
+        document.getElementById('imageUploadForm').submit();
     });
 </script>
 </body>

@@ -9,93 +9,9 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
     <style>
-        :root {
-            --primary: #8b5cf6;
-            --primary-dark: #7c3aed;
-            --primary-light: #ede9fe;
-            --primary-hover: #6d28d9;
-            --surface: #ffffff;
-            --surface-light: #f8fafc;
-            --text-primary: #1e293b;
-            --text-secondary: #64748b;
-            --border-color: #e2e8f0;
-        }
-
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-
-        body {
-            font-family: 'Inter', sans-serif;
-            background: linear-gradient(135deg, #f8fafc 0%, #ede9fe 100%);
-            min-height: 100vh;
-            color: var(--text-primary);
-            transition: all 0.3s ease;
-            font-size: 1.05rem;
-        }
-
-        body.dark-mode {
-            background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%);
-            color: #e2e8f0;
-        }
-
         /* ═══════════════════════════════════════════
-           NAVBAR - Premium Standardized
-           ═══════════════════════════════════════════ */
-        .navbar {
-            background: rgba(139, 92, 246, 0.95);
-            backdrop-filter: blur(12px);
-            padding: 0.8rem 0;
-            box-shadow: 0 4px 40px rgba(0, 0, 0, 0.08);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            z-index: 1000;
-        }
-        body.dark-mode .navbar {
-            background: rgba(15, 23, 42, 0.95);
-            border-bottom: 1px solid rgba(139, 92, 246, 0.2);
-        }
-
-        .navbar-brand {
-            font-size: 1.8rem !important;
-            font-weight: 800 !important;
-            letter-spacing: -1.5px;
-        }
-
-        .nav-icon-link {
-            width: 48px;
-            height: 48px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: rgba(255, 255, 255, 0.12);
-            border-radius: 16px;
-            color: white !important;
-            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-            text-decoration: none;
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-        }
-        .nav-icon-link i {
-            font-size: 1.25rem;
-            color: white !important;
-        }
-        .nav-icon-link:hover {
-            background: rgba(255, 255, 255, 0.25);
-            transform: translateY(-3px) scale(1.08);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
-        }
-
-        .dark-toggle {
-            width: 48px; height: 48px; display: flex; align-items: center; justify-content: center;
-            background: rgba(255, 255, 255, 0.12); border: 1px solid rgba(255, 255, 255, 0.15);
-            border-radius: 16px; color: white; cursor: pointer; transition: all 0.3s ease;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-        }
-        .dark-toggle i { font-size: 1.25rem; }
-        .dark-toggle:hover {
-            background: rgba(255, 255, 255, 0.25);
-            transform: translateY(-3px);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
-        }
 
         /* ═══════════════════════════════════════════
            PAGE LAYOUT
@@ -347,6 +263,18 @@
         }
 
         /* ═══════════════════════════════════════════
+           RESPONSIVE TWEAKS
+           ═══════════════════════════════════════════ */
+        @media (max-width: 768px) {
+            .cart-item { padding: 1.2rem 1rem; }
+            .item-name { font-size: 1rem; }
+            .qty-controls button { width: 32px; height: 32px; }
+            .qty-value { min-width: 28px; height: 32px; line-height: 32px; }
+            .btn-remove { padding: 4px 10px; font-size: 0.75rem; }
+            .item-total { font-size: 1.1rem; }
+        }
+
+        /* ═══════════════════════════════════════════
            EMPTY CART
            ═══════════════════════════════════════════ */
         .empty-cart-card {
@@ -369,23 +297,9 @@
         }
     </style>
 </head>
-<body>
+<body class="${sessionScope.theme == 'light' ? 'light-mode' : 'dark-mode'}">
 
-<nav class="navbar navbar-expand-lg navbar-dark sticky-top">
-    <div class="container-fluid px-4">
-        <a class="navbar-brand" href="HomeServlet">
-            <i class="bi bi-basket-fill text-warning me-2"></i>Urban Eats
-        </a>
-        <div class="ms-auto d-flex align-items-center gap-2">
-            <a href="HomeServlet" class="nav-icon-link" title="Home"><i class="bi bi-house-door-fill"></i></a>
-            <a href="MoodSuggestServlet" class="nav-icon-link" title="AI Suggest"><i class="bi bi-stars"></i></a>
-            <a href="OrderTrackingServlet" class="nav-icon-link" title="My Orders"><i class="bi bi-box-seam"></i></a>
-            <a href="ProfileServlet" class="nav-icon-link" title="My Profile"><i class="bi bi-person-circle"></i></a>
-            <button class="dark-toggle" id="darkToggle" title="Toggle Theme"><i class="bi bi-moon-stars-fill"></i></button>
-            <a href="login.jsp" class="nav-icon-link" style="background:rgba(239,68,68,0.15); border-color:rgba(239,68,68,0.25);" title="Logout"><i class="bi bi-box-arrow-right"></i></a>
-        </div>
-    </div>
-</nav>
+<jsp:include page="header.jsp" />
 
 <div class="container pb-5">
     <div class="page-title">
@@ -410,11 +324,11 @@
                                     
                                     <div class="d-flex align-items-center gap-3">
                                         <div class="qty-controls">
-                                            <button type="button" onclick="updateQty(${item.cartId}, ${item.quantity - 1}, this)" title="Decrease">−</button>
+                                            <button type="button" onclick="updateQty('${item.cartId}', '${item.quantity - 1}', this)" title="Decrease">−</button>
                                             <span class="qty-value" id="qty-${item.cartId}">${item.quantity}</span>
-                                            <button type="button" onclick="updateQty(${item.cartId}, ${item.quantity + 1}, this)" title="Increase">+</button>
+                                            <button type="button" onclick="updateQty('${item.cartId}', '${item.quantity + 1}', this)" title="Increase">+</button>
                                         </div>
-                                        <button onclick="updateQty(${item.cartId}, 0, this)" class="btn-remove">
+                                        <button onclick="updateQty('${item.cartId}', 0, this)" class="btn-remove">
                                             <i class="bi bi-trash3"></i>Remove
                                         </button>
                                     </div>
@@ -430,7 +344,7 @@
 
             <!-- Bill Column -->
             <div class="col-lg-4">
-                <div class="bill-card sticky-top" style="top: 90px;">
+                <div class="bill-card sticky-top" style="top: 90px; z-index: 1;">
                     <div class="bill-title">
                         <i class="bi bi-receipt-cutoff"></i>Bill Summary
                     </div>
@@ -467,11 +381,8 @@
                         </button>
                     </form>
                     
-                    <div class="text-center mt-3">
-                        <span class="ssl-badge">
-                            <i class="bi bi-shield-check"></i> SSL Secure Transaction
-                        </span>
-                    </div>
+
+
                 </div>
             </div>
         </div>
@@ -491,20 +402,6 @@
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <script>
-    const body = document.body;
-    const toggleBtn = document.getElementById('darkToggle');
-
-    if (localStorage.getItem('darkMode') === 'on') {
-        body.classList.add('dark-mode');
-        toggleBtn.innerHTML = '<i class="bi bi-sun-fill"></i>';
-    }
-
-    toggleBtn.addEventListener('click', () => {
-        body.classList.toggle('dark-mode');
-        const isDark = body.classList.contains('dark-mode');
-        localStorage.setItem('darkMode', isDark ? 'on' : 'off');
-        toggleBtn.innerHTML = isDark ? '<i class="bi bi-sun-fill"></i>' : '<i class="bi bi-moon-stars-fill"></i>';
-    });
 
     function updateQty(cartId, newQty, btn) {
         if (newQty < 0) return;
